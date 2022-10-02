@@ -1,0 +1,21 @@
+
+> emiya.com.cn@0.1.0 start
+> next start -p 80
+
+ready - started server on 0.0.0.0:80, url: http://localhost:80
+Error: Could not find a production build in the '/root/github/emiya.com.cn/.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at NextNodeServer.getBuildId (/root/github/emiya.com.cn/node_modules/.pnpm/next@12.3.1_biqbaboplfbrettd7655fr4n2y/node_modules/next/dist/server/next-server.js:169:23)
+    at new Server (/root/github/emiya.com.cn/node_modules/.pnpm/next@12.3.1_biqbaboplfbrettd7655fr4n2y/node_modules/next/dist/server/base-server.js:58:29)
+    at new NextNodeServer (/root/github/emiya.com.cn/node_modules/.pnpm/next@12.3.1_biqbaboplfbrettd7655fr4n2y/node_modules/next/dist/server/next-server.js:70:9)
+    at NextServer.createServer (/root/github/emiya.com.cn/node_modules/.pnpm/next@12.3.1_biqbaboplfbrettd7655fr4n2y/node_modules/next/dist/server/next.js:140:16)
+    at async /root/github/emiya.com.cn/node_modules/.pnpm/next@12.3.1_biqbaboplfbrettd7655fr4n2y/node_modules/next/dist/server/next.js:149:31
+
+> emiya.com.cn@0.1.0 start
+> next start -p 80
+
+ready - started server on 0.0.0.0:80, url: http://localhost:80
+
+> emiya.com.cn@0.1.0 start
+> next start -p 80
+
+ready - started server on 0.0.0.0:80, url: http://localhost:80
