@@ -1,6 +1,6 @@
 // db.js
 import mysql from 'serverless-mysql'
-import config from './config.json'
+import config from './config.server.json'
 
 const db = mysql({
   config: {
@@ -8,17 +8,17 @@ const db = mysql({
     port: config.port,
     database: config.database,
     user: config.user,
+    password: config.password,
   },
 })
 
-export default async function excuteQuery(query: string) {
+export default async function excuteQuery<T = unknown>(query: string) {
   try {
-    const results = await db.query(query)
+    const data = await db.query<T>(query)
     await db.end()
-    console.log({ results })
-    return results
+    return { data, error: null }
   } catch (error: any) {
-    console.log(error)
-    return { error: error.message }
+    const err = error as Error
+    return { data: null, error: err.message ?? 'unknown error' }
   }
 }

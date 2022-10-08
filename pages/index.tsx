@@ -5,12 +5,6 @@ import React from 'react'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
-  // React.useEffect(() => {
-  //   fetch('/api/getArticle?title=en-title-1')
-  //     .then((a) => a.json())
-  //     .then((a) => console.log(a))
-  // }, [])
-
   return (
     <div className={styles.container}>
       <Head>
