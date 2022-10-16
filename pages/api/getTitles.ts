@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import excuteQuery from '../../database'
 import { ArticleMainData } from '../../database/typings/ArticleMain'
-import { ServerData } from '../../typings/serverData'
+import { ServerData } from '../../typings/ServerData'
 import response from '../../utils/api/response'
 
 type Data = ArticleMainData['enTitle'][]

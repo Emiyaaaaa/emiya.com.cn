@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import excuteQuery from '../../database'
 import { ArticleMainDatas } from '../../database/typings/ArticleMain'
-import { ServerData } from '../../typings/serverData'
+import { ServerData } from '../../typings/ServerData'
 import { query2Sql } from '../../utils/query2Sql'
 import response from '../../utils/api/response'
 
