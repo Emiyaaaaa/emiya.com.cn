@@ -1,0 +1,39 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbo",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "gen-sql-dts": "npx kysely-codegen",
+    "format": "prettier --write \"**/*.{js,ts,tsx,md}\""
+  },
+  "prettier": {
+    "arrowParens": "always",
+    "semi": false,
+    "trailingComma": "all",
+    "singleQuote": true
+  },
+  "dependencies": {
+    "mysql2": "file:./../node-mysql2",
+    "next": "latest",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "styled-components": "6.0.0-beta.2",
+    "styled-jsx": "5.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "18.0.3",
+    "@types/react": "18.0.15",
+    "@types/react-dom": "18.0.6",
+    "autoprefixer": "^10.4.7",
+    "babel-plugin-add-module-exports": "1.0.4",
+    "eslint": "8.19.0",
+    "eslint-config-next": "latest",
+    "kysely": "^0.23.4",
+    "kysely-codegen": "^0.9.0",
+    "postcss": "^8.4.14",
+    "prettier": "^2.7.1",
+    "typescript": "4.9.5"
+  }
+}
