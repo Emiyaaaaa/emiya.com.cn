@@ -8,6 +8,7 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
+    "noUncheckedIndexedAccess": true,
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
@@ -16,13 +17,12 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/ui/*": ["ui/*"],
-      "@/lib/*": ["lib/*"],
-      "@/styles/*": ["styles/*"],
-      "@/server/*": ["server/*"],
-      "@/app/*": ["app/*"],
-      "@/typings/*": ["typings/*"],
-      "@/utils/*": ["utils/*"],
+      "@/*": ["./*"],
+      "@/ui": ["ui"],
+      "@/lib": ["lib"],
+      "@/styles": ["styles"],
+      "@/app": ["app"],
+      "@/utils": ["utils"],
     },
     "plugins": [
       {

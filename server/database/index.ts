@@ -1,6 +1,6 @@
 import config from './config.server.json'
 import mysql from 'mysql2'
-import { Kysely, MysqlDialect, Generated, ColumnType, Selectable, Insertable, Updateable } from 'kysely'
+import { Kysely, MysqlDialect } from 'kysely'
 import type { Database } from './typing'
 
 const db = new Kysely<Database>({
