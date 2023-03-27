@@ -7,11 +7,10 @@ export default function ArticleList() {
   return (
     <>
       {data.map((d, index) => (
-        <div key={index}>
+        <div className="border-l-neutral-800 text-3xl text-red-300" key={index}>
           <Link href={`blog/${d.id}`}>
-            <h1>{d.title}</h1>
+            <span>{d.title}</span>
           </Link>
-          <h1>{d.content}</h1>
         </div>
       ))}
     </>

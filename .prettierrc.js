@@ -15,4 +15,5 @@ module.exports = {
   proseWrap: 'preserve',
   quoteProps: 'as-needed', // 仅在必需时为对象的 key 添加引号
   useTabs: false, // 使用空格代替tab缩进
+  plugins: [require('prettier-plugin-tailwindcss')],
 }
