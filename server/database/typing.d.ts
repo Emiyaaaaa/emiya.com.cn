@@ -1,22 +1,17 @@
 import type { DB as KyselyDatabase } from 'kysely-codegen/dist/db.d'
 
-import type { ColumnType } from 'kysely'
+import type { ColumnType, Selection } from 'kysely'
+import { From } from 'kysely/dist/cjs/parser/table-parser'
+import { Selectable } from 'kysely/dist/cjs/util/column-type'
+import { AnyColumn } from 'kysely/dist/cjs/util/type-utils'
+import { SelectAllQueryBuilder } from 'kysely/dist/cjs/parser/select-parser'
 
-export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
-  ? ColumnType<S, I | undefined, U>
-  : ColumnType<T, T | undefined, T>
+type AllSelection<DB, TB extends keyof DB> = Selectable<{
+  [C in AnyColumn<DB, TB>]: {
+    [T in TB]: C extends keyof DB[T] ? DB[T][C] : never
+  }[TB]
+}>
 
-export interface TechBlog {
-  id: Generated<number>
-  title: string
-  description: string | null
-  content: string
-  creat_time: Date | null
-  update_time: Date | null
-}
+export type Database = KyselyDatabase
 
-export interface DB {
-  tech_blog: TechBlog
-}
-
-export type Database = DB & KyselyDatabase
+export type Blog = AllSelection<Database, 'blog'>

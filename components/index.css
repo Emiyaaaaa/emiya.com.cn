@@ -1,0 +1,7 @@
+@tailwind utilities;
+
+@layer utilities {
+  .loading .text {
+    @apply bg-gray-500;
+  }
+}

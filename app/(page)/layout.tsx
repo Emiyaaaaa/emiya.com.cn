@@ -1,6 +1,7 @@
 import React from 'react'
 import { Inter } from 'next/font/google'
-import '@/styles/global.css'
+import './index.css'
+import '@/components/index.css'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -15,7 +16,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
-        <link rel="manifest" href="/favicon/site.webmanifest" />
       </head>
       <body>{children}</body>
     </html>

@@ -3,6 +3,7 @@
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "cSpell.words": [
     "editorjs",
-    "emiya"
+    "emiya",
+    "Kysely"
   ]
 }
