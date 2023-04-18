@@ -1,7 +1,7 @@
 import React from 'react'
 
 export const metadata = {
-  title: 'emiya-editor',
+  title: 'Emiya-editor',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -1,30 +1,55 @@
 'use client'
 import React from 'react'
 import dynamic from 'next/dynamic'
-import type EditorJS from '@editorjs/editorjs'
-import post from '@/utils/post'
+import { post, get } from '@/server/http'
 
-const Editor = dynamic(() => import('@/app/component/editor'), { ssr: false })
+import type EditorJS from '@editorjs/editorjs'
+import type { OutputData } from '@editorjs/editorjs'
+
+const Editor = dynamic(() => import('@/app/component/Editor'), { ssr: false })
+
+async function getBlog(id: string) {
+  const res = await get('/api/getBlog', id).catch((err) => {
+    console.error(err)
+  })
+  return res?.data ? JSON.parse(res.data.content) : undefined
+}
 
 const EditorPage = ({ params }: { params: { id: string | 'new' } }) => {
   const editorRef = React.useRef<EditorJS>()
+  const [initialData, setInitialData] = React.useState<OutputData>()
+
+  React.useEffect(() => {
+    if (params.id === 'new') {
+      setInitialData({ blocks: [] })
+    } else {
+      getBlog(params.id).then((data) => setInitialData(data))
+    }
+  }, [])
 
   const saveHandler = React.useCallback(() => {
     editorRef.current?.save().then((data) => {
-      if (params.id === 'new') return
-      post('/api/setTechBlogById', {
-        id: params.id,
-        title: 'test title',
-        content: JSON.stringify(data),
-      })
+      if (params.id === 'new') {
+        post('/api/createBlog', {
+          title: 'test title',
+          content: JSON.stringify(data),
+          author: 'test author',
+        })
+      } else {
+        post('/api/updateBlog', params.id, {
+          title: 'test title',
+          content: JSON.stringify(data),
+        })
+      }
     })
   }, [])
 
   return (
     <>
-      <h1>Editor</h1>
-      <Editor onRef={(editorInstance) => (editorRef.current = editorInstance)}></Editor>
-      <div onClick={saveHandler}>save</div>
+      <div className="m-6">
+        {initialData && <Editor onRef={(editorInstance) => (editorRef.current = editorInstance)} initialData={initialData}></Editor>}
+        <button onClick={saveHandler}>save</button>
+      </div>
     </>
   )
 }

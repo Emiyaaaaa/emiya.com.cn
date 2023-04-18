@@ -1,16 +1,14 @@
-import React, { use } from 'react'
-import { getTechBlogDetail } from '@/server'
+import React from 'react'
+import { serverSlideAPI } from '@/server/route'
 import { notFound } from 'next/navigation'
+import Content from '@/app/component/Content'
+import Article from '@/app/component/Article'
+import { Blog } from '@/server/database/typing'
 
-function Article({ params }: { params: { id: string } }) {
-  const data = use(getTechBlogDetail(params.id))
+function Page({ params }: { params: { id: string } }) {
+  const data = React.use(serverSlideAPI.getBlog(params.id))
   if (!data) notFound()
-  return (
-    <>
-      <h1>{data.title}</h1>
-      <h1>{data.content}</h1>
-    </>
-  )
+  return <Article data={data as any}></Article>
 }
 
-export default Article
+export default Page
