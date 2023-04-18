@@ -24,7 +24,7 @@
       "@/styles": ["styles"],
       "@/app": ["app"],
       "@/utils": ["server/utils"],
-      "@/component": ["app/component"],
+      "@/components": ["components"],
     },
     "plugins": [
       {

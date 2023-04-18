@@ -6,7 +6,7 @@ import { post, get } from '@/server/http'
 import type EditorJS from '@editorjs/editorjs'
 import type { OutputData } from '@editorjs/editorjs'
 
-const Editor = dynamic(() => import('@/app/component/Editor'), { ssr: false })
+const Editor = dynamic(() => import('@/components/Editor'), { ssr: false })
 
 async function getBlog(id: string) {
   const res = await get('/api/getBlog', id).catch((err) => {

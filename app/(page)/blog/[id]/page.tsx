@@ -1,8 +1,8 @@
 import React from 'react'
 import { serverSlideAPI } from '@/server/route'
 import { notFound } from 'next/navigation'
-import Content from '@/app/component/Content'
-import Article from '@/app/component/Article'
+import Content from '@/components/Content'
+import Article from '@/components/Article'
 import { Blog } from '@/server/database/typing'
 
 function Page({ params }: { params: { id: string } }) {

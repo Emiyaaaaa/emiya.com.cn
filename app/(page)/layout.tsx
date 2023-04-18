@@ -1,7 +1,7 @@
 import React from 'react'
 import { Inter } from 'next/font/google'
 import './index.css'
-import '@/app/component/index.css'
+import '@/components/index.css'
 
 const inter = Inter({
   subsets: ['latin'],
