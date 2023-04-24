@@ -1,6 +1,5 @@
 # 2023.04.19
-  - style: blog list
-  - feat: blog loading page
+ - deploy
 
 # 2023.04.18
  - feat(*): add header

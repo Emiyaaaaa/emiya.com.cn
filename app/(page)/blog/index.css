@@ -1,12 +1,12 @@
 @tailwind components;
 
 @layer components {
-  h1, h2, h3, h4, h5, h6 {
-    @apply bg-clip-text text-transparent bg-gradient-to-tr from-[#e6633f] to-[#e88843];
+  /* h1, h2, h3, h4, h5, h6 {
+    @apply bg-clip-text text-transparent bg-gradient-to-tr from-main-color to-main-color-light;
   }
 
   h1::before {
     content: "";
-    @apply absolute left-0 w-2 h-full bg-gradient-to-b from-[#e6633f] to-[#e88843];
-  }
+    @apply absolute left-0 w-2 h-full bg-gradient-to-b from-main-color to-main-color-light;
+  } */
 }

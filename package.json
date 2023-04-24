@@ -30,6 +30,7 @@
   "devDependencies": {
     "@editorjs/editorjs": "2.26.5",
     "@editorjs/header": "2.7.0",
+    "@tailwindcss/aspect-ratio": "0.4.2",
     "@types/editorjs__header": "2.6.0",
     "@types/node": "18.0.3",
     "@types/react": "18.0.15",
