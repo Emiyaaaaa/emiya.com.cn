@@ -1,5 +1,6 @@
 import React from 'react'
 import { Inter } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react'
 import '@/app/index.css'
 import '@/components/index.css'
 import Head from '@/components/Head'
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Beian />
           </div>
         </div>
+        <Analytics />
       </body>
     </html>
   )
