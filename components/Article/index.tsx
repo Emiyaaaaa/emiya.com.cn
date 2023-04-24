@@ -9,8 +9,8 @@ function Article(props: { data: Blog }) {
   return (
     <div className="ml-5 mr-5 overflow-auto">
       <article>
-        <header className="relative">
-          <h1 className="pl-6 text-2xl">{data.title}</h1>
+        <header className="flex w-full justify-center">
+          <h1 className="text-2xl text-main-color">{data.title}</h1>
         </header>
         <div className="w-fill m-2 mt-6">
           {/* <address>{data.author}</address> */}
@@ -23,7 +23,7 @@ function Article(props: { data: Blog }) {
             )}
             <div className="mt-2">作者：Emiya</div>
           </p>
-          <hr className="mb-6 mt-6" />
+          <hr className="my-6" />
           <article className="p-2">
             <Content data={JSON.parse(data.content)} />
           </article>

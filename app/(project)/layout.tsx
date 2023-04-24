@@ -1,10 +1,8 @@
 import React from 'react'
 import { Inter } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/react'
-import '@/app/index.css'
 import '@/components/index.css'
 import Head from '@/components/Head'
-import { Beian } from '@/components/Beian'
+import '@/app/index.css'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -22,13 +20,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <div className="flex h-full w-full flex-col">
-          <Head />
-          {children}
-          <div className="relative bottom-0 mb-2 mt-auto">
-            <Beian />
+          <Head></Head>
+          <div className="flex flex-grow">
+            <div className="relative flex h-full w-full items-center justify-center">{children}</div>
           </div>
         </div>
-        <Analytics />
       </body>
     </html>
   )

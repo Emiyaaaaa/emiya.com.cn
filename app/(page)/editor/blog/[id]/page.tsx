@@ -44,11 +44,22 @@ const EditorPage = ({ params }: { params: { id: string | 'new' } }) => {
     })
   }, [])
 
+  const deleteHandler = React.useCallback(() => {
+    editorRef.current?.save().then((data) => {
+      if (params.id === 'new') {
+        console.log('new blog')
+      } else {
+        post('/api/deleteBlog', params.id)
+      }
+    })
+  }, [])
+
   return (
     <>
       <div className="m-6">
         {initialData && <Editor onRef={(editorInstance) => (editorRef.current = editorInstance)} initialData={initialData}></Editor>}
         <button onClick={saveHandler}>save</button>
+        <button onClick={deleteHandler}>delete</button>
       </div>
     </>
   )

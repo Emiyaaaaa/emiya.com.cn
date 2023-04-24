@@ -5,5 +5,9 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return children
+  if (process.env.NODE_ENV === 'development') {
+    return children
+  } else {
+    return null
+  }
 }

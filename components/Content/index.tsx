@@ -17,7 +17,7 @@ function Content(props: { data: OutputData }) {
           case 'list':
             return <NestedList {...block.data} />
           case 'delimiter':
-            return <hr />
+            return <hr className="my-6" />
           case 'checklist':
             return <CheckList {...block.data} />
           case 'quote':
