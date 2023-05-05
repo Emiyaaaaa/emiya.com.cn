@@ -14,6 +14,8 @@ function Content(props: { data: OutputData }) {
             return <Header {...block.data} />
           case 'paragraph':
             return <Text {...block.data}></Text>
+          case 'image':
+            return <img src={block.data.file.url} alt={block.data.caption} />
           case 'list':
             return <NestedList {...block.data} />
           case 'delimiter':

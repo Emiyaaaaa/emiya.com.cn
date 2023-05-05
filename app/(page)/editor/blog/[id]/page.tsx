@@ -5,6 +5,7 @@ import { post, get } from '@/server/http'
 
 import type EditorJS from '@editorjs/editorjs'
 import type { OutputData } from '@editorjs/editorjs'
+import axios from 'axios'
 
 const Editor = dynamic(() => import('@/components/Editor'), { ssr: false })
 

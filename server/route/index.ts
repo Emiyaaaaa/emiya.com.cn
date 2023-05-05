@@ -1,6 +1,7 @@
 import blogRoute from './blog'
+import authRoute from './auth'
 
-const route = { ...blogRoute }
+const route = { ...blogRoute, ...authRoute }
 
 const serverSlideAPI = route
 

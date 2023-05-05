@@ -14,7 +14,7 @@ function Article(props: { data: Blog }) {
         </header>
         <div className="w-fill m-2 mt-6">
           {/* <address>{data.author}</address> */}
-          <p className="text-xs text-gray-600">
+          <section className="text-xs text-gray-600">
             {data.updated_at && (
               <div>
                 <span className="mr-1">最后修改于</span>
@@ -22,7 +22,7 @@ function Article(props: { data: Blog }) {
               </div>
             )}
             <div className="mt-2">作者：Emiya</div>
-          </p>
+          </section>
           <hr className="my-6" />
           <article className="p-2">
             <Content data={JSON.parse(data.content)} />

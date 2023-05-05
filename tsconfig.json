@@ -6,6 +6,7 @@
     "checkJs": false,
     "skipLibCheck": true,
     "strict": true,
+    "downlevelIteration": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -32,6 +33,6 @@
       }
     ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.js", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["env.d.ts", "*.d.ts", "**/*.ts", "**/*.js", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }

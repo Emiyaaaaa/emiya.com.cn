@@ -33,12 +33,10 @@ export async function deleteBlog(id: ID) {
   return db.deleteFrom(Table.Blog).where('id', '=', Number(id)).execute()
 }
 
-const blogRoute = {
+export default {
   getBlogList,
   getBlog,
   updateBlog,
   createBlog,
   deleteBlog,
 }
-
-export default blogRoute

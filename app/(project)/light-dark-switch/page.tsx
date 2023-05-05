@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 const Home = () => {
   return (
     <div className="flex flex-col items-center justify-center space-y-6">
-      <div className="w-48">
+      <div className="w-44">
         <LightDarkSwitch />
       </div>
       <div className="w-56 max-w-full">
