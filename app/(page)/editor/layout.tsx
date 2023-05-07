@@ -5,9 +5,11 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  if (process.env.NODE_ENV === 'development') {
-    return children
-  } else {
-    return null
-  }
+  return children
+
+  // if (process.env.NODE_ENV === 'development' || location.search.includes('preview')) {
+  //   return children
+  // } else {
+  //   return null
+  // }
 }

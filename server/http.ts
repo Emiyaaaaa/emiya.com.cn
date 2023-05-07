@@ -4,15 +4,17 @@ export async function post<T extends RouteKey>(
   api: RouteString<T>,
   ...data: Parameters<ServerSideAPIInterface[T]>
 ): Promise<ReturnType<ServerSideAPIInterface[T]>> {
-  const response = await fetch(api, {
+  const res = await fetch(api, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ data }),
   })
-  // TODO: error handling
-  return response.json()
+  if (!res.ok) {
+    throw new Error(`post 捕获到错误： ${res.statusText}`)
+  }
+  return res.json()
 }
 
 export async function get<T extends RouteKey>(
@@ -22,7 +24,7 @@ export async function get<T extends RouteKey>(
   const apistring = `${api}?data=${data.join(',')}`
   return fetch(apistring).then((res) => {
     if (!res.ok) {
-      throw new Error(`捕获到错误： ${res.statusText}`)
+      throw new Error(`get 捕获到错误：code(${res.status}) ${res.statusText}`)
     }
     return res.json()
   })

@@ -22,11 +22,27 @@ export async function POST(request: NextRequest, { params }: { params: { slug: s
   const slug = params.slug[0] as keyof typeof serverSlideAPI
   if (!slug) return NextResponse.rewrite('/404')
 
-  const query = await request.json()
+  let query: any[] = []
+
+  if (request.headers.get('content-type') !== 'application/json') {
+    // handle form data
+    query = [request]
+  } else {
+    // handle json data
+    const json = await request.json()
+    query = json.data
+  }
+
+  console.log('slug', slug)
 
   if (serverSlideAPI[slug]) {
-    const result = await (serverSlideAPI[slug] as any)(...query.data)
-    return NextResponse.json(result)
+    try {
+      const result = await (serverSlideAPI[slug] as any)(...query)
+      return NextResponse.json({ data: result })
+    } catch (error) {
+      // 500 response code
+      return NextResponse.json({ error })
+    }
   }
 
   // return 404
