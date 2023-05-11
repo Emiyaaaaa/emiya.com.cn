@@ -4,6 +4,8 @@ import Header from './components/Header'
 import NestedList from './components/NestedList'
 import CheckList from './components/CheckList'
 import Text from './components/Text'
+import { Code } from '@/ui/Code'
+import './index.css'
 
 function Content(props: { data: OutputData }) {
   return (
@@ -11,7 +13,7 @@ function Content(props: { data: OutputData }) {
       {props.data.blocks.map((block) => {
         switch (block.type) {
           case 'header':
-            return <Header {...block.data} />
+            return <Header {...block.data} withHash />
           case 'paragraph':
             return <Text {...block.data}></Text>
           case 'image':
@@ -25,7 +27,7 @@ function Content(props: { data: OutputData }) {
           case 'quote':
             return <blockquote>{block.data.text}</blockquote>
           case 'code':
-            return <pre>{block.data.code}</pre>
+            return <Code className="max-w-full" code={block.data.code} />
           default:
             return <div>unknown block type {block.type}</div>
         }

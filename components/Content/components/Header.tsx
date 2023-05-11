@@ -1,22 +1,20 @@
 import React from 'react'
 
-function Header(props: { level: number; text: string }) {
-  switch (props.level) {
-    case 1:
-      return <h1 dangerouslySetInnerHTML={{ __html: props.text }} />
-    case 2:
-      return <h2 dangerouslySetInnerHTML={{ __html: props.text }} />
-    case 3:
-      return <h3 dangerouslySetInnerHTML={{ __html: props.text }} />
-    case 4:
-      return <h4 dangerouslySetInnerHTML={{ __html: props.text }} />
-    case 5:
-      return <h5 dangerouslySetInnerHTML={{ __html: props.text }} />
-    case 6:
-      return <h6 dangerouslySetInnerHTML={{ __html: props.text }} />
-    default:
-      return <div dangerouslySetInnerHTML={{ __html: props.text }} />
-  }
+function Header(props: { level: number; text: string; withHash?: boolean }) {
+  const id = React.useMemo(() => {
+    return props.text.replace(/ /g, '-').replace(/[^\w-]/g, '')
+  }, [props.text])
+
+  const hash = React.useMemo(() => `#${id}`, [id])
+
+  return React.createElement(`h${props.level}`, { className: 'font-bold relative group' }, [
+    React.createElement('span', { key: 'span', dangerouslySetInnerHTML: { __html: props.text } }),
+    props.withHash ? (
+      <a key={hash} href={hash} id={`#${id}`} className="float-left -ml-[1.5em] px-[0.5em] opacity-0 group-hover:opacity-60">
+        #
+      </a>
+    ) : null,
+  ])
 }
 
 export default Header
