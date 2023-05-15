@@ -1,3 +1,16 @@
+# 2023.05.16
+ - style(blog): UI 更新；引入sass
+
+# 2023.05.12
+ - feat(blog): shiki 性能优化
+
+# 2023.05.10
+ - feat(blog): 添加 Code 组件
+
+# 2023.05.09
+ - feat(blog): head hash 的 UI
+ - style: 最大宽度限制
+
 # 2023.05.08
  - feat(editor): image upload
 

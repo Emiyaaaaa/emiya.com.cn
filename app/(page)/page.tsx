@@ -1,6 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import Head from 'next/head'
-import React, { use } from 'react'
+import React from 'react'
 import type { Metadata } from 'next'
 
 import styles from '@/styles/Home.module.css'

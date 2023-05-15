@@ -1,10 +1,10 @@
 import React from 'react'
 import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
-import '@/app/index.css'
-import '@/components/index.css'
 import Head from '@/components/Head'
 import { Beian } from '@/components/Beian'
+import '@/styles/tailwind.css'
+import './index.css'
 
 const inter = Inter({
   subsets: ['latin'],

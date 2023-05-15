@@ -6,20 +6,20 @@ interface NestedListItem {
   items?: NestedListItems
 }
 
-function ListWrapper(props: { style: 'ordered' | 'unordered'; children: React.ReactNode }) {
+function ListWrapper(props: { style: 'ordered' | 'unordered'; children: React.ReactNode; className?: string }) {
   const { style, children } = props
   switch (style) {
     case 'ordered':
-      return <ol>{children}</ol>
+      return <ol className={props.className}>{children}</ol>
     case 'unordered':
-      return <ul>{children}</ul>
+      return <ul className={props.className}>{children}</ul>
   }
 }
 
-function NestedList(props: { style: 'ordered' | 'unordered'; items: NestedListItems }) {
+function NestedList(props: { style: 'ordered' | 'unordered'; items: NestedListItems; className?: string }) {
   const { style, items } = props
   return (
-    <ListWrapper style={style}>
+    <ListWrapper style={style} className={props.className}>
       {items.map((item, index) => (
         <li key={`${item.content}${index}`}>
           {item.content}
