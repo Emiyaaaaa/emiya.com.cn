@@ -1,7 +1,0 @@
-@tailwind utilities;
-
-@layer {
-  .ui-code .shiki{
-    @apply overflow-x-auto p-4 rounded-md;
-  }
-}

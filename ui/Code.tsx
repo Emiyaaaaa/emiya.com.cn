@@ -2,7 +2,6 @@
 import classNames from 'classnames'
 import React from 'react'
 import shiki from '@/utils/shiki'
-import './Code.css'
 
 interface Props {
   className?: string

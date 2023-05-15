@@ -5,11 +5,11 @@ import NestedList from './components/NestedList'
 import CheckList from './components/CheckList'
 import Text from './components/Text'
 import { Code } from '@/ui/Code'
-import './index.css'
+import './index.scss'
 
 function Content(props: { data: OutputData }) {
   return (
-    <>
+    <div className="content">
       {props.data.blocks.map((block) => {
         switch (block.type) {
           case 'header':
@@ -21,7 +21,7 @@ function Content(props: { data: OutputData }) {
           case 'list':
             return <NestedList {...block.data} />
           case 'delimiter':
-            return <hr className="my-6" />
+            return <hr />
           case 'checklist':
             return <CheckList {...block.data} />
           case 'quote':
@@ -32,7 +32,7 @@ function Content(props: { data: OutputData }) {
             return <div>unknown block type {block.type}</div>
         }
       })}
-    </>
+    </div>
   )
 }
 

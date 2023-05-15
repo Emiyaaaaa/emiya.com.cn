@@ -1,15 +1,15 @@
 import React from 'react'
 
-function CheckList(props: { items: { checked: boolean; text: string }[] }) {
+function CheckList(props: { items: { checked: boolean; text: string }[]; className: string }) {
   return (
-    <ul>
+    <div className={props.className}>
       {props.items.map((item, index) => (
-        <li key={`${item.text}${index}`}>
+        <p key={`${item.text}${index}`}>
           <input type="checkbox" checked={item.checked} readOnly />
           {item.text}
-        </li>
+        </p>
       ))}
-    </ul>
+    </div>
   )
 }
 

@@ -1,7 +1,7 @@
 import type * as ShikiInterface from 'shiki'
 import { singlePromise } from './singlePromise'
 
-const THEME = 'material-theme-palenight'
+const THEME = 'dracula'
 
 const shikiSinglePromise = singlePromise(async () => {
   const shiki = await import('shiki')
