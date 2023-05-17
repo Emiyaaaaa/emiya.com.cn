@@ -28,16 +28,18 @@ const EditorPage = ({ params }: { params: { id: string | 'new' } }) => {
   }, [])
 
   const saveHandler = React.useCallback(() => {
+    // const title = (document.getElementById('title') as HTMLInputElement).value
+    const title = '1'
     editorRef.current?.save().then((data) => {
       if (params.id === 'new') {
         post('/api/createBlog', {
-          title: 'test title',
+          title: title,
           content: JSON.stringify(data),
           author: 'test author',
         })
       } else {
         post('/api/updateBlog', params.id, {
-          title: 'test title',
+          title: title,
           content: JSON.stringify(data),
         })
       }
@@ -55,13 +57,16 @@ const EditorPage = ({ params }: { params: { id: string | 'new' } }) => {
   }, [])
 
   return (
-    <>
-      <div className="m-6">
-        {initialData && <Editor onRef={(editorInstance) => (editorRef.current = editorInstance)} initialData={initialData}></Editor>}
-        <button onClick={saveHandler}>save</button>
-        <button onClick={deleteHandler}>delete</button>
-      </div>
-    </>
+    <div className="m-6" suppressHydrationWarning={true}>
+      {process.browser && (
+        <>
+          <input placeholder="input title" id="title" type="text"></input>
+          {initialData && <Editor onRef={(editorInstance) => (editorRef.current = editorInstance)} initialData={initialData}></Editor>}
+          <button onClick={saveHandler}>save</button>
+          <button onClick={deleteHandler}>delete</button>
+        </>
+      )}
+    </div>
   )
 }
 

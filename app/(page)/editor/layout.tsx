@@ -5,7 +5,7 @@ export const metadata = {
   title: 'Emiya-editor',
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   // return children
   if (process.env.NODE_ENV === 'development') {
     return children
