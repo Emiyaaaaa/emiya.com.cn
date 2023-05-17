@@ -1,15 +1,28 @@
+'use client'
 import React from 'react'
 import './index.css'
+import useGithubLogin from '@/utils/hooks/useGithubLogin'
+import { Block } from '@/ui/Block'
 
-export const metadata = {
-  title: 'Emiya-editor',
-}
+// export const metadata = {
+//   title: 'Emiya-editor',
+// }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  // return children
-  if (process.env.NODE_ENV === 'development') {
-    return children
-  } else {
-    return null
-  }
+  const { redirectToGithubLogin, checkLogin } = useGithubLogin()
+  const [isLogin, setIsLogin] = React.useState(false)
+
+  React.useEffect(() => {
+    checkLogin().then(setIsLogin)
+  }, [])
+
+  return isLogin ? (
+    children
+  ) : (
+    <Block full center>
+      <div onClick={redirectToGithubLogin} className="w-3/4 text-3xl font-bold">
+        You need sign in with github, Click here to sign in
+      </div>
+    </Block>
+  )
 }

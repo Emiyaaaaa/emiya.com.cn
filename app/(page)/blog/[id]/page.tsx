@@ -1,7 +1,7 @@
 import React from 'react'
-import { serverSlideAPI } from '@/server/route'
 import { notFound } from 'next/navigation'
 import Article from '@/components/Article'
+import { serverSlideAPI } from '@/server/route'
 
 function Page({ params }: { params: { id: string } }) {
   const data = React.use(serverSlideAPI.getBlog(params.id))

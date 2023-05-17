@@ -1,24 +1,45 @@
+import { RequestHooks, serverSlideAPI } from '@/server/route'
 import { NextRequest, NextResponse } from 'next/server'
-import { serverSlideAPI } from '@/server/route'
 
 export async function GET(request: NextRequest, { params }: { params: { slug: string } }) {
-  console.log('request.url', request.url)
   const url = new URL(`${request.url}`)
+  const requestHooks: RequestHooks = {}
 
   const slug = params.slug[0] as keyof typeof serverSlideAPI
   if (!slug) return NextResponse.rewrite('/404')
 
-  const query = url.searchParams.get('data')?.split(',') ?? []
+  const query = url.searchParams.get('params')?.split(',') ?? []
+
   if (serverSlideAPI[slug]) {
-    const result = await (serverSlideAPI[slug] as any)(...query)
-    return NextResponse.json({ data: result })
+    try {
+      const result = await (serverSlideAPI[slug] as any)(...query, {})
+
+      const responseInit = requestHooks.getResponseInit?.() ?? {}
+
+      const response = NextResponse.json({ data: result }, responseInit)
+
+      await requestHooks.afterResponseHandler?.(response)
+
+      return response
+    } catch (err: any) {
+      console.log('get request error', err.message ?? err.code ?? '', err)
+      return NextResponse.json(
+        { error: `get request "${slug}" error: ${err.message ?? err.code}` },
+        {
+          status: err.code ?? 500,
+          statusText: err.message ?? err.code ?? '',
+        },
+      )
+    }
   }
 
   // return 404
-  return NextResponse.json({ slug })
+  return NextResponse.json({ error: `slug ${slug} not found` })
 }
 
 export async function POST(request: NextRequest, { params }: { params: { slug: string } }) {
+  const requestHooks: RequestHooks = {}
+
   const slug = params.slug[0] as keyof typeof serverSlideAPI
   if (!slug) return NextResponse.rewrite('/404')
 
@@ -33,12 +54,17 @@ export async function POST(request: NextRequest, { params }: { params: { slug: s
     query = json.data
   }
 
-  console.log('slug', slug)
-
   if (serverSlideAPI[slug]) {
     try {
-      const result = await (serverSlideAPI[slug] as any)(...query)
-      return NextResponse.json({ data: result })
+      const result = await (serverSlideAPI[slug] as any)(...query, requestHooks)
+
+      const responseInit = requestHooks.getResponseInit?.() ?? {}
+
+      const response = NextResponse.json({ data: result }, responseInit)
+
+      await requestHooks.afterResponseHandler?.(response)
+
+      return response
     } catch (error) {
       // 500 response code
       return NextResponse.json({ error })
@@ -46,5 +72,5 @@ export async function POST(request: NextRequest, { params }: { params: { slug: s
   }
 
   // return 404
-  return NextResponse.json({ slug })
+  return NextResponse.json({ error: `slug ${slug} not found` })
 }

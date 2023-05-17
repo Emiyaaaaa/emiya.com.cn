@@ -1,72 +1,93 @@
 'use client'
 import React from 'react'
 import dynamic from 'next/dynamic'
-import { post, get } from '@/server/http'
+import { postAPI, getAPI } from '@/utils/http'
 
-import type EditorJS from '@editorjs/editorjs'
 import type { OutputData } from '@editorjs/editorjs'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { useEditor } from '@/components/Editor/hooks'
+
+type FormInterface = {
+  title: string
+  visibility: number
+}
 
 const Editor = dynamic(() => import('@/components/Editor'), { ssr: false })
 
 async function getBlog(id: string) {
-  const res = await get('/api/getBlog', id).catch((err) => {
+  const res = await getAPI('getBlog', id).catch((err) => {
     console.error(err)
   })
-  return res?.data ? JSON.parse(res.data.content) : undefined
+  return res?.data
 }
 
 const EditorPage = ({ params }: { params: { id: string | 'new' } }) => {
-  const editorRef = React.useRef<EditorJS>()
+  const { editorReady, editorRef, registerEditor } = useEditor()
   const [initialData, setInitialData] = React.useState<OutputData>()
+  const { register, handleSubmit, watch, setValue } = useForm<FormInterface>()
 
   React.useEffect(() => {
-    if (params.id === 'new') {
-      setInitialData({ blocks: [] })
-    } else {
-      getBlog(params.id).then((data) => setInitialData(data))
-    }
+    if (!editorRef.current) return
+    if (!editorReady) return
+    if (params.id === 'new') return
+    if (!initialData) return
+    editorRef.current?.render(initialData)
+  }, [editorRef.current, editorReady, initialData])
+
+  // 获取初始数据
+  React.useEffect(() => {
+    if (params.id !== 'new')
+      getBlog(params.id).then((data) => {
+        if (data && Object.keys(data).length !== 0) {
+          setValue('title', data.title)
+          setValue('visibility', data.visibility)
+          setInitialData(JSON.parse(data.content))
+        }
+      })
   }, [])
 
-  const saveHandler = React.useCallback(() => {
-    // const title = (document.getElementById('title') as HTMLInputElement).value
-    const title = '1'
-    editorRef.current?.save().then((data) => {
-      if (params.id === 'new') {
-        post('/api/createBlog', {
-          title: title,
-          content: JSON.stringify(data),
-          author: 'test author',
-        })
-      } else {
-        post('/api/updateBlog', params.id, {
-          title: title,
-          content: JSON.stringify(data),
-        })
+  // 保存数据
+  const save: SubmitHandler<FormInterface> = React.useCallback(
+    async (form) => {
+      const content = await editorRef.current?.save()
+      if (!content) return
+
+      const submitData = {
+        ...form,
+        content: JSON.stringify(content),
+        author: 'test author',
       }
-    })
-  }, [])
+      if (params.id === 'new') postAPI('createBlog', submitData)
+      else postAPI('updateBlog', params.id, submitData)
+    },
+    [editorRef.current],
+  )
 
-  const deleteHandler = React.useCallback(() => {
+  // 删除数据
+  const deleteBlog = React.useCallback(() => {
     editorRef.current?.save().then((data) => {
       if (params.id === 'new') {
         console.log('new blog')
       } else {
-        post('/api/deleteBlog', params.id)
+        postAPI('deleteBlog', params.id)
       }
     })
   }, [])
 
   return (
-    <div className="m-6" suppressHydrationWarning={true}>
-      {process.browser && (
-        <>
-          <input placeholder="input title" id="title" type="text"></input>
-          {initialData && <Editor onRef={(editorInstance) => (editorRef.current = editorInstance)} initialData={initialData}></Editor>}
-          <button onClick={saveHandler}>save</button>
-          <button onClick={deleteHandler}>delete</button>
-        </>
-      )}
-    </div>
+    <>
+      <form onSubmit={handleSubmit(save)} className="m-6">
+        <input {...register('title', { required: true })} type="text" placeholder="title" />
+        {/* select */}
+        <select {...register('visibility', { required: true })}>
+          <option value={1}>true</option>
+          <option value={0}>false</option>
+        </select>
+        <Editor onRef={registerEditor} initialData={{ blocks: [] }}></Editor>
+        <input type="submit" />
+      </form>
+      <button onClick={deleteBlog}>delete</button>
+    </>
   )
 }
 

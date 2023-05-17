@@ -6,7 +6,7 @@ export enum Table {
   Blog = 'blog',
 }
 
-type ID = string
+type ID = string | number
 
 export async function getBlogList() {
   return db.selectFrom(Table.Blog).selectAll().execute()
