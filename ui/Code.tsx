@@ -1,11 +1,12 @@
 'use client'
 import classNames from 'classnames'
 import React from 'react'
-import shiki from '@/utils/shiki'
+import shiki, { type ShikiInterface } from '@/utils/shiki'
 
 interface Props {
   className?: string
   code: string
+  language?: ShikiInterface.Lang
 }
 
 export function Code(props: Props) {
@@ -15,7 +16,7 @@ export function Code(props: Props) {
   React.useEffect(() => {
     if (loading) return
     if (!ref.current) return
-    shiki.codeToHtml(props.code, 'html').then((html) => {
+    shiki.codeToHtml(props.code, props.language).then((html) => {
       ref.current!.innerHTML = html
       setLoading(true)
     })

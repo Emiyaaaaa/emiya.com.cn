@@ -48,7 +48,6 @@ export async function getGithubAccessToken(code: string, requestHooks: RequestHo
   }
   const data = await res.json()
 
-  console.log('getGithubAccessToken', data)
   requestHooks.getResponseInit = () => {
     return {
       headers: {

@@ -6,6 +6,7 @@ import CheckList from './components/CheckList'
 import Text from './components/Text'
 import { Code } from '@/ui/Code'
 import './index.scss'
+import any from '@/utils/any'
 
 function Content(props: { data: OutputData }) {
   return (
@@ -27,7 +28,7 @@ function Content(props: { data: OutputData }) {
           case 'quote':
             return <blockquote>{block.data.text}</blockquote>
           case 'code':
-            return <Code className="max-w-full" code={block.data.code} />
+            return <Code className="max-w-full" code={block.data.code} language={any(block.data.language)} />
           default:
             return <div>unknown block type {block.type}</div>
         }

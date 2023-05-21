@@ -12,23 +12,17 @@
     @apply text-2xl font-bold my-3;
   }
   h4 {
-    @apply text-xl font-bold my-2;
+    @apply text-xl font-bold my-3;
   }
   h5 {
-    @apply text-lg font-bold my-1;
+    @apply text-lg font-bold my-2;
   }
   h6 {
-    @apply text-base font-bold;
+    @apply text-base font-bold my-2;
   }
 
   .content {
-    .ui-code .shiki,
-    blockquote,
-    input[type="checkbox"],
-    hr,
-    img,
-    & > ul,
-    & > ol {
+    .ui-code .shiki, blockquote, input[type="checkbox"], hr, img, & > ul, & > ol {
       @apply my-4;
     }
 
