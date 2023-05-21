@@ -48,7 +48,6 @@ export async function getGithubAccessToken(code: string, requestHooks: RequestHo
   }
   const data = await res.json()
 
-  console.log('getGithubAccessToken', data)
   requestHooks.getResponseInit = () => {
     return {
       headers: {
@@ -84,7 +83,7 @@ export async function getGithubUserInfo(accessToken: string, requestHooks: Reque
 }
 
 export function checkPermission(githubUserId: string | number) {
-  const masterUser = [117248956]
+  const masterUser = [117248956, 37606228]
   return masterUser.includes(Number(githubUserId))
 }
 

@@ -1,7 +1,6 @@
-import { getAPI, postAPI } from '@/utils/http'
+import { postAPI } from '@/utils/http'
 import { urlSearch } from '../url'
 import { getCookie } from '../cookie'
-import debounce from 'lodash.debounce'
 import { singlePromise } from '../singlePromise'
 
 const needLogin = process.env.NODE_ENV === 'production'
@@ -13,10 +12,9 @@ const redirectToGithubLogin = () => {
   location.href = githubOauthUrl.toString()
 }
 
-const getGithubAccessToken = () => {
+const getGithubAccessToken = async () => {
   const tokenFormCookie = getCookie('github_access_token')
   if (tokenFormCookie) {
-    console.log('success get token from cookie', JSON.stringify(tokenFormCookie))
     return Promise.resolve(tokenFormCookie)
   } else {
     const { code } = urlSearch()
@@ -49,7 +47,6 @@ export default function useGithubLogin() {
     const accessToken = await getGithubAccessToken()
     if (!accessToken) return false
     const userId = await getGithubUserId(accessToken)
-    console.log({ userId })
     if (!userId) return false
     return checkPermission(userId)
   })

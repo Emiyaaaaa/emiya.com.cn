@@ -6,6 +6,7 @@ import { Block } from '@/ui/Block'
 
 function Article(props: { data: Blog }) {
   const { data } = props
+
   return (
     <div className="flex-1">
       <Block v center="x" className="h-full w-full">

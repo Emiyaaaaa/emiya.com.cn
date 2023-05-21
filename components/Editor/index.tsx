@@ -76,7 +76,13 @@ function Editor(props: { onRef?: (editorInstance: EditorJS) => void; initialData
             },
           },
         },
-        code: CodeTools,
+        code: {
+          class: CodeTools,
+          config: {
+            placeholder: 'Enter a code',
+            langaugeOptions: ['css', 'html', 'javascript', 'typescript', 'bash', 'json', 'markdown', 'tsx'],
+          },
+        },
         inlineCode: InlineCodeTools,
       },
     }

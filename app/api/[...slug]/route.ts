@@ -22,7 +22,6 @@ export async function GET(request: NextRequest, { params }: { params: { slug: st
 
       return response
     } catch (err: any) {
-      console.log('get request error', err.message ?? err.code ?? '', err)
       return NextResponse.json(
         { error: `get request "${slug}" error: ${err.message ?? err.code}` },
         {

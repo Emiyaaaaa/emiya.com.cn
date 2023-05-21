@@ -66,9 +66,7 @@ const EditorPage = ({ params }: { params: { id: string | 'new' } }) => {
   // 删除数据
   const deleteBlog = React.useCallback(() => {
     editorRef.current?.save().then((data) => {
-      if (params.id === 'new') {
-        console.log('new blog')
-      } else {
+      if (params.id !== 'new') {
         postAPI('deleteBlog', params.id)
       }
     })
@@ -76,17 +74,23 @@ const EditorPage = ({ params }: { params: { id: string | 'new' } }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(save)} className="m-6">
-        <input {...register('title', { required: true })} type="text" placeholder="title" />
+      <form onSubmit={handleSubmit(save)} className="m-6 flex flex-col">
+        <div>
+          <label>title： </label>
+          <input {...register('title', { required: true })} type="text" placeholder="title" />
+        </div>
         {/* select */}
-        <select {...register('visibility', { required: true })}>
-          <option value={1}>true</option>
-          <option value={0}>false</option>
-        </select>
+        <div>
+          <label>visibility： </label>
+          <select {...register('visibility', { required: true })}>
+            <option value={1}>true</option>
+            <option value={0}>false</option>
+          </select>
+        </div>
         <Editor onRef={registerEditor} initialData={{ blocks: [] }}></Editor>
         <input type="submit" />
+        <button onClick={deleteBlog}>delete</button>
       </form>
-      <button onClick={deleteBlog}>delete</button>
     </>
   )
 }

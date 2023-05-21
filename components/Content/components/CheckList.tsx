@@ -4,10 +4,10 @@ function CheckList(props: { items: { checked: boolean; text: string }[]; classNa
   return (
     <div className={props.className}>
       {props.items.map((item, index) => (
-        <p key={`${item.text}${index}`}>
+        <div key={`${item.text}${index}`}>
           <input type="checkbox" checked={item.checked} readOnly />
           {item.text}
-        </p>
+        </div>
       ))}
     </div>
   )
