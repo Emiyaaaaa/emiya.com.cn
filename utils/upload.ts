@@ -1,10 +1,9 @@
-import { get } from '@/server/http'
+import { getAPI } from '@/utils/http'
 import COS from 'cos-js-sdk-v5'
 
 const cos = new COS({
   getAuthorization(options, callback) {
-    get('/api/getAuthorization').then((res) => {
-      console.log('res', res)
+    getAPI('getCOSAuthorization').then((res) => {
       callback({
         TmpSecretId: res.data.credentials.tmpSecretId,
         TmpSecretKey: res.data.credentials.tmpSecretKey,
@@ -29,10 +28,9 @@ export async function uploadFile(file: File) {
       },
       function (err, data) {
         if (err) {
-          console.log('上传出错', err)
+          console.error('上传出错', err)
           reject(err)
         } else {
-          console.log('上传成功', data)
           resolve(data)
         }
       },

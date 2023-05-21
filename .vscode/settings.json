@@ -7,5 +7,17 @@
     "emiya",
     "Kysely",
     "shiki"
+  ],
+  "sqltools.connections": [
+    {
+      "mysqlOptions": {
+        "authProtocol": "default"
+      },
+      "previewLimit": 50,
+      "server": "localhost",
+      "driver": "MySQL",
+      "name": "dev",
+      "connectString": "mysql://ia72734gqbzgl8qa98sr:pscale_pw_TW9GGxpQsMys6MyybxfHtbE1ImVgOUri7CkDP4c4UlZ@aws.connect.psdb.cloud/emiya-com-cn-database?ssl={\"rejectUnauthorized\":true}"
+    }
   ]
 }
