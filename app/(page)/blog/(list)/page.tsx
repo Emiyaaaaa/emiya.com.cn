@@ -4,7 +4,7 @@ import Card from '@/components/Card'
 import { serverSlideAPI } from '@/server/route'
 
 export default function ArticleList() {
-  const data = React.use(serverSlideAPI.getBlogList())
+  const data = React.use(serverSlideAPI.getVisibleBlogList())
   return (
     <div>
       {data.map((d, index) => (

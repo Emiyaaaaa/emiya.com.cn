@@ -8,8 +8,12 @@ export enum Table {
 
 type ID = string | number
 
-export async function getBlogList() {
-  return db.selectFrom(Table.Blog).selectAll().execute()
+export async function getEditorBlogList() {
+  return db.selectFrom(Table.Blog).select(['title', 'id', 'visibility']).execute()
+}
+
+export async function getVisibleBlogList() {
+  return db.selectFrom(Table.Blog).select(['title', 'id']).where('visibility', '=', 1).execute()
 }
 
 export async function getBlog(id: ID) {
@@ -34,7 +38,8 @@ export async function deleteBlog(id: ID) {
 }
 
 export default {
-  getBlogList,
+  getEditorBlogList,
+  getVisibleBlogList,
   getBlog,
   updateBlog,
   createBlog,

@@ -6,10 +6,10 @@ import { postAPI, getAPI } from '@/utils/http'
 import { ServerSideAPIInterface } from '@/server/route'
 
 export default function EditorListPage() {
-  const [data, setData] = React.useState<PromiseReturnType<ServerSideAPIInterface['getBlogList']>>([])
+  const [data, setData] = React.useState<PromiseReturnType<ServerSideAPIInterface['getEditorBlogList']>>([])
 
   React.useEffect(() => {
-    getAPI('getBlogList').then((res) => setData(res.data))
+    getAPI('getEditorBlogList').then((res) => setData(res.data))
   }, [])
 
   return (

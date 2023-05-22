@@ -2,15 +2,14 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
 import { postAPI, getAPI } from '@/utils/http'
+import './index.scss'
 
 import type { OutputData } from '@editorjs/editorjs'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useEditor } from '@/components/Editor/hooks'
+import { Blog } from '@/server/database/typing'
 
-type FormInterface = {
-  title: string
-  visibility: number
-}
+type FormInterface = Pick<Blog, 'title' | 'visibility'>
 
 const Editor = dynamic(() => import('@/components/Editor'), { ssr: false })
 
@@ -39,8 +38,10 @@ const EditorPage = ({ params }: { params: { id: string | 'new' } }) => {
     if (params.id !== 'new')
       getBlog(params.id).then((data) => {
         if (data && Object.keys(data).length !== 0) {
-          setValue('title', data.title)
-          setValue('visibility', data.visibility)
+          Object.keys(data).forEach((d) => {
+            const value = data[d as keyof FormInterface]
+            setValue(d as keyof FormInterface, value as any)
+          })
           setInitialData(JSON.parse(data.content))
         }
       })
@@ -75,23 +76,32 @@ const EditorPage = ({ params }: { params: { id: string | 'new' } }) => {
   return (
     <>
       <form onSubmit={handleSubmit(save)} className="m-6 flex flex-col">
-        <div>
-          <label>title： </label>
-          <input {...register('title', { required: true })} type="text" placeholder="title" />
-        </div>
-        {/* select */}
-        <div>
-          <label>visibility： </label>
-          <select {...register('visibility', { required: true })}>
-            <option value={1}>true</option>
-            <option value={0}>false</option>
-          </select>
+        <div className="mx-auto w-full max-w-[650px]">
+          <FormItem label="title">
+            <input {...register('title', { required: true })} type="text" placeholder="title" />
+          </FormItem>
+          {/* select */}
+          <FormItem label="visibility">
+            <select {...register('visibility', { required: true })}>
+              <option value={1}>true</option>
+              <option value={0}>false</option>
+            </select>
+          </FormItem>
         </div>
         <Editor onRef={registerEditor} initialData={{ blocks: [] }}></Editor>
         <input type="submit" />
         <button onClick={deleteBlog}>delete</button>
       </form>
     </>
+  )
+}
+
+function FormItem(props: { label: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <label>{props.label}： </label>
+      {props.children}
+    </div>
   )
 }
 

@@ -18,6 +18,7 @@ function ListWrapper(props: { style: 'ordered' | 'unordered'; children: React.Re
 
 function NestedList(props: { style: 'ordered' | 'unordered'; items: NestedListItems; className?: string }) {
   const { style, items } = props
+  if (items.length === 0) return null
   return (
     <ListWrapper style={style} className={props.className}>
       {items.map((item, index) => (

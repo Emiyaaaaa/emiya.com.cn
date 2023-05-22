@@ -22,7 +22,7 @@
   }
 
   .content {
-    .ui-code .shiki, blockquote, input[type="checkbox"], hr, img, & > ul, & > ol {
+    .ui-code .shiki, blockquote, hr, img, & > ul, & > ol {
       @apply my-4;
     }
 
@@ -33,6 +33,16 @@
     /* content */
     & > p, & > ul, & > ol {
       @apply leading-relaxed break-words text-justify;
+    }
+
+    /* text */
+    & > p {
+      @apply mt-6 break-words;
+    }
+
+    /* checklist */
+    input[type="checkbox"] {
+      @apply mr-2;
     }
 
     /* list */
@@ -46,7 +56,7 @@
       @apply mr-2;
     }
   
-    ul li::before {
+    ul:not(.checklist) li::before {
       content: "•";
       @apply mr-2;
     }
@@ -56,8 +66,12 @@
         @apply mr-2;
       }
       li {
-        @apply ml-4;
+        @apply ml-4 my-1;
       }
+    }
+
+    p + ul, p + ol {
+      @apply mt-2;
     }
   
     /* blockquote */
@@ -78,10 +92,6 @@
 
     & > img {
       @apply mx-auto;
-    }
-
-    & > p {
-      @apply my-6 break-words;
     }
   }
 }
