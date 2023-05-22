@@ -1,6 +1,5 @@
 'use client'
 import React from 'react'
-import './index.css'
 import useGithubLogin from '@/utils/hooks/useGithubLogin'
 import { Block } from '@/ui/Block'
 

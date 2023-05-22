@@ -1,3 +1,7 @@
+# 2023.05.22
+ - fix(editor): 修复列表显隐开关
+ - feat(blog): 列表仅显示显示的文章
+
 # 2023.05.21
  - feat(editor): code block 添加语言选择
  - style(blog): 样式优化
