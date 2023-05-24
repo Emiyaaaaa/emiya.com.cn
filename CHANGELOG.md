@@ -1,3 +1,6 @@
+# 2023.05.23
+ - style(blog): checkbox UI 完成
+
 # 2023.05.22
  - fix(editor): 修复列表显隐开关
  - feat(blog): 列表仅显示显示的文章

@@ -7,13 +7,13 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx}', // Note the addition of the `app` directory.
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
+    './ui/**/*.{js,ts,jsx,tsx}',
   ],
   darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        'main-color': colors.teal['600'],
-        'main-color-light': colors.teal['500'],
+        'main-color': '#239181',
       },
     },
     aspectRatio: {
