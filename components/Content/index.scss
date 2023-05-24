@@ -70,6 +70,12 @@
       }
     }
 
+    & > ol, & > ul {
+      & > li {
+        @apply ml-2;
+      }
+    }
+
     p + ul, p + ol {
       @apply mt-2;
     }
