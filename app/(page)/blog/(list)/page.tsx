@@ -5,7 +5,6 @@ import { serverSlideAPI } from '@/server/route'
 
 export default function ArticleList() {
   const data = React.use(serverSlideAPI.getVisibleBlogList())
-  console.log(data)
   return (
     <div>
       {data.map((d, index) => (
