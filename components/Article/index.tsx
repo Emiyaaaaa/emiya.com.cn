@@ -13,7 +13,7 @@ function Article(props: { data: Blog }) {
         <div className="w-full max-w-[51rem] overflow-auto">
           <article className="px-5 py-6">
             <header className="flex w-full">
-              <h1 className="m-1 text-4xl font-extrabold text-black">{data.title}</h1>
+              <h1 className="m-1 text-4xl font-extrabold">{data.title}</h1>
             </header>
             <div className="w-fill m-2 mt-6">
               {/* <address>{data.author}</address> */}
