@@ -103,6 +103,9 @@
 
     /* link */
     a {
+      @apply text-color-main-dark;
+    }
+    a:not([id]) {
       @apply underline text-color-main-dark;
       &::after {
         content: "";
