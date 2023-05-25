@@ -13,7 +13,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'main-color': '#239181',
+        'color-main': 'hsl(var(--color-main) / <alpha-value>)',
+        'color-main-dark': 'hsl(var(--color-main-dark) / <alpha-value>)',
+        'color-bg': 'rgb(var(--color-bg) / <alpha-value>)',
       },
     },
     aspectRatio: {
