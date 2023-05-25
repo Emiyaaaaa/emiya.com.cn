@@ -6,9 +6,9 @@ export default function Checkbox(props: React.PropsWithChildren<{ checked?: bool
     <span className="flex items-center">
       <span
         className={classNames(
-          'mr-2 flex h-[1.1em] w-[1.1em] items-center justify-center rounded-full border-2 border-solid border-main',
+          'mr-2 flex h-[1.1em] w-[1.1em] items-center justify-center rounded-full border-2 border-solid border-color-main',
           props.className,
-          { 'bg-main': props.checked },
+          { 'bg-color-main': props.checked },
         )}
       >
         {props.checked && (
