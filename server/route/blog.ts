@@ -13,7 +13,7 @@ export async function getEditorBlogList() {
 }
 
 export async function getVisibleBlogList() {
-  return db.selectFrom(Table.Blog).select(['title', 'id']).where('visibility', '=', 1).execute()
+  return db.selectFrom(Table.Blog).select(['title', 'id']).where('visibility', '=', 1).orderBy('created_at', 'desc').execute()
 }
 
 export async function getBlog(id: ID) {

@@ -96,6 +96,22 @@
       @apply overflow-x-auto p-4 rounded-md;
     }
 
+    /* inline code */
+    *:not(pre.shiki) > code {
+      @apply bg-opacity-20 bg-color-main rounded-[3px] px-2 mx-1;
+    }
+
+    /* link */
+    a {
+      @apply underline text-color-main-dark;
+      &::after {
+        content: "";
+        @apply underline inline-block w-4 h-4 -ml-[2px] bg-center bg-color-main-dark bg-no-repeat bg-contain;
+        mask: url(/assets/icon/external-link.svg);
+      }
+    }
+
+    /* image */
     & > img {
       @apply mx-auto;
     }
