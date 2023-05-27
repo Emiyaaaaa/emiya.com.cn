@@ -1,3 +1,7 @@
+# 2023.05.27
+ - feat(blog): 标题做路由
+ - feat(blog): 新增标签字段
+
 # 2023.05.26
   - style(blog): 主题系统
   - style(blog): a、code 样式支持

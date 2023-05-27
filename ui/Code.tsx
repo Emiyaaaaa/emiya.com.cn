@@ -16,10 +16,13 @@ export function Code(props: Props) {
   React.useEffect(() => {
     if (loading) return
     if (!ref.current) return
-    shiki.codeToHtml(props.code, props.language).then((html) => {
-      ref.current!.innerHTML = html
-      setLoading(true)
-    })
+    setLoading(true)
+    shiki
+      .codeToHtml(props.code, props.language)
+      .then((html) => {
+        if (ref.current) ref.current.innerHTML = html
+      })
+      .finally(() => setLoading(false))
   }, [ref.current])
   return <div className={classNames('ui-code', props.className, {})} ref={ref}></div>
 }

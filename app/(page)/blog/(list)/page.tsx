@@ -8,8 +8,8 @@ export default function ArticleList() {
   return (
     <div>
       {data.map((d, index) => (
-        <Link key={index} href={`/blog/${d.id}`}>
-          <Card title={d.title}></Card>
+        <Link key={index} href={`/blog/${d.en_title ? d.en_title.replace(/\s/g, '-') : `untitled-${d.id}`}`}>
+          <Card {...d} tags={d.tag?.split(';')}></Card>
         </Link>
       ))}
     </div>

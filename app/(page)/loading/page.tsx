@@ -1,5 +1,5 @@
 import React from 'react'
-import Loading from '../blog/[id]/loading'
+import Loading from '../blog/[title]/loading'
 
 function Page() {
   return <Loading></Loading>

@@ -16,6 +16,7 @@ module.exports = {
         'color-main': 'hsl(var(--color-main) / <alpha-value>)',
         'color-main-dark': 'hsl(var(--color-main-dark) / <alpha-value>)',
         'color-bg': 'rgb(var(--color-bg) / <alpha-value>)',
+        'color-tag': 'rgb(var(--color-tag) / <alpha-value>)',
       },
     },
     aspectRatio: {

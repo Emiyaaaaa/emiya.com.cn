@@ -20,11 +20,9 @@ function Article(props: { data: Blog }) {
               <section className="text-xs text-gray-600">
                 {data.updated_at && (
                   <div>
-                    <span className="mr-1">最后修改于</span>
-                    <Time date={data.updated_at}></Time>
+                    <Time format="YYYY-MM-DD" date={data.updated_at}></Time>
                   </div>
                 )}
-                <div className="mt-2">作者：Emiya</div>
               </section>
               <hr className="my-6" />
               <article className="py-2">

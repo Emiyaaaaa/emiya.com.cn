@@ -1,3 +1,3 @@
-export default function any(value: any): any {
-  return value
+export default function any(value: any): never {
+  return value as never
 }

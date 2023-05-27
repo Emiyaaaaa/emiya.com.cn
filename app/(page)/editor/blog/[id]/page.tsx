@@ -5,16 +5,20 @@ import { postAPI, getAPI } from '@/utils/http'
 import './index.scss'
 
 import type { OutputData } from '@editorjs/editorjs'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { SubmitHandler, useForm, useFieldArray } from 'react-hook-form'
 import { useEditor } from '@/components/Editor/hooks'
 import { Blog } from '@/server/database/typing'
+import any from '@/utils/any'
 
-type FormInterface = Pick<Blog, 'title' | 'visibility'>
+const formField: Array<keyof Blog> = ['title', 'visibility', 'en_title']
+interface FormInterface extends Blog {
+  tags: string[]
+}
 
 const Editor = dynamic(() => import('@/components/Editor'), { ssr: false })
 
 async function getBlog(id: string) {
-  const res = await getAPI('getBlog', id).catch((err) => {
+  const res = await getAPI('getBlogById', id).catch((err) => {
     console.error(err)
   })
   return res?.data
@@ -23,7 +27,8 @@ async function getBlog(id: string) {
 const EditorPage = ({ params }: { params: { id: string | 'new' } }) => {
   const { editorReady, editorRef, registerEditor } = useEditor()
   const [initialData, setInitialData] = React.useState<OutputData>()
-  const { register, handleSubmit, watch, setValue } = useForm<FormInterface>()
+  const { register, handleSubmit, setValue, control } = useForm<FormInterface>()
+  const { fields, append } = useFieldArray<any>({ control, name: 'tags' })
 
   React.useEffect(() => {
     if (!editorRef.current) return
@@ -38,9 +43,13 @@ const EditorPage = ({ params }: { params: { id: string | 'new' } }) => {
     if (params.id !== 'new')
       getBlog(params.id).then((data) => {
         if (data && Object.keys(data).length !== 0) {
-          Object.keys(data).forEach((d) => {
-            const value = data[d as keyof FormInterface]
-            setValue(d as keyof FormInterface, value as any)
+          Object.keys(data).forEach((key) => {
+            if (formField.includes(any(key))) {
+              const value = data[any(key)]
+              setValue(any(key), any(value))
+            }
+            console.log(data.tag?.split(';') ?? [])
+            setValue('tags', data.tag?.split(';') ?? [])
           })
           setInitialData(JSON.parse(data.content))
         }
@@ -53,12 +62,17 @@ const EditorPage = ({ params }: { params: { id: string | 'new' } }) => {
       const content = await editorRef.current?.save()
       if (!content) return
 
+      const submitForm: Partial<FormInterface> = {}
+      formField.forEach((field) => {
+        submitForm[field] = form[field] as any
+      })
       const submitData = {
-        ...form,
+        ...submitForm,
+        tag: form.tags.join(';'),
         content: JSON.stringify(content),
         author: 'test author',
       }
-      if (params.id === 'new') postAPI('createBlog', submitData)
+      if (params.id === 'new') postAPI('createBlog', submitData as any)
       else postAPI('updateBlog', params.id, submitData)
     },
     [editorRef.current],
@@ -80,12 +94,30 @@ const EditorPage = ({ params }: { params: { id: string | 'new' } }) => {
           <FormItem label="title">
             <input {...register('title', { required: true })} type="text" placeholder="title" />
           </FormItem>
+          <FormItem label="en_title">
+            <input {...register('en_title')} type="text" placeholder="en_title" />
+          </FormItem>
           {/* select */}
           <FormItem label="visibility">
             <select {...register('visibility', { required: true })}>
               <option value={1}>true</option>
               <option value={0}>false</option>
             </select>
+          </FormItem>
+          <FormItem label="tags">
+            {fields.map((field, index) => (
+              <span key={field.id}>
+                <input {...register(`tags.${index}`)} list="tag-list"></input>
+                <datalist id="tag-list">
+                  <option value="React"></option>
+                  <option value="JavaScript"></option>
+                  <option value="Css"></option>
+                  <option value="Typescript"></option>
+                  <option value="Next.js"></option>
+                </datalist>
+              </span>
+            ))}
+            <button onClick={() => append('')}>add</button>
           </FormItem>
         </div>
         <Editor onRef={registerEditor} initialData={{ blocks: [] }}></Editor>
