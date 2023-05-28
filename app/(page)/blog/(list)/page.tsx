@@ -15,5 +15,3 @@ export default function ArticleList() {
     </div>
   )
 }
-
-export const revalidate = 300

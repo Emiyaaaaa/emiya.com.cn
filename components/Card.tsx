@@ -13,7 +13,7 @@ function Card(props: CardProps) {
   return (
     <>
       <div className="overflow-hidden">
-        <div className="relative mb-0.5 p-6">
+        <div className="relative mb-0.5 flex flex-col justify-center p-6">
           {typeof props.title === 'string' ? <div className="text-lg font-black tracking-wide">{props.title}</div> : props.title}
           <div className="mt-1 flex">
             {props.tags?.map((tag, i) => (
@@ -26,13 +26,8 @@ function Card(props: CardProps) {
               </p>
             ))}
           </div>
-          <Time format="MON DD · YYYY" className="mt-1 block text-sm tracking-wide" date={props.created_at}></Time>
+          <Time format="MON DD" className="absolute right-3 mt-1 block text-sm tracking-wide" date={props.created_at}></Time>
           {props.children}
-          {props.right && (
-            <div className="absolute right-6 top-0 h-full">
-              <div className="flex h-full items-center">{props.right}</div>
-            </div>
-          )}
         </div>
       </div>
       <hr></hr>

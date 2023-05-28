@@ -73,3 +73,5 @@ export async function POST(request: NextRequest, { params }: { params: { slug: s
   // return 404
   return NextResponse.json({ error: `slug ${slug} not found` })
 }
+
+export const revalidate = 300

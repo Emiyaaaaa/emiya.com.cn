@@ -22,7 +22,7 @@
   }
 
   .content {
-    .ui-code .shiki, blockquote, hr, img, & > ul, & > ol {
+    .ui-code, blockquote, hr, img, & > ul, & > ol {
       @apply my-4;
     }
 
