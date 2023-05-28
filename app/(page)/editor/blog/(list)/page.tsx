@@ -22,16 +22,12 @@ export default function EditorListPage() {
                 <Link href={`/editor/blog/${item.id}`}>{item.title}</Link>
               </h3>
             }
-            right={
-              <select
-                defaultValue={item.visibility}
-                onChange={(e) => postAPI('updateBlog', item.id, { visibility: Number(e.target.value) })}
-              >
-                <option value="1">显示</option>
-                <option value="0">隐藏</option>
-              </select>
-            }
-          ></Card>
+          >
+            <select defaultValue={item.visibility} onChange={(e) => postAPI('updateBlog', item.id, { visibility: Number(e.target.value) })}>
+              <option value="1">显示</option>
+              <option value="0">隐藏</option>
+            </select>
+          </Card>
         </div>
       ))}
     </div>

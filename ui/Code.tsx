@@ -24,5 +24,13 @@ export function Code(props: Props) {
       })
       .finally(() => setLoading(false))
   }, [ref.current])
-  return <div className={classNames('ui-code', props.className, {})} ref={ref}></div>
+  return (
+    <div className={classNames('ui-code', props.className, {})} ref={ref}>
+      <pre className="shiki bg-[#282A36]">
+        <code className="text-slate-100" lang={props.language}>
+          {props.code}
+        </code>
+      </pre>
+    </div>
+  )
 }

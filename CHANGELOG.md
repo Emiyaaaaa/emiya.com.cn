@@ -1,3 +1,6 @@
+# 2023.05.28
+ - feat(blog): 优化code组件
+
 # 2023.05.27
  - feat(blog): 标题做路由
  - feat(blog): 新增标签字段
