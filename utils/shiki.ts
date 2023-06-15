@@ -30,14 +30,14 @@ class Shiki {
     return this.shiki
   }
 
-  async getHighlighter() {
+  private async getHighlighter() {
     if (!this.highlighter) {
       this.highlighter = await getHighlighterSinglePromise()
     }
     return this.highlighter
   }
 
-  async codeToHtml(code: string, lang: ShikiInterface.Lang = 'markdown') {
+  public async codeToHtml(code: string, lang: ShikiInterface.Lang = 'markdown') {
     const highlighter = await this.getHighlighter()
     const loadedLangs = highlighter.getLoadedLanguages()
     if (!loadedLangs.includes(lang)) {

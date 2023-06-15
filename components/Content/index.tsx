@@ -8,6 +8,7 @@ import { Code } from '@/ui/Code'
 import './index.scss'
 import any from '@/utils/any'
 import Quote from './components/Quote'
+import { Devider } from '@/ui/Devider'
 
 function Content(props: { data: OutputData }) {
   return (
@@ -23,7 +24,7 @@ function Content(props: { data: OutputData }) {
           case 'list':
             return <NestedList {...block.data} />
           case 'delimiter':
-            return <hr />
+            return <Devider />
           case 'checklist':
             return <CheckList {...block.data} />
           case 'quote':

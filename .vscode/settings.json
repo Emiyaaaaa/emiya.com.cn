@@ -6,7 +6,8 @@
     "editorjs",
     "emiya",
     "Kysely",
-    "shiki"
+    "shiki",
+    "Waka"
   ],
   "sqltools.connections": [
     {

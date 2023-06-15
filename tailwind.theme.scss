@@ -1,0 +1,19 @@
+@tailwind base;
+
+@layer base {
+  :root {
+    --color-main: 156deg 100% 39%;
+    /* --color-main-dark: 156deg 100% 28%; */
+    --color-main-dark: 156deg 100% 0%;
+    --color-bg: 250 250 250;
+    --color-font: 50 50 50;
+  }
+
+  :root[data-theme='dark'] {
+    --color-main: 156deg 100% 0%;
+    /* --color-main-dark: 156deg 100% 28%; */
+    --color-main-dark: 156deg 100% 100%;
+    --color-bg: 28 28 28;
+    --color-font: 255 255 255;
+  }
+}

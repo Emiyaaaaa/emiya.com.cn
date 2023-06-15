@@ -20,7 +20,7 @@ const getGithubAccessToken = async () => {
     const { code } = urlSearch()
     if (!code) return Promise.resolve(null)
     return postAPI('getGithubAccessToken', code)
-      .then((res) => res.data.access_token)
+      .then((res) => res.access_token)
       .catch((error) => {
         console.error('getAccessToken error', { error })
       })
@@ -35,7 +35,7 @@ const getGithubUserId = async (accessToken: string) => {
 }
 
 const checkPermission = async (githubUserId: string) => {
-  return postAPI('checkPermission', githubUserId).then((res) => res.data)
+  return postAPI('checkPermission', githubUserId)
 }
 
 export default function useGithubLogin() {

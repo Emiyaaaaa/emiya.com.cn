@@ -3,10 +3,6 @@ import React from 'react'
 import useGithubLogin from '@/utils/hooks/useGithubLogin'
 import { Block } from '@/ui/Block'
 
-// export const metadata = {
-//   title: 'Emiya-editor',
-// }
-
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { redirectToGithubLogin, checkLogin } = useGithubLogin()
   const [isLogin, setIsLogin] = React.useState(false)

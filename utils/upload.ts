@@ -5,11 +5,11 @@ const cos = new COS({
   getAuthorization(options, callback) {
     getAPI('getCOSAuthorization').then((res) => {
       callback({
-        TmpSecretId: res.data.credentials.tmpSecretId,
-        TmpSecretKey: res.data.credentials.tmpSecretKey,
-        XCosSecurityToken: res.data.credentials.sessionToken,
-        ExpiredTime: res.data.expiredTime,
-        StartTime: res.data.startTime,
+        TmpSecretId: res.credentials.tmpSecretId,
+        TmpSecretKey: res.credentials.tmpSecretKey,
+        XCosSecurityToken: res.credentials.sessionToken,
+        ExpiredTime: res.expiredTime,
+        StartTime: res.startTime,
       })
     })
   },

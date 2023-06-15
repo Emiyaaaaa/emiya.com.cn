@@ -1,6 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const colors = require('tailwindcss/colors')
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -9,15 +6,21 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
     './ui/**/*.{js,ts,jsx,tsx}',
   ],
-  darkMode: 'class',
+  // darkMode: 'class',
   theme: {
     extend: {
       colors: {
         'color-main': 'hsl(var(--color-main) / <alpha-value>)',
         'color-main-dark': 'hsl(var(--color-main-dark) / <alpha-value>)',
         'color-bg': 'rgb(var(--color-bg) / <alpha-value>)',
+        'color-font': 'rgb(var(--color-font) / <alpha-value>)',
         'color-tag': 'rgb(var(--color-tag) / <alpha-value>)',
+        'color-font-80': 'rgb(var(--color-font) / 0.8)',
       },
+    },
+    // hyphens-auto
+    hyphens: {
+      auto: 'auto',
     },
     aspectRatio: {
       auto: 'auto',

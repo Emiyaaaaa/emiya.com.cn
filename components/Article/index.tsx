@@ -3,6 +3,7 @@ import React from 'react'
 import Content from '../Content'
 import Time from '@/ui/Time'
 import { Block } from '@/ui/Block'
+import { Devider } from '@/ui/Devider'
 
 function Article(props: { data: Blog }) {
   const { data } = props
@@ -12,22 +13,16 @@ function Article(props: { data: Blog }) {
       <Block v center="x" className="h-full w-full">
         <div className="w-full max-w-[51rem] overflow-auto">
           <article className="px-5 py-6">
-            <header className="flex w-full">
-              <h1 className="m-1 text-4xl font-extrabold">{data.title}</h1>
+            <header className="m-1 w-full">
+              <h1 className="m-0 text-4xl font-bold leading-snug">
+                <span>{data.title}</span>
+              </h1>
+              {data.updated_at && <Time className="ml-1 mt-6 block opacity-70" format="MON DD · YYYY" date={data.updated_at}></Time>}
+              <span className="ml-1 mt-2 block opacity-70">{Math.ceil(data.content.length / 750)} minute read</span>
             </header>
-            <div className="w-fill m-2 mt-6">
-              {/* <address>{data.author}</address> */}
-              <section className="text-xs text-gray-600">
-                {data.updated_at && (
-                  <div>
-                    <Time format="YYYY-MM-DD" date={data.updated_at}></Time>
-                  </div>
-                )}
-              </section>
-              <hr className="my-6" />
-              <article className="py-2">
-                <Content data={JSON.parse(data.content)} />
-              </article>
+            <Devider className="my-6" />
+            <div className="w-fill mt-6 flex flex-col py-2 px-[2%]">
+              <Content data={JSON.parse(data.content)} />
             </div>
           </article>
         </div>

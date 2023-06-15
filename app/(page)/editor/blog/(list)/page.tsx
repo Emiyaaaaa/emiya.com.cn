@@ -9,7 +9,7 @@ export default function EditorListPage() {
   const [data, setData] = React.useState<PromiseReturnType<ServerSideAPIInterface['getEditorBlogList']>>([])
 
   React.useEffect(() => {
-    getAPI('getEditorBlogList').then((res) => setData(res.data))
+    getAPI('getEditorBlogList').then((res) => setData(res))
   }, [])
 
   return (
