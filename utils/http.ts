@@ -1,16 +1,11 @@
 import { RouteKey, ServerSideAPIInterface, RouteString, RequestHooks } from '@/server/route'
 
-// type ParametersExcludeLastParamsType<T extends (...args: any) => any, LastParamsType> = T extends (
-//   ...args: infer P,
-//   lastParams: LastParamsType,
-// ) => any
-//   ? P
-//   : never
+export type APIResult<T extends RouteKey> = PromiseReturnType<ServerSideAPIInterface[T]>
 
 export async function postAPI<T extends RouteKey>(
   api: RouteString<T>,
   ...data: RemoveTypeFormArray<Parameters<ServerSideAPIInterface[T]>, RequestHooks>
-): Promise<{ data: PromiseReturnType<ServerSideAPIInterface[T]> }> {
+): Promise<PromiseReturnType<ServerSideAPIInterface[T]>> {
   const res = await fetch(`/api/${api}`, {
     method: 'POST',
     headers: {
@@ -21,19 +16,21 @@ export async function postAPI<T extends RouteKey>(
   if (res.status !== 200) {
     throw new Error(`postAPI code(${res.status}): ${res.statusText}`)
   }
-  return res.json()
+  return res.json().then((data) => data.data)
 }
 
 export async function getAPI<T extends RouteKey>(
   api: RouteString<T>,
   ...data: RemoveTypeFormArray<Parameters<ServerSideAPIInterface[T]>, RequestHooks>
-): Promise<{ data: PromiseReturnType<ServerSideAPIInterface[T]> }> {
-  const apistring = `/api/${api}?params=${data.join(',')}`
+): Promise<PromiseReturnType<ServerSideAPIInterface[T]>> {
+  const params = data.length > 0 ? `?params=${data.join(',')}` : ''
+  const host = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : ''
+  const apistring = `${host}/api/${api}${params}`
   return fetch(apistring).then((res) => {
     if (res.status !== 200) {
       return Promise.reject(new Error(`getAPI code(${res.status}): ${res.statusText}`))
     }
-    return res.json()
+    return res.json().then((data) => data.data)
   })
 }
 

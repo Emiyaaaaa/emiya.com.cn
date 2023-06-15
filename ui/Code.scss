@@ -1,0 +1,7 @@
+@tailwind utilities;
+
+@layer utilities {
+  .ui-code .shiki {
+    background-color: #28292d !important;
+  }
+}

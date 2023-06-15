@@ -18,10 +18,9 @@ interface FormInterface extends Blog {
 const Editor = dynamic(() => import('@/components/Editor'), { ssr: false })
 
 async function getBlog(id: string) {
-  const res = await getAPI('getBlogById', id).catch((err) => {
+  return getAPI('getBlogById', id).catch((err) => {
     console.error(err)
   })
-  return res?.data
 }
 
 const EditorPage = ({ params }: { params: { id: string | 'new' } }) => {
@@ -48,7 +47,6 @@ const EditorPage = ({ params }: { params: { id: string | 'new' } }) => {
               const value = data[any(key)]
               setValue(any(key), any(value))
             }
-            console.log(data.tag?.split(';') ?? [])
             setValue('tags', data.tag?.split(';') ?? [])
           })
           setInitialData(JSON.parse(data.content))
@@ -109,11 +107,9 @@ const EditorPage = ({ params }: { params: { id: string | 'new' } }) => {
               <span key={field.id}>
                 <input {...register(`tags.${index}`)} list="tag-list"></input>
                 <datalist id="tag-list">
-                  <option value="React"></option>
-                  <option value="JavaScript"></option>
-                  <option value="Css"></option>
-                  <option value="Typescript"></option>
-                  <option value="Next.js"></option>
+                  {['React', 'HTML', 'JavaScript', 'Git', 'Next.js', 'Typescript', 'Node.js', 'Css'].map((tag, i) => (
+                    <option value={tag} key={i}></option>
+                  ))}
                 </datalist>
               </span>
             ))}

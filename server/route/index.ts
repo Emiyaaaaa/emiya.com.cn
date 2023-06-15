@@ -1,8 +1,9 @@
 import blogRoute from './blog'
 import authRoute from './auth'
 import { NextResponse } from 'next/server'
+import wakaTimeRoute from './wakaTime'
 
-const route = { ...blogRoute, ...authRoute }
+const route = { ...blogRoute, ...authRoute, ...wakaTimeRoute }
 
 const serverSlideAPI = route
 

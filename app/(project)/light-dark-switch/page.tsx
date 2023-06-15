@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import React, { use } from 'react'
 import type { Metadata } from 'next'
-import LightDarkSwitch from '@/components/LightDarkSwitch'
+import LightDarkSwitch from '@/components/LightDarkSwitchDemo'
 
 export const metadata: Metadata = {
   title: 'light-dark-switch',

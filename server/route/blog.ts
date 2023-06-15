@@ -1,7 +1,6 @@
 import { InsertObject, UpdateObject } from 'kysely'
 import db from '../database'
 import type { Database } from '@/server/database/typing'
-import { get } from 'http'
 
 export enum Table {
   Blog = 'blog',
