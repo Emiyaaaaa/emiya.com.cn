@@ -26,7 +26,7 @@ function ThemeSwitch(props?: { width?: number }) {
 
   return (
     <>
-      <MetaThemeColor color={theme === 'dark' ? 'rgb(28,28,28)' : 'rgb(245,245,245)'} ease={{ duration: 200 }}></MetaThemeColor>
+      <MetaThemeColor color={theme === 'dark' ? 'rgb(28,28,28)' : 'rgb(245,245,245)'} ease={{ duration: 150 }}></MetaThemeColor>
       {theme === 'dark' ? (
         <IconDark width={props?.width} onClick={toggleTheme}></IconDark>
       ) : (
@@ -38,6 +38,7 @@ function ThemeSwitch(props?: { width?: number }) {
 
 function MetaThemeColor(props: { color: string; ease?: { duration: number /** ms */ } }) {
   const themeColorRef = React.useRef<HTMLMetaElement>(null)
+  const testRef = React.useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const meta = themeColorRef.current
@@ -73,10 +74,12 @@ function MetaThemeColor(props: { color: string; ease?: { duration: number /** ms
 
       const currentRGB = startRGB?.map((v, i) => Math.round(v + (endRGB[i]! - v) * progress))
       // console.log(currentRGB)
+      testRef.current!.style.backgroundColor = `rgb(${currentRGB?.join(',')})`
       meta.setAttribute('content', `rgb(${currentRGB?.join(',')})`)
       if (now < endTime) {
         requestAnimationFrame(update)
       } else {
+        testRef.current!.style.backgroundColor = targetColor
         meta.setAttribute('content', targetColor)
       }
     }
