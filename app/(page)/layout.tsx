@@ -17,7 +17,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <meta name="revisit-after" content="7 days" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <meta name="theme-color" content="#1a5d8d"></meta>
         <link rel="icon" href="/favicon/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
