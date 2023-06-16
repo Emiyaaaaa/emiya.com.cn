@@ -11,7 +11,7 @@
     background-color: rgb(var(--color-bg));
     color: rgb(var(--color-font));
     fill: rgb(var(--color-font));
-    @apply transition-colors break-words ease-linear;
+    /* @apply transition-colors break-words ease-linear; */
     hyphens: auto;
   }
 

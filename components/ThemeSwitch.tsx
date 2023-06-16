@@ -26,7 +26,7 @@ function ThemeSwitch(props?: { width?: number }) {
 
   return (
     <>
-      <MetaThemeColor color={theme === 'dark' ? 'rgb(28,28,28)' : 'rgb(245,245,245)'} ease={{ duration: 150 }}></MetaThemeColor>
+      <MetaThemeColor color={theme === 'dark' ? 'rgb(28,28,28)' : 'rgb(245,245,245)'} ease={{ duration: 300 }}></MetaThemeColor>
       {theme === 'dark' ? (
         <IconDark width={props?.width} onClick={toggleTheme}></IconDark>
       ) : (
@@ -74,13 +74,15 @@ function MetaThemeColor(props: { color: string; ease?: { duration: number /** ms
 
       const currentRGB = startRGB?.map((v, i) => Math.round(v + (endRGB[i]! - v) * progress))
       // console.log(currentRGB)
-      // testRef.current!.style.backgroundColor = `rgb(${currentRGB?.join(',')})`
+      testRef.current!.style.backgroundColor = `rgb(${currentRGB?.join(',')})`
       meta.setAttribute('content', `rgb(${currentRGB?.join(',')})`)
+      document.body.style.backgroundColor = `rgb(${currentRGB?.join(',')})`
       if (now < endTime) {
         requestAnimationFrame(update)
       } else {
-        // testRef.current!.style.backgroundColor = targetColor
+        testRef.current!.style.backgroundColor = targetColor
         meta.setAttribute('content', targetColor)
+        document.body.style.backgroundColor = `rgb(${currentRGB?.join(',')})`
       }
     }
     requestAnimationFrame(update)
@@ -88,6 +90,7 @@ function MetaThemeColor(props: { color: string; ease?: { duration: number /** ms
 
   return (
     <>
+      <div style={{ width: '100vw', height: '30', top: 0, left: 0, position: 'absolute' }} ref={testRef}></div>
       <meta name="theme-color" ref={themeColorRef}></meta>
     </>
   )
