@@ -74,12 +74,12 @@ function MetaThemeColor(props: { color: string; ease?: { duration: number /** ms
 
       const currentRGB = startRGB?.map((v, i) => Math.round(v + (endRGB[i]! - v) * progress))
       // console.log(currentRGB)
-      testRef.current!.style.backgroundColor = `rgb(${currentRGB?.join(',')})`
+      // testRef.current!.style.backgroundColor = `rgb(${currentRGB?.join(',')})`
       meta.setAttribute('content', `rgb(${currentRGB?.join(',')})`)
       if (now < endTime) {
         requestAnimationFrame(update)
       } else {
-        testRef.current!.style.backgroundColor = targetColor
+        // testRef.current!.style.backgroundColor = targetColor
         meta.setAttribute('content', targetColor)
       }
     }
