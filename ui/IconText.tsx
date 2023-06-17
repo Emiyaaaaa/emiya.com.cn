@@ -1,6 +1,8 @@
 import React, { PropsWithChildren } from 'react'
 import Link from 'next/link'
 import './IconText.scss'
+import { UIProps } from '@/utils/util.typing'
+import classNames from 'classnames'
 
 export function IconText(props: PropsWithChildren<{ icon?: string }>) {
   return (
@@ -11,14 +13,15 @@ export function IconText(props: PropsWithChildren<{ icon?: string }>) {
   )
 }
 
-export function IconLink(props: PropsWithChildren<{ icon?: string; href: string }>) {
+export function IconLink(props: PropsWithChildren<UIProps<{ icon?: string; href: string }>>) {
   return (
     <Link
       data-component="IconLink"
+      type="link"
       href={props.href}
       rel="noreferrer"
       target="_blank"
-      className="relative inline-flex underline decoration-color-font-80 decoration-dashed underline-offset-[3px]"
+      className={classNames('relative inline-flex', props.className)}
     >
       <IconText icon={props.icon ?? props.href + '/favicon.ico'}>{props.children}</IconText>
     </Link>

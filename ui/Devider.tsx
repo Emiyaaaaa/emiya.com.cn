@@ -21,7 +21,7 @@ export function Devider(
   return (
     <div
       data-component="Devider"
-      className={classNames(props.className, 'rounded-full bg-color-font bg-opacity-40', {
+      className={classNames(props.className, 'rounded-full bg-color-font bg-opacity-10', {
         'mx-auto h-[2px] w-[90%]': h,
         'h-[90%] min-h-[1em] w-[2px]': v,
       })}

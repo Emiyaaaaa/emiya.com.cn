@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  * {
+    @apply box-border;
+  }
+
   html, body {
     @apply w-full h-full scroll-smooth;
   }
@@ -11,16 +15,12 @@
     background-color: rgb(var(--color-bg));
     color: rgb(var(--color-font));
     fill: rgb(var(--color-font));
-    @apply transition-colors duration-300 break-words;
     hyphens: auto;
   }
 
   p,span, ul {
-    a {
-      @apply px-1;
-    }
-    a:hover {
-      @apply underline px-1;
+    a[type="link"] {
+      @apply underline px-1 decoration-color-font-80 decoration-dashed underline-offset-2 text-color-font text-opacity-95;
     }
     /** 
     a[target='_blank']::after {
