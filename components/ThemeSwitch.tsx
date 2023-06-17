@@ -26,7 +26,8 @@ function ThemeSwitch(props?: { width?: number }) {
 
   return (
     <>
-      <meta name="theme-color" content={theme === 'dark' ? '#1c1c1c' : '#f5f5f5'}></meta>
+      <meta name="theme-color" content="#f5f5f5" media="(prefers-color-scheme: light)" />
+      <meta name="theme-color" content="#1c1c1c" media="(prefers-color-scheme: dark)" />
       {theme === 'dark' ? (
         <IconDark width={props?.width} onClick={toggleTheme}></IconDark>
       ) : (
