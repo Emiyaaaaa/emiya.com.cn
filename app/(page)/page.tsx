@@ -1,11 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react'
 import type { Metadata } from 'next'
-import { Beian } from '@/ui/Beian'
-import { WakaTime, getWakaTimeStats } from '@/components/WakaTime'
-import './page.scss'
-import Link from 'next/link'
 import { IconLink } from '@/ui/IconText'
+import './page.scss'
 
 export const metadata: Metadata = {
   title: "Emiya's HomePage",
@@ -15,17 +12,17 @@ export const metadata: Metadata = {
 const Home = () => {
   // const wakaTimeData = React.use(getWakaTimeStats())
   return (
-    <>
+    <div className="flex h-full flex-col">
       <div className="flex flex-col items-center">
-        <div className="profile space-y-3 p-6 tracking-wide">
+        <div className="profile space-y-3 p-6">
           <div className="mb-8 space-y-4 text-5xl font-bold">
             <p>Hello~</p>
             <p>I'm Emiya</p>
           </div>
-          <div className="space-y-4 opacity-[0.85]">
+          <div className="space-y-4 text-color-font text-opacity-[0.85]">
             <p className="mt-5">Front-end developer / UI amateur / Looking for remote work or project</p>
             <p>
-              Working for
+              Working at
               <IconLink href="//realsee.com">Realsee</IconLink>
               <span className="px-0">&</span>
               <IconLink href="//ke.com">BeiKe</IconLink>
@@ -81,10 +78,12 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="relative bottom-0 mb-2 mt-auto">
-        <Beian />
+      <div className="relative bottom-0 mb-2 mt-auto text-center">
+        <a href="https://beian.miit.gov.cn/" className="text-sm text-color-font text-opacity-40">
+          晋ICP备18012113号
+        </a>
       </div>
-    </>
+    </div>
   )
 }
 

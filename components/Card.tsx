@@ -29,7 +29,7 @@ function Card(props: CardProps) {
           </div>
           {props.children}
           <Time
-            format="MON DD, YYYY"
+            format="MON DD · YYYY"
             className="right-3 mt-1 block text-sm font-semibold tracking-wide opacity-60"
             date={props.created_at}
           ></Time>

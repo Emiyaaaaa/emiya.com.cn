@@ -5,6 +5,7 @@ import Head from '@/components/Head'
 import '@/tailwind.theme.scss'
 import './layout.scss'
 import { Providers } from './Providers'
+import { Block } from '@/ui/Block'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -27,7 +28,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers>
           <div className="flex h-full w-full flex-col">
             <Head />
-            {children}
+            <div className="flex-1">
+              <Block v center="x" className="h-full w-full">
+                <div className="mx-auto min-h-full w-full max-w-[51rem] overflow-auto">{children}</div>
+              </Block>
+            </div>
           </div>
         </Providers>
         <Analytics />

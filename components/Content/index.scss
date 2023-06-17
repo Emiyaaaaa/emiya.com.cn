@@ -32,7 +32,7 @@
 
     /* content */
     & > p, & > ul, & > ol {
-      @apply leading-relaxed break-words text-justify;
+      @apply leading-relaxed break-words text-justify text-color-font text-opacity-90;
     }
 
     /* text */
