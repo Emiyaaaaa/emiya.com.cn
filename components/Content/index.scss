@@ -32,12 +32,12 @@
 
     /* content */
     & > p, & > ul, & > ol {
-      @apply leading-relaxed break-words text-justify text-color-font text-opacity-90;
+      @apply leading-relaxed text-justify text-color-font text-opacity-90;
     }
 
     /* text */
     & > p {
-      @apply mt-6 break-words;
+      @apply mt-6;
     }
 
     /* checklist */

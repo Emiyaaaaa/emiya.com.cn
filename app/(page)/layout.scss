@@ -15,7 +15,8 @@
     background-color: rgb(var(--color-bg));
     color: rgb(var(--color-font));
     fill: rgb(var(--color-font));
-    hyphens: auto;
+    word-break: break-word;
+    @apply break-words antialiased hyphens-auto;
   }
 
   p,span, ul {
@@ -44,5 +45,11 @@
   }
   *[data-tag="vue"] {
     --color-tag: 66 184 131;
+  }
+  *[data-tag="html"] {
+    --color-tag: 227 76 38;
+  }
+  *[data-tag="html"] {
+    --color-tag: 36 73 216;
   }
 }
