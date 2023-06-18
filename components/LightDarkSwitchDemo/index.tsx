@@ -10,7 +10,7 @@ function LightDarkSwitch() {
 
   return (
     <div className="w-full" onClick={() => toggleTheme()}>
-      <div data-item="aspect-0.4" className="aspect-w-5 aspect-h-2 relative flex">
+      {/* <div data-item="aspect-0.4" className="aspect-w-5 aspect-h-2 relative flex">
         <div data-item="wrapper" className="animation flex h-full w-full overflow-hidden rounded-full bg-[#357Bb1] dark:bg-[#1b1f2f]">
           <div data-item="cloud-1" className="absolute w-full">
             <Cloud1 className="-mr-[18%] -mt-[6%] w-1/3" />
@@ -64,7 +64,7 @@ function LightDarkSwitch() {
             className="animation absolute left-0 top-0 h-full w-[102%] rounded-full shadow-[0_2px_3px_3px_rgba(87,87,87,0.5)_inset] dark:-left-[1%] dark:top-[1%]"
           ></div>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

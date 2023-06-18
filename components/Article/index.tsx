@@ -17,7 +17,7 @@ function Article(props: { data: Blog }) {
         <span className="ml-1 mt-2 block opacity-70">{Math.ceil(data.content.length / 750)} minute read</span>
       </header>
       <Devider className="my-6" />
-      <div className="w-fill mt-6 flex flex-col py-2 px-[2%]">
+      <div className="w-fill mt-6 flex flex-col px-[2%] py-2">
         <Content data={JSON.parse(data.content)} />
       </div>
     </article>
