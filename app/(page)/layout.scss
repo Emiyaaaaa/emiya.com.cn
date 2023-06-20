@@ -19,6 +19,13 @@
     @apply break-words antialiased hyphens-auto;
   }
 
+  .image {
+    @apply opacity-0 transition-opacity;
+    &.loaded {
+      @apply opacity-100;
+    }
+  }
+
   p,span, ul {
     a[type="link"] {
       @apply underline px-1 decoration-color-font-80 decoration-dashed underline-offset-2 text-color-font text-opacity-95;
@@ -38,18 +45,31 @@
     --color-tag: var(--color-font);
   }
   *[data-tag="react"] {
-    --color-tag: 8 126 124;
+    --color-tag: 97 218 251;
   }
   *[data-tag="typescript"] {
-    --color-tag: 3 116 194;
+    --color-tag: 0 122 204;
   }
   *[data-tag="vue"] {
-    --color-tag: 66 184 131;
+    --color-tag: 65 184 131;
   }
   *[data-tag="html"] {
     --color-tag: 227 76 38;
   }
-  *[data-tag="html"] {
-    --color-tag: 36 73 216;
+  *[data-tag="css"] {
+    --color-tag: 21 114 182;
   }
+  *[data-tag="javascript"] {
+    --color-tag: 247 223 30;
+  }
+  *[data-tag="git"] {
+    --color-tag: 239 101 81;
+  }
+  *[data-tag="next.js"] {
+    --color-tag: 0 0 0;
+  }
+  *[data-tag="node.js"] {
+    --color-tag: 2 110 0;
+  }
+
 }
