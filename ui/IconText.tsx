@@ -1,13 +1,17 @@
+'use client'
 import React, { PropsWithChildren } from 'react'
 import Link from 'next/link'
 import './IconText.scss'
 import { UIProps } from '@/utils/util.typing'
 import classNames from 'classnames'
+import { useLoadImage } from '@/utils/hooks/useLoad'
 
 export function IconText(props: PropsWithChildren<{ icon?: string }>) {
+  const { loaded } = useLoadImage(props.icon)
+
   return (
     <>
-      {props.icon && <span className="icon" style={{ backgroundImage: `url(${props.icon})` }}></span>}
+      {props.icon && <span className={classNames('icon image', { loaded })} style={{ backgroundImage: `url(${props.icon})` }}></span>}
       {props.children}
     </>
   )

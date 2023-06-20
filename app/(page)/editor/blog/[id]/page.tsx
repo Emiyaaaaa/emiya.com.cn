@@ -107,7 +107,7 @@ const EditorPage = ({ params }: { params: { id: string | 'new' } }) => {
               <span key={field.id}>
                 <input {...register(`tags.${index}`)} list="tag-list"></input>
                 <datalist id="tag-list">
-                  {['React', 'HTML', 'JavaScript', 'Git', 'Next.js', 'Typescript', 'Node.js', 'Css'].map((tag, i) => (
+                  {['React', 'HTML', 'JavaScript', 'Git', 'Next.js', 'Typescript', 'Node.js', 'CSS'].map((tag, i) => (
                     <option value={tag} key={i}></option>
                   ))}
                 </datalist>

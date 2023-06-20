@@ -1,6 +1,7 @@
 import { Devider } from '@/ui/Devider'
 import Time from '@/ui/Time'
 import React from 'react'
+import './Card.scss'
 
 type CardProps = React.PropsWithChildren<{
   title: string | React.ReactNode
@@ -16,13 +17,9 @@ function Card(props: CardProps) {
       <div className="overflow-hidden">
         <div className="relative mb-0.5 flex flex-col justify-center p-6">
           {typeof props.title === 'string' ? <h1 className="m-0 text-lg font-black tracking-wide">{props.title}</h1> : props.title}
-          <div className="mt-1 flex">
+          <div className="mt-1 flex flex-wrap">
             {props.tags?.map((tag, i) => (
-              <p
-                className="tag-colorful-color mr-3 flex items-center font-semibold capitalize text-color-tag before:mr-1 before:h-2 before:w-2 before:rounded-full before:bg-color-tag before:opacity-70 before:content-['']"
-                key={i}
-                data-tag={tag.toLowerCase()}
-              >
+              <p className="tag mr-4" key={i} data-tag={tag.toLowerCase()}>
                 {tag}
               </p>
             ))}
