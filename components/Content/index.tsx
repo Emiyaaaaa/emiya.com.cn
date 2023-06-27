@@ -9,6 +9,7 @@ import './index.scss'
 import any from '@/utils/any'
 import Quote from './components/Quote'
 import { Devider } from '@/ui/Devider'
+import Image from 'next/image'
 
 function Content(props: { data: OutputData }) {
   return (
@@ -20,7 +21,7 @@ function Content(props: { data: OutputData }) {
           case 'paragraph':
             return <Text {...block.data}></Text>
           case 'image':
-            return <img src={block.data.file.url} alt={block.data.caption} />
+            return <Image src={block.data.file.url} alt={block.data.caption} />
           case 'list':
             return <NestedList {...block.data} />
           case 'delimiter':

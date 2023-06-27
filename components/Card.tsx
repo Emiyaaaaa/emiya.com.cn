@@ -2,19 +2,23 @@ import { Devider } from '@/ui/Devider'
 import Time from '@/ui/Time'
 import React from 'react'
 import './Card.scss'
+import { UIProps } from '@/utils/util.typing'
+import classNames from 'classnames'
 
-type CardProps = React.PropsWithChildren<{
-  title: string | React.ReactNode
-  description?: string
-  tags?: string[]
-  created_at?: Date | null
-  right?: React.ReactNode
-}>
+type CardProps = UIProps<
+  React.PropsWithChildren<{
+    title: string | React.ReactNode
+    description?: string
+    tags?: string[]
+    created_at?: Date | null
+    right?: React.ReactNode
+  }>
+>
 
 function Card(props: CardProps) {
   return (
     <>
-      <div className="overflow-hidden">
+      <div className={classNames('overflow-hidden', props.className)}>
         <div className="relative mb-0.5 flex flex-col justify-center p-6">
           {typeof props.title === 'string' ? <h1 className="m-0 text-lg font-black tracking-wide">{props.title}</h1> : props.title}
           <div className="mt-1 flex flex-wrap">
