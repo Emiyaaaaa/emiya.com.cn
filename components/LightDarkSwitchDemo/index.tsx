@@ -72,7 +72,7 @@ function LightDarkSwitch() {
 function Circle({ children, className }: { children?: React.ReactNode; className?: string }) {
   return (
     <div className="w-full">
-      <div className="aspect-w-1 aspect-h-1">
+      <div className="aspect-h-1 aspect-w-1">
         <div className={classNames('flex h-full w-full items-center justify-center rounded-full', className)}>{children}</div>
       </div>
     </div>

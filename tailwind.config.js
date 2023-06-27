@@ -17,10 +17,15 @@ module.exports = {
         'color-tag': 'rgb(var(--color-tag) / <alpha-value>)',
         'color-font-80': 'rgb(var(--color-font) / 0.8)',
       },
-    },
-    // hyphens-auto
-    hyphens: {
-      auto: 'auto',
+      animation: {
+        'pulse-light': 'pulse-light 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      },
+      keyframes: {
+        'pulse-light': {
+          '0%, 100%': { opacity: 0.25 },
+          '50%': { opacity: 0.5 },
+        },
+      },
     },
     aspectRatio: {
       auto: 'auto',

@@ -1,20 +1,21 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTheme } from 'next-themes'
 import { IconLight, IconDark } from '@/ui/icon'
 
 function ThemeSwitch(props?: { width?: number }) {
+  const [mounted, setMounted] = useState(false)
   const { resolvedTheme: theme, setTheme } = useTheme()
 
   // https://github.com/pacocoursey/next-themes#avoid-hydration-mismatch
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
-  const toggleTheme = () => {
-    if (theme === 'dark') {
-      setTheme('light')
-    } else {
-      setTheme('dark')
-    }
-  }
+  const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark')
+
+  if (!mounted) return null
+
   return (
     <>
       <meta name="theme-color" content={theme === 'dark' ? '#1c1c1c' : '#f5f5f5'}></meta>
