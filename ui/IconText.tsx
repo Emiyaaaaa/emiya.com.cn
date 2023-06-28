@@ -21,7 +21,6 @@ export function IconLink(props: PropsWithChildren<UIProps<{ icon?: string; href:
   return (
     <Link
       data-component="IconLink"
-      type="link"
       href={props.href}
       rel="noreferrer"
       target="_blank"

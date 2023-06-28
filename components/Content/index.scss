@@ -82,9 +82,12 @@
   
     /* blockquote */
     & > blockquote {
-      @apply w-full bg-gray-100 py-2 px-3 italic rounded-md;
+      @apply w-full bg-color-font bg-opacity-20 py-2 px-3 rounded-md;
+      & > span {
+        @apply text-color-font;
+      }
       & > span:last-child {
-        @apply block text-right text-gray-500 text-sm;
+        @apply block text-right text-sm italic text-opacity-80;
         &::before {
           content: "— ";
         }
@@ -98,20 +101,12 @@
 
     /* inline code */
     *:not(pre.shiki) > code {
-      @apply bg-opacity-20 bg-color-main rounded-[3px] px-2 mx-1;
+      @apply bg-opacity-20 bg-color-font rounded-[3px] px-2 mx-1 py-[1px];
     }
 
     /* link */
     a {
       @apply text-color-main-dark;
-    }
-    a:not([id]) {
-      @apply underline text-color-main-dark;
-      &::after {
-        content: "";
-        @apply underline inline-block w-4 h-4 -ml-[2px] bg-center bg-color-main-dark bg-no-repeat bg-contain;
-        mask: url(/assets/icon/external-link.svg);
-      }
     }
 
     /* image */

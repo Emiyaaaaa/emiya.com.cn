@@ -26,17 +26,10 @@
     }
   }
 
-  p,span, ul {
-    a[type="link"] {
+  p, span, ul {
+    a {
       @apply underline px-1 decoration-color-font-80 decoration-dashed underline-offset-2 text-color-font text-opacity-95;
     }
-    /** 
-    a[target='_blank']::after {
-      content: "";
-      @apply underline inline-block w-4 h-4 -ml-[2px] bg-center bg-color-main-dark bg-no-repeat bg-contain;
-      mask: url(/assets/icon/external-link.svg);
-    }
-    */
   }
 }
 

@@ -7,7 +7,6 @@ import Text from './components/Text'
 import { Code } from '@/ui/Code'
 import './index.scss'
 import any from '@/utils/any'
-import Quote from './components/Quote'
 import { Devider } from '@/ui/Devider'
 
 function Content(props: { data: OutputData }) {
@@ -28,7 +27,12 @@ function Content(props: { data: OutputData }) {
           case 'checklist':
             return <CheckList {...block.data} />
           case 'quote':
-            return <Quote {...block.data} />
+            return (
+              <blockquote>
+                <span>{block.data.text}</span>
+                <span>{block.data.caption}</span>
+              </blockquote>
+            )
           case 'code':
             return <Code className="max-w-full" code={block.data.code} language={any(block.data.language)} />
           default:
