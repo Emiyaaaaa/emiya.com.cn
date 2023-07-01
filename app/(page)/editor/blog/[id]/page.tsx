@@ -2,7 +2,6 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
 import { postAPI, getAPI } from '@/utils/http'
-import './index.scss'
 
 import type { OutputData } from '@editorjs/editorjs'
 import { SubmitHandler, useForm, useFieldArray } from 'react-hook-form'

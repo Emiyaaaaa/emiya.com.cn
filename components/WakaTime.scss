@@ -1,0 +1,9 @@
+@tailwind utilities;
+
+@layer utilities {
+  .language {
+    @apply relative overflow-hidden rounded-sm px-2 py-[3px] font-semibold text-color-font text-opacity-100;
+    @apply bg-img-color-tag bg-no-repeat;
+    @apply before:absolute before:inset-0 before:-z-10 before:bg-color-font before:bg-opacity-5 before:content-[""];
+  }
+}

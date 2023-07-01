@@ -17,6 +17,18 @@ module.exports = {
         'color-tag': 'rgb(var(--color-tag) / <alpha-value>)',
         'color-font-80': 'rgb(var(--color-font) / 0.8)',
       },
+      backdropOpacity: {
+        5: '0.05',
+      },
+      before: {
+        content: '""',
+        display: 'block',
+        position: 'absolute',
+        top: '0',
+      },
+      backgroundImage: {
+        'img-color-tag': 'linear-gradient(90deg, rgb(var(--color-tag)) 0%, rgb(var(--color-tag)) 100%)',
+      },
       animation: {
         'pulse-light': 'pulse-light 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },

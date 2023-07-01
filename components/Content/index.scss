@@ -1,24 +1,23 @@
 @tailwind components;
 
 @layer components {
-  /* header */
   h1 {
-    @apply text-[1.8rem] font-bold mb-6 mt-10;
+    @apply mb-6 mt-10;
   }
   h2 {
-    @apply text-[1.6rem] font-bold mb-5 mt-8;
+    @apply mb-5 mt-8;
   }
   h3 {
-    @apply text-[1.4rem] font-bold mb-4 mt-6;
+    @apply mb-4 mt-6;
   }
   h4 {
-    @apply text-[1.2rem] font-bold mb-3 mt-4;
+    @apply mb-3 mt-4;
   }
   h5 {
-    @apply text-base font-bold mb-3 mt-4;
+    @apply mb-3 mt-4;
   }
   h6 {
-    @apply text-base font-bold mb-3 mt-4;
+    @apply mb-3 mt-4;
   }
 
   .content {
