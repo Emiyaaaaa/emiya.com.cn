@@ -1,3 +1,4 @@
+'use client'
 import { Duration } from '@/ui/Time'
 import { APIResult, getAPI } from '@/utils/http'
 import React, { use } from 'react'
