@@ -7,7 +7,7 @@ import usePromise from '@/utils/hooks/usePromise'
 import classNames from 'classnames'
 
 export function WakaTime() {
-  const { data, loading } = usePromise(getAPI('getWakaTimeStats'))
+  const { data, loading } = usePromise(() => getAPI('getWakaTimeStats'))
 
   if (data && data?.languages.length <= 3) return null
 
