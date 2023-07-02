@@ -1,10 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react'
 import type { Metadata } from 'next'
-import { IconLink } from '@/ui/IconText'
+import { IconLink } from '@/ui/IconLink'
 import './page.scss'
-import { Devider } from '@/ui/Devider'
 import { WakaTime } from '@/components/WakaTime'
+import { IconMail, IconTwitter, IconWeChat } from '@/ui/icon'
 
 export const metadata: Metadata = {
   title: "Emiya's HomePage",
@@ -12,7 +12,6 @@ export const metadata: Metadata = {
 }
 
 const Home = () => {
-  // const wakaTimeData = React.use(getWakaTimeStats())
   return (
     <div className="flex h-full flex-col">
       <div className="flex flex-col items-center">
@@ -31,11 +30,11 @@ const Home = () => {
               <IconLink href="//ke.com">BeiKe</IconLink>, have 6 years' development experience and 3 years' work experience.
             </p>
             <h3>Skill</h3>
-            <ul className="mt-2 space-y-1 text-color-font text-opacity-100">
-              <li>language - Typescript, Node.js</li>
-              <li>ui library - React, Svelte</li>
-              <li>styling - Tailwind CSS</li>
-              <li>framework - Next.js</li>
+            <ul className="space-y-1 text-color-font text-opacity-100">
+              <li>Language - Typescript, Node.js</li>
+              <li>UI library - React, Svelte</li>
+              <li>Styling - Tailwind CSS</li>
+              <li>Framework - Next.js</li>
             </ul>
             <div className="mt-4 rounded-md bg-color-font bg-opacity-5 px-4 pb-7 pt-2">
               <p className="mb-2 text-sm">My top 3 languages used in last 7 days</p>
@@ -43,23 +42,31 @@ const Home = () => {
               <p className="float-right mt-[6px] scale-90 text-xs opacity-60">*data from wakatime</p>
             </div>
             <h3>Contant Me</h3>
-            <p>
-              <a href="mailto:emiya@emiya.com.cn">emiya@emiya.com.cn</a>
+            <p className="flex flex-col space-y-1">
+              <IconLink href="mailto:emiya@emiya.com.cn" icon={<IconMail size={16} className="opacity-80" />}>
+                emiya@emiya.com.cn
+              </IconLink>
+              <IconLink href="//twitter.com/Em1ya05" icon={<IconTwitter className="opacity-80" />}>
+                Yeami
+              </IconLink>
+              <IconLink href="/image/wechat.jpg" icon={<IconWeChat className="opacity-80" />}>
+                Em1ya5
+              </IconLink>
             </p>
             <h3>About</h3>
             {/* <p>Overwatch Master Player, Lúcioball Top 500</p> */}
             <div>
-              My blog using these opensource libraries♥:
+              My blog using these opensource libraries ♥:
               <ul className="ml-2 mt-2 space-y-1">
-                <li>
-                  UI Library:
-                  <IconLink href="//react.dev/">React 18</IconLink>
-                </li>
                 <li>
                   Language:
                   <IconLink href="//typescriptlang.org" icon="//www.typescriptlang.org/favicon-32x32.png">
                     Typescript
                   </IconLink>
+                </li>
+                <li>
+                  UI library:
+                  <IconLink href="//react.dev/">React 18</IconLink>
                 </li>
                 <li>
                   Styling:

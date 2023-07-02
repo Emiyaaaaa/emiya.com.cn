@@ -5,7 +5,7 @@ export type APIResult<T extends RouteKey> = PromiseReturnType<ServerSideAPIInter
 export async function postAPI<T extends RouteKey>(
   api: RouteString<T>,
   ...data: RemoveTypeFormArray<Parameters<ServerSideAPIInterface[T]>, RequestHooks>
-): Promise<PromiseReturnType<ServerSideAPIInterface[T]>> {
+): Promise<APIResult<T>> {
   const res = await fetch(`/api/${api}`, {
     method: 'POST',
     headers: {
@@ -22,7 +22,7 @@ export async function postAPI<T extends RouteKey>(
 export async function getAPI<T extends RouteKey>(
   api: RouteString<T>,
   ...data: RemoveTypeFormArray<Parameters<ServerSideAPIInterface[T]>, RequestHooks>
-): Promise<PromiseReturnType<ServerSideAPIInterface[T]>> {
+): Promise<APIResult<T>> {
   const params = data.length > 0 ? `?params=${data.join(',')}` : ''
   const host = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : ''
   const apistring = `${host}/api/${api}${params}`

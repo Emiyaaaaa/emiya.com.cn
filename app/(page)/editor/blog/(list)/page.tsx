@@ -3,18 +3,14 @@ import React from 'react'
 import Link from 'next/link'
 import Card from '@/components/Card'
 import { postAPI, getAPI } from '@/utils/http'
-import { ServerSideAPIInterface } from '@/server/route'
+import usePromise from '@/utils/hooks/usePromise'
 
 export default function EditorListPage() {
-  const [data, setData] = React.useState<PromiseReturnType<ServerSideAPIInterface['getEditorBlogList']>>([])
-
-  React.useEffect(() => {
-    getAPI('getEditorBlogList').then((res) => setData(res))
-  }, [])
+  const { data } = usePromise(getAPI('getEditorBlogList'))
 
   return (
     <div>
-      {data.map((item, index) => (
+      {data?.map((item, index) => (
         <div key={index}>
           <Card
             title={
