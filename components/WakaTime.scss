@@ -1,0 +1,14 @@
+@tailwind utilities;
+
+@layer utilities {
+  .language {
+    @apply relative overflow-hidden rounded-sm px-2 py-[3px] font-semibold h-[1.375rem];
+    @apply bg-img-color-tag bg-no-repeat;
+    @apply before:absolute before:inset-0 before:-z-10 before:bg-color-font before:bg-opacity-5 before:content-[""];
+    transition: background-size 600ms ease-out, color 300ms ease-out;
+    @apply text-color-font text-opacity-100;
+    &.loading{
+      @apply text-color-font text-opacity-0 
+    }
+  }
+}

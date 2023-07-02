@@ -7,7 +7,8 @@
     "emiya",
     "Kysely",
     "shiki",
-    "Waka"
+    "Waka",
+    "wakatime"
   ],
   "sqltools.connections": [
     {
@@ -33,5 +34,8 @@
   ],
   "files.associations": {
     "*.scss": "postcss"
+  },
+  "editor.quickSuggestions": {
+    "strings": "on"
   }
 }

@@ -1,11 +1,6 @@
 import { UIProps } from '@/utils/util.typing'
 import React from 'react'
 
-type Props = UIProps<{
-  date?: Date | null
-  format?: string
-}>
-
 function transformDate(date: Date, format?: string) {
   if (!format) return date.toLocaleString()
   const year = date.getFullYear()
@@ -28,7 +23,29 @@ function transformDate(date: Date, format?: string) {
   return dateString
 }
 
-function Time(props: Props) {
+function transformDuration(second: number, format?: string) {
+  if (!format) return second.toString()
+  const hour = Math.floor(second / 3600)
+  const minute = Math.floor((second % 3600) / 60)
+  const secondLeft = second % 60
+
+  let durationString = format
+
+  if (hour) durationString = durationString.replace('hh', hour.toString())
+  else durationString = durationString.replace(/\(hh .*?\)/g, '')
+
+  if (minute) durationString = durationString.replace('mm', minute.toString())
+  else durationString = durationString.replace(/\(mm .*?\)/g, '')
+
+  if (secondLeft) durationString = durationString.replace('ss', secondLeft.toString())
+  else durationString = durationString.replace(/\(ss .*?\)/g, '')
+
+  durationString = durationString.replace(/[()]/g, '')
+
+  return durationString
+}
+
+function Time(props: UIProps<{ date?: Date | null; format?: string }>) {
   if (!props.date) return null
   return (
     <time className={props.className} dateTime={props.date.toLocaleString()}>
@@ -37,4 +54,10 @@ function Time(props: Props) {
   )
 }
 
+function Duration(props: UIProps<{ second?: number | null; format?: string }>) {
+  if (!props.second) return null
+  return <time className={props.className}>{transformDuration(props.second, props.format)}</time>
+}
+
 export default Time
+export { Time, Duration }

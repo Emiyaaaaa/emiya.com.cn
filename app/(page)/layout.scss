@@ -11,6 +11,25 @@
     @apply w-full h-full scroll-smooth;
   }
 
+  h1 {
+    @apply text-[1.8rem] font-bold;
+  }
+  h2 {
+    @apply text-[1.6rem] font-bold;
+  }
+  h3 {
+    @apply text-[1.4rem] font-bold;
+  }
+  h4 {
+    @apply text-[1.2rem] font-bold;
+  }
+  h5 {
+    @apply text-base font-bold;
+  }
+  h6 {
+    @apply text-base font-bold;
+  }
+
   body {
     background-color: rgb(var(--color-bg));
     color: rgb(var(--color-font));
@@ -60,6 +79,16 @@
   }
   *[data-tag="css"] {
     --color-tag: 21 114 182;
+  }
+  *[data-tag="sass"],
+  *[data-tag="scss"] {
+    --color-tag: 199 93 203;
+  }
+  *[data-tag="tailwind"] {
+    --color-tag: 78 202 206;
+  }
+  *[data-tag="svelte"] {
+    --color-tag: 255 165 0;
   }
   *[data-tag="javascript"] {
     --color-tag: 247 223 30;

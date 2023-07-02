@@ -1,6 +1,10 @@
 @tailwind utilities;
 
 @layer utilities {
+  h3 {
+    @apply mb-1 mt-4;
+  }
+
   .profile {
     ul > li > a:first-child {
       @apply ml-1

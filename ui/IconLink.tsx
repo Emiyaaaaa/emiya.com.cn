@@ -1,23 +1,29 @@
 'use client'
 import React, { PropsWithChildren } from 'react'
 import Link from 'next/link'
-import './IconText.scss'
+import './IconLink.scss'
 import { UIProps } from '@/utils/util.typing'
 import classNames from 'classnames'
 import { useLoadImage } from '@/utils/hooks/useLoad'
 
-export function IconText(props: PropsWithChildren<{ icon?: string }>) {
-  const { loaded } = useLoadImage(props.icon)
+type Icon = string | React.ReactNode | Element
 
+export function ImageIcon(props: { icon?: string }) {
+  const { loaded } = useLoadImage(props.icon)
+  return <span className={classNames('icon image', { loaded })} style={{ backgroundImage: `url(${props.icon})` }}></span>
+}
+
+export function IconText(props: PropsWithChildren<{ icon?: Icon }>) {
   return (
     <>
-      {props.icon && <span className={classNames('icon image', { loaded })} style={{ backgroundImage: `url(${props.icon})` }}></span>}
+      {typeof props.icon === 'string' && <ImageIcon icon={props.icon} />}
+      {typeof props.icon !== 'string' && <span className="icon">{props.icon as any}</span>}
       {props.children}
     </>
   )
 }
 
-export function IconLink(props: PropsWithChildren<UIProps<{ icon?: string; href: string }>>) {
+export function IconLink(props: PropsWithChildren<UIProps<{ icon?: Icon; href: string }>>) {
   return (
     <Link
       data-component="IconLink"
