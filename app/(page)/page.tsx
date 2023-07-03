@@ -30,7 +30,7 @@ const Home = () => {
               <IconLink href="//ke.com">BeiKe</IconLink>, have 6 years' development experience and 3 years' work experience.
             </p>
             <h3>Skill</h3>
-            <ul className="space-y-1 text-color-font text-opacity-100">
+            <ul className="space-y-1">
               <li>Language - Typescript, Node.js</li>
               <li>UI library - React, Svelte</li>
               <li>Styling - Tailwind CSS</li>
@@ -43,7 +43,7 @@ const Home = () => {
             </div>
             <h3>Contant Me</h3>
             <p className="flex flex-col space-y-1">
-              <IconLink href="mailto:emiya@emiya.com.cn" icon={<IconMail size={16} className="opacity-80" />}>
+              <IconLink href="mailto:emiya@emiya.com.cn" icon={<IconMail size={16} className="mr-1 opacity-80" />}>
                 emiya@emiya.com.cn
               </IconLink>
               <IconLink href="//twitter.com/Em1ya05" icon={<IconTwitter className="opacity-80" />}>

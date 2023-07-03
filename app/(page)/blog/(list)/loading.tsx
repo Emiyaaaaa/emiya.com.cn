@@ -10,7 +10,7 @@ function LoadingCard() {
 }
 
 export default function Loading() {
-  const shouldShowLoading = useTimeout(500)
+  const shouldShowLoading = useTimeout(300)
 
   if (!shouldShowLoading) return null
 

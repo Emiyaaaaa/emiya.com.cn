@@ -109,8 +109,14 @@
     }
 
     /* image */
-    & > img {
-      @apply mx-auto;
+    & > .img {
+      @apply mx-auto w-max;
+      img {
+        @apply rounded-md;
+      }
+      caption {
+        @apply text-center text-sm text-color-font text-opacity-60 w-max mx-auto block;
+      }
     }
   }
 }
