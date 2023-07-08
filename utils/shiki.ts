@@ -37,7 +37,8 @@ class Shiki {
     return this.highlighter
   }
 
-  public async codeToHtml(code: string, lang: ShikiInterface.Lang = 'markdown') {
+  public async codeToHtml(code: string, _lang?: ShikiInterface.Lang) {
+    const lang = _lang || 'markdown'
     const highlighter = await this.getHighlighter()
     const loadedLangs = highlighter.getLoadedLanguages()
     if (!loadedLangs.includes(lang)) {

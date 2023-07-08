@@ -22,7 +22,7 @@ function Content(props: { data: OutputData }) {
             return (
               <div className="img">
                 <img src={block.data.file.url} alt={block.data.caption} />
-                <caption>{block.data.caption}</caption>
+                <span>{block.data.caption}</span>
               </div>
             )
           case 'list':

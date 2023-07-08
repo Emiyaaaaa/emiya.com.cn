@@ -30,7 +30,7 @@ export function IconLink(props: PropsWithChildren<UIProps<{ icon?: Icon; href: s
       href={props.href}
       rel="noreferrer"
       target="_blank"
-      className={classNames('relative inline-flex', props.className)}
+      className={classNames('relative inline-flex w-max', props.className)}
     >
       <IconText icon={props.icon ?? props.href + '/favicon.ico'}>{props.children}</IconText>
     </Link>

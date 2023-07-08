@@ -56,7 +56,7 @@ const Home = () => {
             <h3>About</h3>
             {/* <p>Overwatch Master Player, Lúcioball Top 500</p> */}
             <div>
-              My blog using these opensource libraries ♥:
+              My blog is used these opensource libraries ♥:
               <ul className="ml-2 mt-2 space-y-1">
                 <li>
                   Language:
