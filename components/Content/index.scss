@@ -31,7 +31,7 @@
 
     /* content */
     & > p, & > ul, & > ol {
-      @apply leading-relaxed text-justify text-color-font text-opacity-90;
+      @apply leading-relaxed text-color-font text-opacity-90;
     }
 
     /* text */
@@ -114,7 +114,7 @@
       img {
         @apply rounded-md;
       }
-      caption {
+      span {
         @apply text-center text-sm text-color-font text-opacity-60 w-max mx-auto block;
       }
     }

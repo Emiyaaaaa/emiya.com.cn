@@ -8,6 +8,7 @@ import { SubmitHandler, useForm, useFieldArray } from 'react-hook-form'
 import { useEditor } from '@/components/Editor/hooks'
 import { Blog } from '@/server/database/typing'
 import any from '@/utils/any'
+import markdown2obj from '@/utils/md2obj'
 
 const formField: Array<keyof Blog> = ['title', 'visibility', 'en_title']
 interface FormInterface extends Blog {
@@ -15,12 +16,6 @@ interface FormInterface extends Blog {
 }
 
 const Editor = dynamic(() => import('@/components/Editor'), { ssr: false })
-
-async function getBlog(id: string) {
-  return getAPI('getBlogById', id).catch((err) => {
-    console.error(err)
-  })
-}
 
 const EditorPage = ({ params }: { params: { id: string | 'new' } }) => {
   const { editorReady, editorRef, registerEditor } = useEditor()
@@ -39,18 +34,22 @@ const EditorPage = ({ params }: { params: { id: string | 'new' } }) => {
   // 获取初始数据
   React.useEffect(() => {
     if (params.id !== 'new')
-      getBlog(params.id).then((data) => {
-        if (data && Object.keys(data).length !== 0) {
-          Object.keys(data).forEach((key) => {
-            if (formField.includes(any(key))) {
-              const value = data[any(key)]
-              setValue(any(key), any(value))
-            }
-            setValue('tags', data.tag?.split(';') ?? [])
-          })
-          setInitialData(JSON.parse(data.content))
-        }
-      })
+      getAPI('getBlogById', params.id)
+        .then((data) => {
+          if (data && Object.keys(data).length !== 0) {
+            Object.keys(data).forEach((key) => {
+              if (formField.includes(any(key))) {
+                const value = data[any(key)]
+                setValue(any(key), any(value))
+              }
+              setValue('tags', data.tag?.split(';') ?? [])
+            })
+            setInitialData(data.old ? markdown2obj(data.content) : JSON.parse(data.content))
+          }
+        })
+        .catch((err) => {
+          console.error(err)
+        })
   }, [])
 
   // 保存数据
@@ -68,6 +67,7 @@ const EditorPage = ({ params }: { params: { id: string | 'new' } }) => {
         tag: form.tags.join(';'),
         content: JSON.stringify(content),
         author: 'test author',
+        old: 0,
       }
       if (params.id === 'new') postAPI('createBlog', submitData as any)
       else postAPI('updateBlog', params.id, submitData)

@@ -17,6 +17,13 @@ module.exports = {
         'color-tag': 'rgb(var(--color-tag) / <alpha-value>)',
         'color-font-80': 'rgb(var(--color-font) / 0.8)',
       },
+      inset: {
+        '1/10': '10%',
+        '1/20': '5%',
+      },
+      height: {
+        '9/10': '90%',
+      },
       backdropOpacity: {
         5: '0.05',
       },

@@ -54,9 +54,24 @@
 
 @layer components {
   .loading {
-    h1, h2, h3, h4, h5, h6, time {
-      @apply w-fit animate-pulse-light;
-      @apply bg-gradient-to-t from-current to-current bg-[length:100%_80%] bg-no-repeat bg-center;
+    h1, h2, h3, h4, h5, h6, time, span, p {
+      @apply animate-pulse-light;
+      @apply relative text-transparent w-fit #{!important};
+      &::after {
+        @apply absolute content-[''] left-0 w-full;
+        @apply bg-color-font rounded-md;
+      }
+    }
+    
+    h1, h2, h3, h4, h5, h6, time, span, p {
+      &::after {
+        @apply top-1/20 h-9/10;
+      }
+    }
+    p {
+      &::after {
+        @apply h-full top-0;
+      }
     }
   }
 }
