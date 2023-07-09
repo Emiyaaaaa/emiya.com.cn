@@ -117,5 +117,10 @@
   *[data-tag="node.js"] {
     --color-tag: 2 110 0;
   }
-
+  *[data-tag="npm"] {
+    --color-tag: 203 0 0;
+  }
+  *[data-tag="python"] {
+    --color-tag: 0 114 187;
+  }
 }
