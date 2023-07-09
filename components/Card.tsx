@@ -22,7 +22,7 @@ function Card(props: CardProps) {
         <div className="relative mb-0.5 flex flex-col justify-center p-6">
           {typeof props.title === 'string' ? <h1 className="m-0 text-lg font-black tracking-wide">{props.title}</h1> : props.title}
           <div className="mt-1 flex flex-wrap">
-            {props.tags?.map((tag, i) => (
+            {props.tags?.filter(Boolean).map((tag, i) => (
               <p className="tag mr-4" key={i} data-tag={tag.toLowerCase()}>
                 {tag}
               </p>
