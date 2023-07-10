@@ -5,7 +5,6 @@ import NestedList from './components/NestedList'
 import CheckList from './components/CheckList'
 import Text from './components/Text'
 import { Code } from '@/ui/Code'
-import './index.scss'
 import any from '@/utils/any'
 import { Devider } from '@/ui/Devider'
 
