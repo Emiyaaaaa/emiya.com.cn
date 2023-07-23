@@ -6,6 +6,8 @@ import './WakaTime.scss'
 import usePromise from '@/utils/hooks/usePromise'
 import classNames from 'classnames'
 
+const excludesLanguage = ['JSON']
+
 export function WakaTime() {
   const { data, loading } = usePromise(() => getAPI('getWakaTimeStats'))
 
@@ -14,15 +16,17 @@ export function WakaTime() {
   return (
     <div className="space-y-1 text-xs">
       {new Array(3).fill(null).map((_, index) => {
-        const item = data?.languages[index]
+        const item = data?.languages.filter((item) => !excludesLanguage.includes(item.name))[index]
         return (
           <div
             className={classNames('language', { loading })}
-            style={{
-              backgroundSize: item
-                ? `${index === 0 ? 100 : Math.round((item.total_seconds / data.languages[0]!.total_seconds) * 100)}% 100%`
-                : '0% 100%',
-            }}
+            style={
+              {
+                '--width': item
+                  ? `${index === 0 ? 100 : Math.round((item.total_seconds / data.languages[0]!.total_seconds) * 100)}%`
+                  : '0%',
+              } as any
+            }
             data-tag={item?.name.toLowerCase()}
             key={index}
           >

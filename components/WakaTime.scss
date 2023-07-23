@@ -2,13 +2,22 @@
 
 @layer utilities {
   .language {
-    @apply relative overflow-hidden rounded-sm px-2 py-[3px] font-semibold h-[1.375rem];
-    @apply bg-img-color-tag bg-no-repeat;
-    @apply before:absolute before:inset-0 before:-z-10 before:bg-color-font before:bg-opacity-5 before:content-[""];
-    transition: background-size 600ms ease-out, color 300ms ease-out;
+    @apply relative overflow-hidden rounded-sm font-semibold px-2 pt-1 pb-[5px];
     @apply text-color-font text-opacity-100;
-    &.loading{
-      @apply text-color-font text-opacity-0 
+    @apply bg-color-font bg-opacity-5;
+    &::after {
+      content: '';
+      @apply absolute left-0 bottom-0 h-[3px] rounded-full;
+      @apply bg-img-color-tag bg-no-repeat;
+      transition: width 600ms ease-out;
+      width: var(--width);
+    }
+    &.loading {
+      &::before {
+        content: '1';
+        @apply text-transparent
+      }
+      @apply text-opacity-0;
     }
   }
 }

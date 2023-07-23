@@ -46,6 +46,9 @@ const Home = () => {
               <IconLink href="mailto:emiya@emiya.com.cn" icon={<IconMail size={16} className="mr-1 opacity-80" />}>
                 emiya@emiya.com.cn
               </IconLink>
+              <IconLink href="mailto:emiyaaaaa05@gmail.com" icon={<IconMail size={16} className="mr-1 opacity-80" />}>
+                emiyaaaaa05@gmail.com
+              </IconLink>
               <IconLink href="//twitter.com/Em1ya05" icon={<IconTwitter className="opacity-80" />}>
                 Yeami
               </IconLink>

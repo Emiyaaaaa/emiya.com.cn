@@ -33,7 +33,7 @@
     }
   ],
   "files.associations": {
-    "*.scss": "postcss"
+    "*.scss": "scss"
   },
   "editor.quickSuggestions": {
     "strings": "on"
