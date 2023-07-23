@@ -172,6 +172,7 @@
     /* code */
     .ui-code .shiki{
       @apply overflow-x-auto p-4 rounded-md;
+      @apply bg-[#28292d] #{!important};
     }
 
     /* inline code */
