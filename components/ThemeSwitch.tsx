@@ -15,15 +15,15 @@ function ThemeSwitch(props?: { width?: number }) {
 
   const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark')
 
-  if (!mounted) return <IconLight width={width} onClick={toggleTheme}></IconLight>
+  if (!mounted) return <IconLight width={width}></IconLight>
 
   return (
     <>
       <meta name="theme-color" content={theme === 'dark' ? '#1c1c1c' : '#f5f5f5'}></meta>
       {theme === 'dark' ? (
-        <IconLight width={width} onClick={toggleTheme}></IconLight>
-      ) : (
         <IconDark width={width} onClick={toggleTheme}></IconDark>
+      ) : (
+        <IconLight width={width} onClick={toggleTheme}></IconLight>
       )}
     </>
   )
