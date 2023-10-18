@@ -1,10 +1,10 @@
-import productionDataBase from './config.production.json'
-import developmentDataBase from './config.development.json'
+import productionDatabase from './config.production.json'
+import developmentDatabase from './config.development.json'
 import mysql from 'mysql2'
 import { Kysely, MysqlDialect } from 'kysely'
 import type { Database } from './typing'
 
-const databaseConfig = process.env.NODE_ENV === 'production' ? productionDataBase : developmentDataBase
+const databaseConfig = process.env.NODE_ENV === 'production' ? productionDatabase : developmentDatabase
 
 const db = new Kysely<Database>({
   dialect: new MysqlDialect({

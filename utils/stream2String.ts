@@ -32,5 +32,12 @@ export function stream2String(stream?: ReadableStream | null) {
 
 export async function stream2Object(stream?: ReadableStream | null) {
   if (!stream) return
-  return stream2String(stream)?.then((text) => JSON.parse(text))
+  return stream2String(stream)?.then((text) => {
+    try {
+      const result = JSON.parse(text)
+      return result
+    } catch (err) {
+      return text
+    }
+  })
 }

@@ -5,6 +5,7 @@ import { IconLink } from '@/ui/IconLink'
 import './page.scss'
 import { WakaTime } from '@/components/WakaTime'
 import { IconMail, IconTwitter, IconWeChat } from '@/ui/icon'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: "Emiya's HomePage",
@@ -21,10 +22,13 @@ const Home = () => {
             <p>I'm Emiya</p>
           </div>
           <div className="text-color-font text-opacity-[0.85]">
-            <p className="mt-5">Front-end developer / UI amateur / Looking for remote work or project</p>
+            <p className="mt-5">
+              Front-end developer / <Link href={'https://github.com/sindresorhus/type-fest'}>Type-fest</Link> contributor / Looking for
+              remote work or project
+            </p>
             <h3>Work</h3>
             <p>
-              Working at
+              Working for
               <IconLink href="//realsee.com">Realsee</IconLink>
               <span className="px-0">&</span>
               <IconLink href="//ke.com">BeiKe</IconLink>, have 6 years' development experience and 3 years' work experience.
@@ -87,7 +91,7 @@ const Home = () => {
                   </IconLink>
                 </li>
                 <li>
-                  DataBase:<IconLink href="//planetscale.com/">Planetscale</IconLink>
+                  Database:<IconLink href="//planetscale.com/">Planetscale</IconLink>
                   <IconLink href="//kysely.dev/" icon="//kysely.dev/img/favicon.ico">
                     Kysely
                   </IconLink>
@@ -109,11 +113,11 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="relative bottom-0 mb-2 mt-auto text-center">
+      {/* <div className="relative bottom-0 mb-2 mt-auto text-center">
         <a href="https://beian.miit.gov.cn/" className="text-sm text-color-font text-opacity-40">
           晋ICP备18012113号
         </a>
-      </div>
+      </div> */}
     </div>
   )
 }
