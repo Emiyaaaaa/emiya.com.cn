@@ -2,8 +2,8 @@
   "host": "ap-northeast.connect.psdb.cloud",
   "port": 3306,
   "database": "emiya-com-cn-database",
-  "user": "v74ylsy06exfhrfj3fe7",
-  "password": "pscale_pw_nlbBM5BcZzaPID1WglzuNyVIDrpqZY8SPgZeP3CcZKO",
+  "user": "3twhkm4ca77r4ebetijr",
+  "password": "pscale_pw_vNHCSj8ipszzYpnY26C82C36BEVsymtVvaTh2bieFAD",
   "ssl": {
     "rejectUnauthorized": true 
   }
