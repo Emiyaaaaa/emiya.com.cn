@@ -12,7 +12,7 @@ export async function GET(request: NextRequest, { params }: { params: { slug: st
 
   if (serverSlideAPI[slug]) {
     try {
-      const result = await (serverSlideAPI[slug] as any)(...query, {})
+      const result = await (serverSlideAPI[slug] as any)(...query, requestHooks)
 
       const responseInit = requestHooks.getResponseInit?.() ?? {}
 

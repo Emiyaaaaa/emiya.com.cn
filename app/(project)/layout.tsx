@@ -18,7 +18,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <div className="flex h-full w-full flex-col">
-          <Head></Head>
           <div className="flex flex-grow">
             <div className="relative flex h-full w-full items-center justify-center">{children}</div>
           </div>
