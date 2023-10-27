@@ -23,7 +23,7 @@ const Home = () => {
           </div>
           <div className="text-color-font text-opacity-[0.85]">
             <p className="mt-5">
-              Front-end developer / <Link href={'https://github.com/sindresorhus/type-fest'}>Type-fest</Link> contributor / Looking for
+              Front-end developer / <Link href={'https://github.com/sindresorhus/type-fest'}>type-fest</Link> maintainer / Looking for
               remote work or project
             </p>
             <h3>Work</h3>
