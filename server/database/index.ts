@@ -4,7 +4,7 @@ import mysql from 'mysql2'
 import { Kysely, MysqlDialect } from 'kysely'
 import type { Database } from './typing'
 
-const databaseConfig = process.env.NODE_ENV === 'production' ? productionDatabase : developmentDatabase
+const databaseConfig = process.env.NODE_ENV === 'production' ? productionDatabase : productionDatabase
 
 const db = new Kysely<Database>({
   dialect: new MysqlDialect({

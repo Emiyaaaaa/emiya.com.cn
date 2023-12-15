@@ -17,7 +17,7 @@ const Home = () => {
     <div className="flex h-full flex-col">
       <div className="flex flex-col items-center">
         <div className="profile space-y-3 p-6">
-          <div className="mb-8 space-y-4 text-5xl font-bold">
+          <div className="mb-8 space-y-4 text-5xl font-bold lg:text-6xl">
             <p>Hello~</p>
             <p>I'm Emiya</p>
           </div>
@@ -35,13 +35,13 @@ const Home = () => {
             </p>
             <h3>Skill</h3>
             <ul className="space-y-1">
-              <li>Language - Typescript, Node.js</li>
+              <li>Language - Typescript</li>
               <li>UI library - React, Svelte</li>
               <li>Styling - Tailwind CSS</li>
               <li>Framework - Next.js</li>
             </ul>
             <div className="mt-4 rounded-md bg-color-font bg-opacity-5 px-4 pb-7 pt-2">
-              <p className="mb-2 text-sm">My top 3 languages used in last 7 days</p>
+              <p className="mb-2 text-sm">My top 3 languages in last 7 days</p>
               <WakaTime></WakaTime>
               <p className="float-right mt-[6px] scale-90 text-xs opacity-60">*data from wakatime</p>
             </div>
@@ -63,7 +63,7 @@ const Home = () => {
             <h3>About</h3>
             {/* <p>Overwatch Master Player, Lúcioball Top 500</p> */}
             <div>
-              My blog is used these opensource libraries ♥:
+              Thanks these open-source libraries ♥:
               <ul className="ml-2 mt-2 space-y-1">
                 <li>
                   Language:

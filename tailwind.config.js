@@ -41,8 +41,8 @@ module.exports = {
       },
       keyframes: {
         'pulse-light': {
-          '0%, 100%': { opacity: 0.25 },
-          '50%': { opacity: 0.5 },
+          '0%, 100%': { opacity: 0.1 },
+          '50%': { opacity: 0.15 },
         },
       },
     },
