@@ -1,7 +1,7 @@
 import { Devider } from '@/ui/Devider'
 import Time from '@/ui/Time'
 import React from 'react'
-import './Card.scss'
+import './index.scss'
 import { UIProps } from '@/utils/util.typing'
 import classNames from 'classnames'
 
