@@ -2,7 +2,7 @@
 import { Duration } from '@/ui/Time'
 import { getAPI } from '@/utils/http'
 import React from 'react'
-import './WakaTime.scss'
+import './index.scss'
 import usePromise from '@/utils/hooks/usePromise'
 import classNames from 'classnames'
 
