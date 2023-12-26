@@ -36,7 +36,7 @@ const Home = () => {
             </p>
             <h3>Skill</h3>
             <div className="space-y-1">
-              <div className="flex flex-wrap space-x-2">
+              <div className="flex flex-wrap gap-2">
                 <ColorfulItem type="TypeScript" />
                 <ColorfulItem type="React" />
                 <ColorfulItem type="Svelte" />
