@@ -26,14 +26,14 @@ const Home = () => {
               Front-end developer / <Link href={'https://github.com/sindresorhus/type-fest'}>type-fest</Link> maintainer / Looking for
               remote work or project
             </p>
-            <h3>Work</h3>
+            <h3>WORK</h3>
             <p>
               Working for
               <IconLink href="//realsee.com">Realsee</IconLink>
               <span className="px-0">&</span>
               <IconLink href="//ke.com">BeiKe</IconLink>, have 6 years' development experience and 3 years' work experience.
             </p>
-            <h3>Skill</h3>
+            <h3>SKILL</h3>
             <ul className="space-y-1">
               <li>Language - Typescript</li>
               <li>UI library - React, Svelte</li>
@@ -45,7 +45,7 @@ const Home = () => {
               <WakaTime></WakaTime>
               <p className="float-right mt-[6px] scale-90 text-xs opacity-60">*data from wakatime</p>
             </div>
-            <h3>Contant Me</h3>
+            <h3>CONTANT ME</h3>
             <p className="flex flex-col space-y-1">
               <IconLink href="mailto:emiya@emiya.com.cn" icon={<IconMail size={16} className="mr-1 opacity-80" />}>
                 emiya@emiya.com.cn
@@ -60,7 +60,7 @@ const Home = () => {
                 Em1ya5
               </IconLink>
             </p>
-            <h3>About</h3>
+            <h3>ABOUT</h3>
             {/* <p>Overwatch Master Player, Lúcioball Top 500</p> */}
             <div>
               Thanks these open-source libraries ♥:
