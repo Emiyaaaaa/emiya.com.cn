@@ -15,7 +15,8 @@ module.exports = {
         'color-bg': 'rgb(var(--color-bg) / <alpha-value>)',
         'color-font': 'rgb(var(--color-font) / <alpha-value>)',
         'color-tag': 'rgb(var(--color-tag) / <alpha-value>)',
-        'color-font-80': 'rgb(var(--color-font) / 0.8)',
+        'color-font-40': 'rgb(var(--color-font) / 0.4)',
+        'color-font-50': 'rgb(var(--color-font) / 0.5)',
       },
       inset: {
         '1/10': '10%',

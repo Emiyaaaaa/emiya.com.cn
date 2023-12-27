@@ -25,8 +25,7 @@ export async function getAPI<T extends RouteKey>(
 ): Promise<APIResult<T>> {
   const params = data.length > 0 ? `?params=${data.join(',')}` : ''
   const host = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : ''
-  const apistring = `${host}/api/${api}${params}`
-  return fetch(apistring).then((res) => {
+  return fetch(`${host}/api/${api}${params}`, {}).then((res) => {
     if (res.status !== 200) {
       return Promise.reject(new Error(`getAPI code(${res.status}): ${res.statusText}`))
     }
