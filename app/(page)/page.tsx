@@ -4,8 +4,9 @@ import type { Metadata } from 'next'
 import { IconLink } from '@/ui/IconLink'
 import './page.scss'
 import { WakaTime } from '@/components/WakaTime'
-import { IconMail, IconTwitter, IconWeChat } from '@/ui/icon'
+import { IconMail, IconTwitter, IconTypeScript, IconWeChat } from '@/ui/icon'
 import Link from 'next/link'
+import ColorfulItem from '@/components/ColorfulItem'
 
 export const metadata: Metadata = {
   title: "Emiya's HomePage",
@@ -24,22 +25,25 @@ const Home = () => {
           <div className="text-color-font text-opacity-[0.85]">
             <p className="mt-5">
               Front-end developer / <Link href={'https://github.com/sindresorhus/type-fest'}>type-fest</Link> maintainer / Looking for
-              remote work or project
+              remote work or project.
             </p>
             <h3>WORK</h3>
             <p>
               Working for
               <IconLink href="//realsee.com">Realsee</IconLink>
               <span className="px-0">&</span>
-              <IconLink href="//ke.com">BeiKe</IconLink>, have 6 years' development experience and 3 years' work experience.
+              <IconLink href="//ke.com">Ke Holding</IconLink>, 6 years' development experience and 3 years' work experience.
             </p>
             <h3>SKILL</h3>
-            <ul className="space-y-1">
-              <li>Language - Typescript</li>
-              <li>UI library - React, Svelte</li>
-              <li>Styling - Tailwind CSS</li>
-              <li>Framework - Next.js</li>
-            </ul>
+            <div className="space-y-1">
+              <div className="flex flex-wrap gap-2">
+                <ColorfulItem type="TypeScript" />
+                <ColorfulItem type="React" />
+                <ColorfulItem type="Svelte" />
+                <ColorfulItem type="NextJs" />
+                <ColorfulItem type="Tailwind" />
+              </div>
+            </div>
             <div className="mt-4 rounded-md bg-color-font bg-opacity-5 px-4 pb-7 pt-2">
               <p className="mb-2 text-sm">My top 3 languages in last 7 days</p>
               <WakaTime></WakaTime>
