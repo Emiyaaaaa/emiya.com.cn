@@ -5,7 +5,7 @@ const THEME = 'dracula'
 
 const shikiSinglePromise = singlePromise(async () => {
   const shiki = await import('shiki')
-  shiki.setCDN('https://unpkg.com/shiki@latest/')
+  shiki.setCDN('https://unpkg.com/shiki@0.14.2/')
   return shiki
 })
 
