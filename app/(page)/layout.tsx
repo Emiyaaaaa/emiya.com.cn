@@ -4,6 +4,8 @@ import { Analytics } from '@vercel/analytics/react'
 import Head from '@/components/Head'
 import '@/tailwind.theme.scss'
 import './layout.scss'
+import './tag.scss'
+import './loading.scss'
 import { Providers } from './Providers'
 import { Block } from '@/ui/Block'
 

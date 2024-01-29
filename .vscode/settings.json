@@ -33,7 +33,7 @@
     }
   ],
   "files.associations": {
-    "*.scss": "scss"
+    "*.scss": "tailwindcss"
   },
   "editor.quickSuggestions": {
     "strings": "on"

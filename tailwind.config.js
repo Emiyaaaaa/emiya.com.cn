@@ -18,6 +18,9 @@ module.exports = {
         'color-font-40': 'rgb(var(--color-font) / 0.4)',
         'color-font-50': 'rgb(var(--color-font) / 0.5)',
       },
+      lineHeight: {
+        180: 1.8,
+      },
       inset: {
         '1/10': '10%',
         '1/20': '5%',

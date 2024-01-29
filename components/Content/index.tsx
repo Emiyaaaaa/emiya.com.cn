@@ -7,6 +7,7 @@ import Text from './components/Text'
 import { Code } from '@/ui/Code'
 import any from '@/utils/any'
 import { Devider } from '@/ui/Devider'
+import './index.scss'
 
 function Content(props: { data: OutputData }) {
   return (

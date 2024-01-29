@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import { IconLink } from '@/ui/IconLink'
 import './page.scss'
 import { WakaTime } from '@/components/WakaTime'
-import { IconMail, IconTwitter, IconTypeScript, IconWeChat } from '@/ui/icon'
+import { IconMail, IconTwitter, IconWeChat } from '@/ui/icon'
 import Link from 'next/link'
 import ColorfulItem from '@/components/ColorfulItem'
 
@@ -53,9 +53,6 @@ const Home = () => {
             <p className="flex flex-col space-y-1">
               <IconLink href="mailto:emiya@emiya.com.cn" icon={<IconMail size={16} className="mr-1 opacity-80" />}>
                 emiya@emiya.com.cn
-              </IconLink>
-              <IconLink href="mailto:emiyaaaaa05@gmail.com" icon={<IconMail size={16} className="mr-1 opacity-80" />}>
-                emiyaaaaa05@gmail.com
               </IconLink>
               <IconLink href="//twitter.com/Em1ya05" icon={<IconTwitter className="opacity-80" />}>
                 Yeami

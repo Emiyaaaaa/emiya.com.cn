@@ -8,11 +8,11 @@ function Head(props?: { title?: string }) {
   return (
     <div className="p-5">
       <div className="flex items-center">
-        <Link href="">
+        <Link href="/">
           <div className="pointer-events-none select-none font-black opacity-90">{props?.title ?? "Emiya's Blog"}</div>
         </Link>
         <div className="ml-auto flex items-center space-x-5 opacity-90">
-          <Link href="">
+          <Link href="/">
             <IconHome width={24}></IconHome>
           </Link>
           <Link href="/blog">
