@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(request: NextRequest, { params }: { params: { slug: string } }) {
   const url = new URL(`${request.url}`)
+
   const requestHooks: RequestHooks = {}
 
   const slug = params.slug[0] as keyof typeof serverSlideAPI

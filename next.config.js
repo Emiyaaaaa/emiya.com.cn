@@ -4,7 +4,7 @@ const withMDX = require('@next/mdx')()
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true, // Recommended for the `pages` directory, default in `app`.
-  pageExtensions: ['mdx', 'tsx'],
+  pageExtensions: ['mdx', 'tsx', 'ts', 'jsx', 'js'],
   experimental: {
     serverComponentsExternalPackages: ['mysql2', 'kysely', 'postcss', 'shiki'],
   },
