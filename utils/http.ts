@@ -23,6 +23,7 @@ export async function getAPI<T extends RouteKey>(
   api: RouteString<T>,
   ...data: RemoveTypeFormArray<Parameters<ServerSideAPIInterface[T]>, RequestHooks>
 ): Promise<APIResult<T>> {
+  console.log('getAPI', api, data)
   const params = data.length > 0 ? `?params=${data.join(',')}` : ''
   const host = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : ''
   return fetch(`${host}/api/${api}${params}`, {}).then((res) => {
