@@ -5,14 +5,13 @@ const THEME = 'dracula'
 
 const shikiSinglePromise = singlePromise(async () => {
   const shiki = await import('shiki')
-  shiki.setCDN('https://unpkg.com/shiki@0.14.2/')
   return shiki
 })
 
 const getHighlighterSinglePromise = singlePromise(async () => {
   const shiki = await shikiSinglePromise()
   const highlighter = await shiki.getHighlighter({
-    theme: { name: 'blank-theme', type: 'light', settings: [], fg: '#000', bg: '#fff' },
+    themes: [{ name: 'blank-theme', type: 'light', fg: '#000', bg: '#fff' }],
     langs: [],
   })
   await highlighter.loadTheme(THEME)
@@ -37,18 +36,17 @@ class Shiki {
     return this.highlighter
   }
 
-  public async codeToHtml(code: string, _lang?: ShikiInterface.Lang) {
-    const lang = _lang || 'markdown'
+  public async codeToHtml(code: string, lang?: ShikiInterface.BuiltinLanguage) {
+    const _lang = lang || 'markdown'
     const highlighter = await this.getHighlighter()
     const loadedLangs = highlighter.getLoadedLanguages()
-    if (!loadedLangs.includes(lang)) {
-      await highlighter.loadLanguage(lang)
-    }
-    return highlighter.codeToHtml(code, { lang, theme: THEME })
+    if (!loadedLangs.includes(_lang)) await highlighter.loadLanguage(_lang)
+    return highlighter.codeToHtml(code, { lang: _lang, theme: THEME })
   }
 }
 
 const shiki = new Shiki()
 
 export type { ShikiInterface }
+export { Shiki }
 export default shiki

@@ -2,11 +2,12 @@
 import classNames from 'classnames'
 import React from 'react'
 import shiki, { type ShikiInterface } from '@/utils/shiki'
+import { LiteralUnion } from 'react-hook-form'
 
 interface Props {
   className?: string
   code: string
-  language?: ShikiInterface.Lang
+  language?: LiteralUnion<ShikiInterface.BuiltinLanguage, string>
 }
 
 export function Code(props: Props) {
@@ -18,7 +19,7 @@ export function Code(props: Props) {
     if (!ref.current) return
     setLoading(true)
     shiki
-      .codeToHtml(props.code, props.language)
+      .codeToHtml(props.code, props.language as any)
       .then((html) => {
         if (ref.current) ref.current.innerHTML = html
       })
