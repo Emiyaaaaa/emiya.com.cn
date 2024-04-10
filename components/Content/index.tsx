@@ -1,6 +1,6 @@
 import type { OutputData } from '@editorjs/editorjs'
 import React from 'react'
-import Header from './components/Header'
+import Header from './Header'
 import NestedList from './components/NestedList'
 import CheckList from './components/CheckList'
 import Text from './components/Text'

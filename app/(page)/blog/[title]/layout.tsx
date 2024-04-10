@@ -11,11 +11,8 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const title = blog?.title ?? params.title.replace(/-/g, ' ') ?? emiyaBlog
 
   return {
-    title: title,
-    description: title,
     applicationName: emiyaBlog,
     authors: [{ name: 'Emiya', url: 'emiya.com.cn' }],
   }

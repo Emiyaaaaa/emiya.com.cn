@@ -1,24 +1,27 @@
 @tailwind utilities;
 
 @layer utilities {
-  .content {
-    h1 {
+  .post {
+    /* h1 {
       @apply mb-6 mt-10;
-    }
+      @apply text-[1.8rem] font-bold;
+    } */
     h2 {
       @apply mb-5 mt-8;
+      @apply text-[1.6rem] font-bold;
     }
     h3 {
       @apply mb-4 mt-6;
+      @apply text-[1.4rem] font-bold;
     }
     h4 {
       @apply mb-3 mt-4;
+      @apply text-[1.2rem] font-bold;
     }
-    h5 {
-      @apply mb-3 mt-4;
-    }
+    h5,
     h6 {
       @apply mb-3 mt-4;
+      @apply text-base font-bold;
     }
 
     .ui-code,
