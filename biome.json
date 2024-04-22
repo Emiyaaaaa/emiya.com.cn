@@ -1,0 +1,23 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.7.0/schema.json",
+	"formatter": {
+		"enabled": true,
+		"formatWithErrors": true
+	},
+	"javascript": {
+		"formatter": {
+			"trailingComma": "none"
+		}
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"suspicious": {
+				"noExplicitAny": "warn"
+			},
+			"style": {
+				"noNonNullAssertion": "warn"
+			}
+		}
+	}
+}

@@ -1,12 +1,16 @@
-import { Blog } from '@/server/database/typing'
+import type { Blog } from '@/server/database/typing'
+import { Devider } from '@/ui/Devider'
+import Time from '@/ui/Time'
+import markdown2obj from '@/utils/md2obj'
+import type { UIProps } from '@/utils/util.typing'
+import type { OutputData } from '@editorjs/editorjs'
+import classNames from 'classnames'
 import React from 'react'
 import Content from './Content'
-import Time from '@/ui/Time'
-import { Devider } from '@/ui/Devider'
-import { UIProps } from '@/utils/util.typing'
-import classNames from 'classnames'
-import type { OutputData } from '@editorjs/editorjs'
-import markdown2obj from '@/utils/md2obj'
+
+
+
+
 
 function Article(props: UIProps<{ data: Pick<Blog, 'title' | 'created_at' | 'content' | 'old'>; content?: OutputData }>) {
   const { data } = props

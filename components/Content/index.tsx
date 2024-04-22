@@ -1,13 +1,12 @@
+import { Code } from '@/ui/Code'
+import { Devider } from '@/ui/Devider'
+import any from '@/utils/any'
 import type { OutputData } from '@editorjs/editorjs'
 import React from 'react'
 import Header from './Header'
-import NestedList from './components/NestedList'
 import CheckList from './components/CheckList'
+import NestedList from './components/NestedList'
 import Text from './components/Text'
-import { Code } from '@/ui/Code'
-import any from '@/utils/any'
-import { Devider } from '@/ui/Devider'
-import './index.scss'
 
 function Content(props: { data: OutputData }) {
   return (

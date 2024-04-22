@@ -1,22 +1,20 @@
-import blogRoute from './blog'
-import authRoute from './auth'
-import { NextResponse } from 'next/server'
-import wakaTimeRoute from './wakaTime'
+import type { NextResponse } from "next/server";
+import wakaTimeRoute from "./wakaTime";
 
-const route = { ...blogRoute, ...authRoute, ...wakaTimeRoute }
+const route = { ...wakaTimeRoute };
 
-const serverSlideAPI = route
+const serverSlideAPI = route;
 
 // typing
-type ServerSideAPIInterface = typeof serverSlideAPI
-type RouteKey = keyof ServerSideAPIInterface
-type RouteString<T extends RouteKey> = `${T}`
+type ServerSideAPIInterface = typeof serverSlideAPI;
+type RouteKey = keyof ServerSideAPIInterface;
+type RouteString<T extends RouteKey> = `${T}`;
 interface RequestHooks {
-  getResponseInit?: () => ResponseInit
-  afterResponseHandler?: (response: NextResponse) => void | Promise<void>
+	getResponseInit?: () => ResponseInit;
+	afterResponseHandler?: (response: NextResponse) => void | Promise<void>;
 }
 // typing end
 
 // export default route
-export { serverSlideAPI, type RequestHooks }
-export type { ServerSideAPIInterface, RouteKey, RouteString }
+export { serverSlideAPI, type RequestHooks };
+export type { ServerSideAPIInterface, RouteKey, RouteString };
