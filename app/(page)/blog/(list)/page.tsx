@@ -1,31 +1,35 @@
 import fs from "node:fs";
 import Card from "@/components/Card";
-import { serverSlideAPI } from "@/server/route";
-import listPaths from "list-paths";
 import Link from "next/link";
 import React from "react";
+import { getMDXFromPath } from "../utils";
 
-const posts = listPaths("../posts", { includeFiles: true })
+const posts = fs
+	.readdirSync("./app/(page)/blog/posts")
 	.filter((p) => p.endsWith(".mdx"))
-	.map((p) => p.split(".")?.[0])
 	.filter(Boolean);
 
-console.log(posts);
+const metadataes = posts
+	.map((p) => ({
+		...getMDXFromPath(`./app/(page)/blog/posts/${p}`)?.metadata,
+		path: p.split(".")[0]
+	}))
+	.filter(Boolean);
 
-export default function ExampleClientComponent() {
-	return <div>1</div>;
+export default function ArticleList() {
+	return (
+		<div>
+			{metadataes.map((metadata, index) => (
+				<Link key={index} href={`/blog/${metadata?.path}`}>
+					<Card
+						title={metadata?.title ?? "unTitled"}
+						{...metadata}
+						created_at={metadata?.date ? new Date(metadata?.date) : undefined}
+					/>
+				</Link>
+			))}
+		</div>
+	);
 }
-
-// export default function ArticleList() {
-//   return (
-//     <div>
-//       {/* {data.map((d, index) => (
-//         <Link key={index} href={`/blog/${d.en_title ? d.en_title.replace(/\s/g, '-') : `untitled-${d.id}`}`}>
-//           <Card {...d} tags={d.tag?.split(';')}></Card>
-//         </Link>
-//       ))} */}
-//     </div>
-//   )
-// }
 
 export const revalidate = 300;

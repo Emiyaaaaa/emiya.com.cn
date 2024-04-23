@@ -26,7 +26,6 @@
 		"@types/react": "18.2.79",
 		"@types/react-dom": "18.2.25",
 		"autoprefixer": "10.4.14",
-		"list-paths": "1.0.2",
 		"postcss": "8.4.21",
 		"shiki": "1.2.4",
 		"tailwindcss": "latest",
