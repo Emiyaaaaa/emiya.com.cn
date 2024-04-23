@@ -53,7 +53,7 @@ export default async function MdxPage({
 							h6: ({ children }) => {
 								return <Header level={6} text={children as string} withHash />;
 							},
-							code: (props) => {
+							pre: (props) => {
 								return (
 									<Code
 										code={props.children as string}
@@ -61,6 +61,15 @@ export default async function MdxPage({
 									/>
 								);
 							}
+							// code: (props) => {
+							// 	console.log("code", props);
+							// 	return (
+							// 		<Code
+							// 			code={props.children as string}
+							// 			language={props.className?.split("-")?.[1]}
+							// 		/>
+							// 	);
+							// }
 						}}
 					/>
 				</div>
