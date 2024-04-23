@@ -26,7 +26,7 @@ export default async function MdxPage({
 						<Time
 							className="ml-1 mt-4 block opacity-70"
 							format="MON DD · YYYY"
-							date={metadata.date}
+							date={new Date(metadata.date)}
 						/>
 					)}
 				</header>

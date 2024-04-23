@@ -46,7 +46,12 @@ function transformDuration(second: number, format?: string) {
 	return durationString;
 }
 
-function Time(props: UIProps<{ date?: Date | null; format?: string }>) {
+function Time(
+	props: UIProps<{
+		date?: Date | null;
+		format?: string;
+	}>
+) {
 	if (!props.date) return null;
 	return (
 		<time className={props.className} dateTime={props.date.toLocaleString()}>

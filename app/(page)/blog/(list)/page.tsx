@@ -1,15 +1,19 @@
-import fs from 'fs'
-import Card from '@/components/Card'
-import { serverSlideAPI } from '@/server/route'
-import Link from 'next/link'
-import React from 'react'
+import fs from "node:fs";
+import Card from "@/components/Card";
+import { serverSlideAPI } from "@/server/route";
+import listPaths from "list-paths";
+import Link from "next/link";
+import React from "react";
 
-// fs.readdir(__dirname + '/', 'utf-8', (_, files) => {
-//   console.log(files)
-// })
+const posts = listPaths("../posts", { includeFiles: true })
+	.filter((p) => p.endsWith(".mdx"))
+	.map((p) => p.split(".")?.[0])
+	.filter(Boolean);
+
+console.log(posts);
 
 export default function ExampleClientComponent() {
-  return <div>1</div>
+	return <div>1</div>;
 }
 
 // export default function ArticleList() {
@@ -24,4 +28,4 @@ export default function ExampleClientComponent() {
 //   )
 // }
 
-export const revalidate = 300
+export const revalidate = 300;
