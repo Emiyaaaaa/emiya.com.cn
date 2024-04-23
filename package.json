@@ -29,6 +29,7 @@
 		"postcss": "8.4.21",
 		"shiki": "1.2.4",
 		"tailwindcss": "latest",
+		"type-fest": "4.16.0",
 		"typescript": "5.4.5"
 	}
 }
