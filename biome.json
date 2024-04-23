@@ -12,6 +12,9 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
+			"correctness": {
+				"useExhaustiveDependencies": "warn"
+			},
 			"suspicious": {
 				"noExplicitAny": "warn",
 				"noArrayIndexKey": "off"
@@ -19,6 +22,9 @@
 			"style": {
 				"noNonNullAssertion": "warn",
 				"useSelfClosingElements": "warn"
+			},
+			"a11y": {
+				"noSvgWithoutTitle": "warn"
 			}
 		}
 	}
