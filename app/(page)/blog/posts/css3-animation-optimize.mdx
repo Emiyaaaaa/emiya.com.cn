@@ -1,0 +1,117 @@
+---
+title: CSS3动画优化
+date: 2020-03-02 15:51:25
+tag: HTML
+---
+
+José Rosário的一篇文章，看完后受益匪浅，尤其是最后分离动画块的例子
+
+https://medium.com/outsystems-experts/how-to-achieve-60-fps-animations-with-css3-db7b98610108
+
+仔细研究了一下实现原理，源代码和个人理解如下：
+```html
+  <html lang="en">
+    <head>
+    	<meta charset="UTF-8">
+    	<title>Document</title>
+    	<style type="text/css">
+    		body,html{
+      			width: 100%;
+    			height: 100%;
+    		}
+    		.menu {
+      		    position: fixed;
+    		    left: 0;
+    		    top: 0;
+    		    width: 100%;
+    		    height: 100%;
+    		    overflow: hidden;
+    		    pointer-events: none;/*重点，其实menu部分是整个位于页面之上的，通过设置此选项来使点击效果穿透menu层，就像这一层不存在一样*/
+    		    z-index: 150;/*设置z-index来将menu层位于页面之上，注意后面的app-menu的z-index要大于这个值才能正常显示*/
+    		}
+    		.menu--visible {
+      		    pointer-events: auto;
+    		}
+    		.app-menu {
+      		    background-color: #fff;
+    		    color: #000;
+    		    position: relative;
+    		    max-width: 400px;
+    		    width: 90%;
+    		    height: 100%;
+    		    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    		    -webkit-transform: translateX(-103%);/*重点，默认情况下菜单部分向左移动103%，也就是不可见*/
+    		            transform: translateX(-103%);
+    		    display: flex;/*设置菜单为flex布局，与动画无关*/
+    		    flex-direction: column;/*设置菜单内flex主轴方向为垂直方向，与动画无关*/
+    		    will-change: transform;
+    		    z-index: 160;
+    		    pointer-events: auto;            
+    		}
+    		.menu-icon{/*这部分是我自己添加的，因为源代码中没有icon相关css*/
+    			width: 100px;
+    			height: 100px;
+    			background: red;
+    		}
+    		.menu--visible .app-menu {/*重点，点击菜单按钮后取消的左移103%的效果，也就是右移103%*/
+    		    -webkit-transform: none;
+    		            transform: none;
+    		}
+    		.menu--animatable .app-menu {
+      		    transition: all 130ms ease-in;/*关闭菜单的动画速度*/
+    		}
+    		.menu--visible.menu--animatable  .app-menu {
+      		    transition: all 330ms ease-out;/*打开菜单的动画速度*/
+    		}
+    		.menu:after {/*为除菜单外的部分添加一层阴影，默认透明度为0，点击菜单时透明度变为1*/
+    		    content: '';
+    		    display: block;
+    		    position: absolute;
+    		    left: 0;
+    		    top: 0;
+    		    width: 100%;
+    		    height: 100%;
+    		    background: rgba(0,0,0,0.4);
+    		    opacity: 0;
+    		    will-change: opacity;
+    		    pointer-events: none;
+    		    transition: opacity 0.3s cubic-bezier(0,0,0.3,1);/*阴影动画效果*/
+    		}
+    		.menu--visible.menu:after {
+      		    opacity: 1;
+    		    pointer-events: auto;
+    		}
+    	</style>
+    </head>
+    <body>
+    	<div class="menu">
+    		<div class="app-menu"></div>
+    	</div>
+    	<div class="layout">
+    		<div class="header">
+    			<div class="menu-icon"></div>
+    		</div>
+    	</div>
+    	<script type="text/javascript">
+    		function toggleClassMenu() {
+      			myMenu.classList.add("menu--animatable");	
+    			if(!myMenu.classList.contains("menu--visible")) {		
+      				myMenu.classList.add("menu--visible");
+    			} else {
+      				myMenu.classList.remove('menu--visible');		
+    			}	
+    		}
+    		function OnTransitionEnd() {
+      			myMenu.classList.remove("menu--animatable");
+    		}
+    		var myMenu = document.querySelector(".menu");
+    		var oppMenu = document.querySelector(".menu-icon");
+    		myMenu.addEventListener("transitionend", OnTransitionEnd, false);
+    		oppMenu.addEventListener("click", toggleClassMenu, false);
+    		myMenu.addEventListener("click", toggleClassMenu, false);
+    	</script>
+    </body>
+  </html>
+```
+
+关于最后的js部分，其实click事件在手机上触发是有延迟的，大约200ms左右，体验不是很好，可以在支持触摸事件的浏览器上使用touchstart事件来取代

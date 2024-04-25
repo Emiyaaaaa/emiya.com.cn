@@ -1,0 +1,19 @@
+@tailwind utilities;
+
+@layer utilities {
+  .markdown {
+    p, ul {
+      @apply leading-relaxed text-color-font text-opacity-90 mb-3;
+    }
+
+    pre {
+      @apply overflow-x-auto rounded-md p-4 text-sm leading-normal my-4;
+      @apply bg-[#28292d] #{!important};
+    }
+
+    /* inline code */
+    *:not(pre) > code {
+      @apply mx-1 rounded-[3px] bg-color-font bg-opacity-20 px-2 py-[1px];
+    }
+  }
+}

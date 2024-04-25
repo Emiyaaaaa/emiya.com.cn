@@ -24,7 +24,6 @@
       @apply text-base font-bold;
     }
 
-    .ui-code,
     blockquote,
     hr,
     img,
@@ -104,17 +103,6 @@
           content: '— ';
         }
       }
-    }
-
-    /* code */
-    .ui-code .shiki {
-      @apply overflow-x-auto rounded-md p-4;
-      @apply bg-[#28292d] #{!important};
-    }
-
-    /* inline code */
-    *:not(pre.shiki) > code {
-      @apply mx-1 rounded-[3px] bg-color-font bg-opacity-20 px-2 py-[1px];
     }
 
     /* link */

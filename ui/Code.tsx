@@ -26,7 +26,7 @@ export function Code(props: Props) {
 			.finally(() => setLoading(false));
 	}, [ref.current]);
 	return (
-		<div className={classNames("ui-code", props.className)} ref={ref}>
+		<div ref={ref}>
 			<pre className="shiki">
 				<code className="text-slate-100" lang={props.language}>
 					{props.code}

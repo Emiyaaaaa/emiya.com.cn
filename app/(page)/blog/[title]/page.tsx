@@ -5,6 +5,7 @@ import Time from "@/ui/Time";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import React from "react";
 import { getMDX } from "../utils";
+import "./markdown.scss";
 
 export default async function MdxPage({
 	params
@@ -31,7 +32,7 @@ export default async function MdxPage({
 					)}
 				</header>
 				<Devider className="my-4" />
-				<div className="w-fill mt-4 flex flex-col px-[2%] py-2">
+				<div className="markdown w-fill mt-4 flex flex-col px-[2%] py-2">
 					<MDXRemote
 						source={content}
 						components={{
@@ -53,23 +54,14 @@ export default async function MdxPage({
 							h6: ({ children }) => {
 								return <Header level={6} text={children as string} withHash />;
 							},
-							pre: (props) => {
+							pre: (props: any) => {
 								return (
 									<Code
-										code={props.children as string}
-										language={props.className?.split("-")?.[1]}
+										code={props.children.props.children}
+										language={props.children.props.className?.split("-")?.[1]}
 									/>
 								);
 							}
-							// code: (props) => {
-							// 	console.log("code", props);
-							// 	return (
-							// 		<Code
-							// 			code={props.children as string}
-							// 			language={props.className?.split("-")?.[1]}
-							// 		/>
-							// 	);
-							// }
 						}}
 					/>
 				</div>

@@ -14,7 +14,13 @@ const metadataes = posts
 		...getMDXFromPath(`./app/(page)/blog/posts/${p}`)?.metadata,
 		path: p.split(".")[0]
 	}))
-	.filter(Boolean);
+	.filter(Boolean)
+	.sort((a, b) => {
+		if (a?.date && b?.date) {
+			return new Date(b.date).getTime() - new Date(a.date).getTime();
+		}
+		return 0;
+	});
 
 export default function ArticleList() {
 	return (
