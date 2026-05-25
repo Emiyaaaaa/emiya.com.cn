@@ -1,0 +1,40 @@
+---
+title: JS 自定义事件
+date: 2020-02-19 14:51:05
+tags: JavaScript
+---
+
+今天了解到了js的自定义事件，通过自定义事件可以解决一些用普通办法很难解决的事情，希望以后在遇到难题时可以扩展思路，尝试一下使用自定义事件。并且自定义事件最重要的优点就是可以降低代码的耦合度
+
+简单的自定义事件就是通过`Event()`构造器来 new 一个对象，如`var ev = new Event("look", {"bubbles":true, "cancelable":false});`这个ev就表示一个look事件，可以通过`dispatchEvent(ev)`来在具体的Element上触发这个事件，但是要捕获这个事件，还需要添加监听器，因为这个ev对象是冒泡的，所以在触发事件的Element及其任意祖先节点上都是可以捕获到look事件
+
+例子如下：
+```html
+<html>
+<head></head>
+<body>
+  <div id="a"></div>
+  <script type="text/javascript">
+    var ev = new Event("look", {"bubbles":true, "cancelable":false}),
+      a = document.getElementById('a');
+    document.addEventListener('look',function(){
+      console.log('document look!');
+    })
+    a.addEventListener('look',function(){
+      console.log('a look!');
+    })
+    a.dispatchEvent(ev);
+    document.dispatchEvent(ev);
+  </script>
+</body>
+</html>
+```
+
+结果为：
+```
+a look!
+document look!
+document look!
+```
+
+还有一种复杂点的自定义事件，是js高程3里面的616页，这个等有空再更新

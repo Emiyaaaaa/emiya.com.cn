@@ -1,0 +1,8 @@
+@reference "../../tailwind.theme.css";
+
+@layer utilities {
+  .tag {
+    @apply flex items-center font-semibold capitalize text-color-font/80;
+    @apply before:mr-1 before:h-2 before:w-2 before:rounded-full before:bg-color-tag before:opacity-70 before:content-[''];
+  }
+}

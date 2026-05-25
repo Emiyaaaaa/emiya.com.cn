@@ -1,0 +1,69 @@
+---
+title: 遍历 NodeList 对象时的性能优化
+date: 2020-02-01 21:17:16
+tags: JavaScript
+---
+
+看到《JavaScript中高级编程》中提到，对于getElementsByClassName()之类方法返回的Nodelist对象，“应该尽量减少访问NodeList的次数，因为每次访问NodeList，都会运行一次基于文档的查询。”
+
+针对这个问题，解决办法就是在遍历之前先将NodeList复制一份，对这个复制节点进行遍历。这个办法是否有效，能提高多少效率，我做了一个测试
+
+测试代码在最后，先看结果（每行都进行了5次测试）：
+
+ - 100个同名class时，直接遍历用时0,0,0,0,0ms，复制后遍历用时0,0,0,0,0ms
+ - 1000个同名class时，直接遍历用时0,1,0,1,1ms，复制后遍历用时1,1,1,2,1ms
+ - 1000个同名class时，直接遍历用时4,3,2,2,2ms，复制后遍历用时6,10,10,10,7ms
+ - 10000个同名class时，直接遍历用时5,2,5,1,3ms，复制后遍历用时13,11,10,6,12ms
+
+
+这么看来，复制后遍历好像并不如直接遍历来的快，反而导致性能变差了，造成这种现象原因应该是复制NodeList的时间大于了每次更新NodeList的时间和。
+
+那么我猜想是不是因为本例结构树过于单一，在实际应用里更新NodeList应该会比较慢一些。那么我就拿我的网站来做个测试吧。
+
+代码不变，很遗憾的发现，结果和上面的并没有什么两样，打开performance录了一下，一看发现确实是复制节点占用了大量时间
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <div id="content"></div>
+  <script type="text/javascript">
+    var content = document.getElementById('content');
+    var testNum = 100000;
+    for (var i = 0; i < testNum; i++) {
+      var a = document.createElement('div');
+      a.setAttribute('class','a')
+      content.appendChild(a);
+    }
+
+    function time(func, id){
+      var start = Date.now();
+      func(id);
+      var stop = Date.now();
+      return stop - start;
+    }
+
+    function test1(ele){
+      var nodeList = ele.getElementsByClassName('a');
+      for (var i = 0; i < nodeList.length; i++) {
+        var a = nodeList[i];
+      }
+    }
+
+    function test2(ele){
+      var nodeListCopy = ele.cloneNode(true);
+      var nodeList = nodeListCopy.getElementsByClassName('a');
+      for (var i = 0; i < nodeListCopy.length; i++) {
+        var b = nodeListCopy[i];
+      }
+    }
+    console.log(time(test1,content))
+    console.log(time(test2,content))
+  </script>
+</body>
+</html>
+```

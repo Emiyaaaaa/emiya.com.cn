@@ -1,0 +1,23 @@
+---
+title: 伪造 git commit 时间
+date: 2025-09-12 17:00:35
+tags: Git
+---
+
+```bash
+export GIT_AUTHOR_DATE="2020-09-08T10:32:40+0800"
+export GIT_COMMITTER_DATE="2020-09-08T10:32:40+0800"
+git add .
+git commit -m "fake timestamp commit"
+git push
+```
+or
+
+```bash
+git add .
+git commit -m "fake timestamp commit"
+export GIT_AUTHOR_DATE="2020-09-08T10:32:40+0800"
+export GIT_COMMITTER_DATE="2020-09-08T10:32:40+0800"
+git commit --amend --no-edit
+git push -f
+```

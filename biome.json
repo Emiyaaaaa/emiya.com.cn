@@ -1,0 +1,31 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.7.0/schema.json",
+	"formatter": {
+		"enabled": true,
+		"formatWithErrors": true
+	},
+	"javascript": {
+		"formatter": {
+			"trailingComma": "none"
+		}
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"correctness": {
+				"useExhaustiveDependencies": "warn"
+			},
+			"suspicious": {
+				"noExplicitAny": "warn",
+				"noArrayIndexKey": "off"
+			},
+			"style": {
+				"noNonNullAssertion": "warn",
+				"useSelfClosingElements": "warn"
+			},
+			"a11y": {
+				"noSvgWithoutTitle": "warn"
+			}
+		}
+	}
+}

@@ -1,0 +1,87 @@
+---
+title: 实现一个固定宽高比的 div 盒子
+date: 2020-02-24 20:19:15
+tags: CSS
+---
+
+要实现一个固定宽高比的div，可以使用`padding:%`中百分比为宽度的百分比这个原理
+```html
+<div class='div1'>
+	<div class='div2'></div>
+</div>
+<style>
+	.div2{
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background: red;
+	}
+	.div1{
+		height: 0;
+		padding-bottom: 75%;
+		width: 100%;
+		position: relative;
+	}
+</style>
+```
+这时会生成一个铺满屏幕的75%宽高比的盒子，那么要控制宽度，只需要在外面添加一层div
+```html
+<div class='div3'>
+	<div class='div1'>
+		<div class='div2'></div>
+	</div>
+</div>
+<style>
+	.div2{
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background: red;
+		}
+	.div1{
+		height: 0;
+		padding-bottom: 75%;
+		width: 100%;
+		position: relative;
+	}
+	.div3{
+		width: 100px;
+		border: solid 1px;
+		padding: 10px;
+	}
+</style>
+```
+最外层div不仅可以控制宽度，还可以方便的设置一些padding，边框之类。
+
+最后将这个功能模块化：
+```html
+<div class="intrinsic-ratios-box"><div><div>
+	<!-- 此处填写div内容 -->
+</div></div></div>
+<style type="text/css">
+	.intrinsic-ratios-box{
+		width: 100px;
+		border: solid 1px;
+		padding: 10px;
+	}
+	.intrinsic-ratios-box > div{
+		height: 0;
+		padding-bottom: 75%;
+		width: 100%;
+		position: relative;
+	}
+	.intrinsic-ratios-box > div > div{
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background: red;
+	}
+</style>
+```
+缺点就是盒子宽度和宽高比要分开来设置，以后再继续研究改进。

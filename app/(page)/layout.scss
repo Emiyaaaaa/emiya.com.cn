@@ -1,0 +1,35 @@
+@reference "../../tailwind.theme.css";
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  html,
+  body {
+    @apply h-full w-full scroll-smooth text-base lg:text-lg text-color-font;
+  }
+
+  body {
+    background-color: rgb(var(--color-bg));
+    color: rgb(var(--color-font));
+    fill: rgb(var(--color-font));
+    word-break: break-word;
+    @apply hyphens-auto break-words antialiased;
+  }
+
+  .image {
+    @apply opacity-0 transition-opacity;
+    &.loaded {
+      @apply opacity-100;
+    }
+  }
+
+  p,
+  span,
+  ul {
+    a {
+      @apply px-1 text-color-font/95 underline decoration-color-font-40 decoration-dashed underline-offset-[3px];
+    }
+  }
+}

@@ -1,0 +1,53 @@
+@reference "../../tailwind.theme.css";
+
+@layer utilities {
+  *[data-tag] {
+    --color-tag: var(--color-font);
+  }
+  *[data-tag='react'] {
+    --color-tag: 97 218 251;
+  }
+  *[data-tag='typescript'] {
+    --color-tag: 0 122 204;
+  }
+  *[data-tag='vue.js'] {
+    --color-tag: 65 184 131;
+  }
+  *[data-tag='html'] {
+    --color-tag: 227 76 38;
+  }
+  *[data-tag='css'] {
+    --color-tag: 21 114 182;
+  }
+  *[data-tag='sass'],
+  *[data-tag='scss'] {
+    --color-tag: 199 93 203;
+  }
+  *[data-tag='tailwind'] {
+    --color-tag: 78 202 206;
+  }
+  *[data-tag='svelte'] {
+    --color-tag: 255 165 0;
+  }
+  *[data-tag='javascript'] {
+    --color-tag: 247 223 30;
+  }
+  *[data-tag='git'] {
+    --color-tag: 239 101 81;
+  }
+  *[data-tag='next.js'] {
+    --color-tag: 0 0 0;
+  }
+  *[data-tag='node.js'] {
+    --color-tag: 2 110 0;
+  }
+  *[data-tag='npm'] {
+    --color-tag: 203 0 0;
+  }
+  *[data-tag='python'] {
+    --color-tag: 0 114 187;
+  }
+  *[data-tag='json'] {
+    --color-tag: 21 114 182;
+  }
+}

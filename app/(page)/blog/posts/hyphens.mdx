@@ -1,0 +1,28 @@
+---
+title: 如何使单词换行时自动插入连字符“-”
+date: 2023-06-18 18:18:18
+tags: HTML,CSS
+---
+
+当文章中包含了一些英文的段落时，段落的右边总是对不齐的，简直逼死强迫症啊，但是如果使用了 `text-justify` 又会带来一些文字/单词间距不一致的问题。
+
+所以在一些场景下使用  `word-break: break-word` 将句子填满整行然后换行是最优解，但是这样又会导致破坏英文单词的连贯性。在这种情况下可以使用 `hyphens: auto`来使浏览器可以自由地在适当的连字符点自动断开单词，即：
+
+```css
+p {
+  word-break: break-word;
+  hyphens: auto;
+}
+```
+
+当然，浏览器也不是那么的全能，还需要我们主动告诉浏览器当前的语言来帮助浏览器选择是否要插入连字符
+
+```html
+<p lang="en">pneumonoultramicroscopicsilicovolcanoconiosis</p>
+<!-- or -->
+<html lang="en">
+  <body>
+     <P>pneumonoultramicroscopicsilicovolcanoconiosis</p>
+  </body>
+</html>
+```
