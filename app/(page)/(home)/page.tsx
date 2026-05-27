@@ -72,12 +72,12 @@ const Home = () => {
 		<div className="flex h-full flex-col">
 			<script
 				type="application/ld+json"
-				// biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD payload is static and trusted
+				// eslint-disable-next-line react/no-danger -- JSON-LD payload is static and trusted
 				dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
 			/>
 			<script
 				type="application/ld+json"
-				// biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD payload is static and trusted
+				// eslint-disable-next-line react/no-danger -- JSON-LD payload is static and trusted
 				dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
 			/>
 			<div className="flex flex-col items-center">

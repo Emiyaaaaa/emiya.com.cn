@@ -36,7 +36,7 @@ function Header(props: { level: number; text: string; withHash?: boolean }) {
 		[
 			React.createElement("span", {
 				key: "span",
-				// biome-ignore lint/security/noDangerouslySetInnerHtml: heading text comes from trusted MDX source
+				// eslint-disable-next-line react/no-danger -- heading text comes from trusted MDX source
 				dangerouslySetInnerHTML: { __html: props.text }
 			}),
 			props.withHash ? (

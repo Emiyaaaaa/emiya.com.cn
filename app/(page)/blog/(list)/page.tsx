@@ -65,7 +65,7 @@ export default function ArticleList() {
 		<div>
 			<script
 				type="application/ld+json"
-				// biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD payload is server-rendered and safe
+				// eslint-disable-next-line react/no-danger -- JSON-LD payload is server-rendered and safe
 				dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }}
 			/>
 			<h1 className="sr-only">{BLOG_TITLE}</h1>
