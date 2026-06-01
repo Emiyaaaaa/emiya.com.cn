@@ -1,13 +1,7 @@
-import { WakaTime } from "@/components/WakaTime";
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { getMDXFromPath } from "../blog/utils";
-import {
-	SITE_AUTHOR,
-	SITE_DESCRIPTION,
-	SITE_NAME,
-	SITE_URL
-} from "../seo";
+import { SITE_AUTHOR, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "../seo";
 
 const HOME_TITLE = "Emiya's Blog | 前端开发者 Emiya 的个人主页";
 const HOME_DESCRIPTION =
@@ -43,10 +37,7 @@ const personJsonLd = {
 	url: SITE_URL,
 	jobTitle: "Front-end Developer",
 	description: SITE_DESCRIPTION,
-	sameAs: [
-		"https://github.com/Emiyaaaaa",
-		"https://x.com/emiya0505"
-	]
+	sameAs: ["https://github.com/Emiyaaaaa", "https://x.com/emiya0505"]
 };
 
 const websiteJsonLd = {
@@ -100,18 +91,7 @@ const Home = () => {
 									decoding="async"
 									className="inline-block mx-1"
 								/>
-							),
-							WakaTime: () => (
-								<div className="mt-4 rounded-md bg-color-font/5 px-4 pb-7 pt-2">
-									<p className="mb-2 text-sm">
-										My top 3 languages in last 7 days
-									</p>
-									<WakaTime />
-									<p className="float-right mt-[6px] scale-90 text-xs opacity-60">
-										*data from wakatime
-									</p>
-								</div>
-							),
+							)
 						}}
 					/>
 				</div>

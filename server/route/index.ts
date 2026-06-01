@@ -1,7 +1,6 @@
 import type { NextResponse } from "next/server";
-import wakaTimeRoute from "./wakaTime";
 
-const route = { ...wakaTimeRoute };
+const route = {};
 
 const serverSlideAPI = route;
 
