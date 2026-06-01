@@ -1,0 +1,37 @@
+---
+interface Props {
+	date?: Date | null;
+	format?: string;
+	class?: string;
+}
+
+const { date, format, class: className } = Astro.props;
+
+function transformDate(d: Date, fmt?: string): string {
+	if (!fmt) return d.toLocaleString();
+	const year = d.getFullYear();
+	const month = d.getMonth() + 1;
+	const day = d.getDate();
+	const hour = d.getHours() + 1;
+	const minute = d.getMinutes() + 1;
+	const second = d.getSeconds() + 1;
+
+	return fmt
+		.replace("YYYY", year.toString())
+		.replace("YY", year.toString().slice(2))
+		.replace("MON", d.toLocaleString("en-US", { month: "long" }))
+		.replace("MM", month.toString())
+		.replace("DD", day.toString())
+		.replace("HH", hour.toString())
+		.replace("mm", minute.toString())
+		.replace("ss", second.toString());
+}
+---
+
+{
+	date && (
+		<time class={className} datetime={date.toISOString()}>
+			{transformDate(date, format)}
+		</time>
+	)
+}

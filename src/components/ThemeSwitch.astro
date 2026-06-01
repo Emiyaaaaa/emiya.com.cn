@@ -1,0 +1,68 @@
+---
+import Icons from "./Icons.astro";
+
+interface Props {
+	width?: number;
+}
+
+const { width = 22 } = Astro.props;
+---
+
+<span
+	id="theme-toggle"
+	role="button"
+	tabindex="0"
+	aria-label="切换主题"
+	class="inline-flex cursor-pointer"
+>
+	<span id="theme-icon-light" class="hidden">
+		<Icons name="light" width={width} />
+	</span>
+	<span id="theme-icon-dark">
+		<Icons name="dark" width={width} />
+	</span>
+</span>
+
+<script>
+	function getTheme(): "light" | "dark" {
+		const t = document.documentElement.dataset.theme;
+		return t === "light" ? "light" : "dark";
+	}
+
+	function updateIcons(theme: "light" | "dark") {
+		const light = document.getElementById("theme-icon-light");
+		const dark = document.getElementById("theme-icon-dark");
+		const toggle = document.getElementById("theme-toggle");
+		if (!light || !dark || !toggle) return;
+		if (theme === "dark") {
+			light.classList.add("hidden");
+			dark.classList.remove("hidden");
+			toggle.setAttribute("aria-label", "切换到浅色主题");
+		} else {
+			light.classList.remove("hidden");
+			dark.classList.add("hidden");
+			toggle.setAttribute("aria-label", "切换到深色主题");
+		}
+	}
+
+	function setTheme(theme: "light" | "dark") {
+		document.documentElement.dataset.theme = theme;
+		localStorage.setItem("theme", theme);
+		updateIcons(theme);
+	}
+
+	function toggleTheme() {
+		setTheme(getTheme() === "dark" ? "light" : "dark");
+	}
+
+	updateIcons(getTheme());
+
+	const toggle = document.getElementById("theme-toggle");
+	toggle?.addEventListener("click", toggleTheme);
+	toggle?.addEventListener("keydown", (e) => {
+		if (e.key === "Enter" || e.key === " ") {
+			e.preventDefault();
+			toggleTheme();
+		}
+	});
+</script>

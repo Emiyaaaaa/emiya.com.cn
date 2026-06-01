@@ -1,0 +1,274 @@
+@import "tailwindcss";
+
+@theme {
+	--color-color-main: hsl(var(--color-main));
+	--color-color-main-dark: hsl(var(--color-main-dark));
+	--color-color-bg: rgb(var(--color-bg));
+	--color-color-font: rgb(var(--color-font));
+	--color-color-tag: rgb(var(--color-tag));
+	--color-color-font-40: rgb(var(--color-font) / 0.4);
+	--color-color-font-50: rgb(var(--color-font) / 0.5);
+
+	--leading-180: 1.8;
+
+	--background-image-img-color-tag: linear-gradient(
+		90deg,
+		rgb(var(--color-tag)) 0%,
+		rgb(var(--color-tag)) 100%
+	);
+
+	--animate-pulse-light: pulse-light 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+	@keyframes pulse-light {
+		0%,
+		100% {
+			opacity: 0.1;
+		}
+		50% {
+			opacity: 0.15;
+		}
+	}
+}
+
+@layer base {
+	:root {
+		--color-main: 156deg 100% 39%;
+		--color-main-dark: 156deg 100% 0%;
+		--color-bg: 255 255 255;
+		--color-font: 50 50 50;
+	}
+
+	:root[data-theme="dark"] {
+		--color-main: 156deg 100% 0%;
+		--color-main-dark: 156deg 100% 100%;
+		--color-bg: 28 28 28;
+		--color-font: 255 255 255;
+	}
+
+	* {
+		@apply box-border;
+	}
+
+	html,
+	body {
+		@apply h-full w-full scroll-smooth text-base lg:text-lg text-color-font;
+	}
+
+	body {
+		background-color: rgb(var(--color-bg));
+		color: rgb(var(--color-font));
+		fill: rgb(var(--color-font));
+		word-break: break-word;
+		@apply hyphens-auto break-words antialiased;
+	}
+
+	.image {
+		@apply opacity-0 transition-opacity;
+		&.loaded {
+			@apply opacity-100;
+		}
+	}
+
+	p,
+	span,
+	ul {
+		a {
+			@apply px-1 text-color-font/95 underline decoration-color-font-40 decoration-dashed underline-offset-[3px];
+		}
+	}
+}
+
+@layer utilities {
+	*[data-tag] {
+		--color-tag: var(--color-font);
+	}
+	*[data-tag="react"] {
+		--color-tag: 97 218 251;
+	}
+	*[data-tag="typescript"] {
+		--color-tag: 0 122 204;
+	}
+	*[data-tag="vue.js"] {
+		--color-tag: 65 184 131;
+	}
+	*[data-tag="html"] {
+		--color-tag: 227 76 38;
+	}
+	*[data-tag="css"] {
+		--color-tag: 21 114 182;
+	}
+	*[data-tag="sass"],
+	*[data-tag="scss"] {
+		--color-tag: 199 93 203;
+	}
+	*[data-tag="tailwind"] {
+		--color-tag: 78 202 206;
+	}
+	*[data-tag="svelte"] {
+		--color-tag: 255 165 0;
+	}
+	*[data-tag="javascript"] {
+		--color-tag: 247 223 30;
+	}
+	*[data-tag="git"] {
+		--color-tag: 239 101 81;
+	}
+	*[data-tag="next.js"] {
+		--color-tag: 0 0 0;
+	}
+	*[data-tag="node.js"] {
+		--color-tag: 2 110 0;
+	}
+	*[data-tag="npm"] {
+		--color-tag: 203 0 0;
+	}
+	*[data-tag="python"] {
+		--color-tag: 0 114 187;
+	}
+	*[data-tag="json"] {
+		--color-tag: 21 114 182;
+	}
+
+	.tag {
+		@apply flex items-center font-semibold capitalize text-color-font/80;
+		@apply before:mr-1 before:h-2 before:w-2 before:rounded-full before:bg-color-tag before:opacity-70 before:content-[''];
+	}
+
+	.markdown {
+		h1 {
+			@apply mb-6 mt-10;
+			@apply text-[1.8rem] font-bold;
+		}
+		h2 {
+			@apply mb-5 mt-8;
+			@apply text-[1.6rem] font-bold;
+		}
+		h3 {
+			@apply mb-4 mt-6;
+			@apply text-[1.4rem] font-bold;
+		}
+		h4 {
+			@apply mb-3 mt-4;
+			@apply text-[1.2rem] font-bold;
+		}
+		h5,
+		h6 {
+			@apply mb-3 mt-4;
+			@apply text-base font-bold;
+		}
+
+		p,
+		ul {
+			@apply leading-relaxed text-color-font/90 mb-3;
+		}
+
+		pre {
+			@apply overflow-x-auto rounded-md p-4 text-sm leading-normal my-4;
+			@apply bg-[#28292d]!;
+		}
+
+		img {
+			@apply rounded-md;
+		}
+
+		*:not(pre) > code {
+			@apply mx-1 rounded-[3px] bg-color-font/20 px-2 py-[1px];
+		}
+
+		p,
+		span,
+		ul {
+			a {
+				@apply px-1 opacity-80 hover:opacity-100 underline decoration-color-font-40 decoration-dashed underline-offset-[3px];
+			}
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			@apply font-bold relative;
+			.anchor {
+				@apply px-2 opacity-0 transition-opacity;
+			}
+			&:hover .anchor {
+				@apply opacity-60;
+			}
+		}
+	}
+
+	.post {
+		blockquote,
+		hr,
+		img,
+		& > ul,
+		& > ol {
+			@apply my-4;
+		}
+
+		& > *:first-child {
+			@apply mt-0;
+		}
+
+		& > p,
+		& > ul,
+		& > ol {
+			@apply leading-180 text-color-font/90;
+		}
+
+		& > p {
+			@apply mt-6;
+		}
+
+		input[type="checkbox"] {
+			@apply mr-2;
+		}
+
+		ol {
+			counter-reset: item;
+		}
+
+		ol li::before {
+			content: counters(item, ".") ".";
+			counter-increment: item;
+			@apply mr-2;
+		}
+
+		ol,
+		ul {
+			li::before {
+				@apply mr-2;
+			}
+			li {
+				@apply my-1 ml-4;
+			}
+		}
+
+		& > ol,
+		& > ul {
+			& > li {
+				@apply ml-2;
+			}
+		}
+
+		p + ul,
+		p + ol {
+			@apply mt-2;
+		}
+
+		& > blockquote {
+			@apply w-full rounded-md bg-color-font/20 px-3 py-2;
+			& > span {
+				@apply text-color-font;
+			}
+			& > span:last-child {
+				@apply block text-right text-sm italic text-color-font/80;
+				&::before {
+					content: "— ";
+				}
+			}
+		}
+	}
+}

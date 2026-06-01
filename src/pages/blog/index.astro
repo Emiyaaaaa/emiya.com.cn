@@ -1,0 +1,62 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Card from "../../components/Card.astro";
+import { getSortedPosts, getPostSlug } from "../../lib/posts";
+import { SITE_AUTHOR, SITE_NAME, SITE_URL } from "../../consts";
+
+const BLOG_TITLE = "博客文章";
+const BLOG_DESCRIPTION =
+	"Emiya 的博客文章列表，涵盖 CSS、JavaScript、TypeScript、React、Git 等前端开发与工程实践的学习笔记与踩坑总结。";
+
+const posts = await getSortedPosts();
+
+const blogJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "Blog",
+	name: `${SITE_NAME} - ${BLOG_TITLE}`,
+	url: `${SITE_URL}/blog`,
+	description: BLOG_DESCRIPTION,
+	inLanguage: "zh-CN",
+	author: {
+		"@type": "Person",
+		name: SITE_AUTHOR.name,
+		url: SITE_URL
+	},
+	blogPost: posts.map((post) => ({
+		"@type": "BlogPosting",
+		headline: post.data.title,
+		url: `${SITE_URL}/blog/${getPostSlug(post)}`,
+		datePublished: post.data.date.toISOString(),
+		dateModified: (post.data.updatedAt ?? post.data.date).toISOString(),
+		description: post.data.description
+	}))
+};
+---
+
+<Layout
+	title={BLOG_TITLE}
+	description={BLOG_DESCRIPTION}
+	canonical="/blog"
+	ogTitle={`${BLOG_TITLE} | ${SITE_NAME}`}
+	ogDescription={BLOG_DESCRIPTION}
+	ogUrl={`${SITE_URL}/blog`}
+	twitterTitle={`${BLOG_TITLE} | ${SITE_NAME}`}
+	twitterDescription={BLOG_DESCRIPTION}
+	jsonLd={blogJsonLd}
+>
+	<div>
+		<h1 class="sr-only">{BLOG_TITLE}</h1>
+		{
+			posts.map((post) => (
+				<a href={`/blog/${getPostSlug(post)}`}>
+					<Card
+						title={post.data.title ?? "unTitled"}
+						description={post.data.description}
+						tags={post.data.tags}
+						created_at={post.data.date}
+					/>
+				</a>
+			))
+		}
+	</div>
+</Layout>

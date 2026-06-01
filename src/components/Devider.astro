@@ -1,0 +1,26 @@
+---
+interface Props {
+	class?: string;
+	h?: boolean;
+	v?: boolean;
+}
+
+const { class: className, h, v } = Astro.props;
+
+const horizontal = h && v ? false : !h && !v ? true : !!h;
+const vertical = h && v ? false : !h && !v ? false : !!v;
+
+if (h && v) {
+	throw new Error("Devider can only be horizontal or vertical");
+}
+---
+
+<div
+	data-component="Devider"
+	class:list={[
+		className,
+		"rounded-full bg-color-font/10",
+		{ "mx-auto h-[2px] w-[90%]": horizontal },
+		{ "h-[90%] min-h-[1em] w-[2px]": vertical }
+	]}
+/>

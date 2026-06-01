@@ -1,0 +1,71 @@
+---
+import Layout from "../layouts/Layout.astro";
+import HomeContent from "../content/home.mdx";
+import Icon from "../components/Icon.astro";
+import {
+	SITE_AUTHOR,
+	SITE_DESCRIPTION,
+	SITE_NAME,
+	SITE_URL
+} from "../consts";
+
+const HOME_TITLE = "Emiya's Blog | 前端开发者 Emiya 的个人主页";
+const HOME_DESCRIPTION =
+	"前端开发者 Emiya 的个人主页，type-fest 核心维护者，分享前端开发、工程实践与远程协作经验。";
+
+const personJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "Person",
+	name: SITE_AUTHOR.name,
+	url: SITE_URL,
+	jobTitle: "Front-end Developer",
+	description: SITE_DESCRIPTION,
+	sameAs: ["https://github.com/Emiyaaaaa", "https://x.com/emiya0505"]
+};
+
+const websiteJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	name: SITE_NAME,
+	url: SITE_URL,
+	inLanguage: "zh-CN",
+	description: SITE_DESCRIPTION,
+	author: {
+		"@type": "Person",
+		name: SITE_AUTHOR.name,
+		url: SITE_URL
+	}
+};
+---
+
+<Layout
+	absoluteTitle={HOME_TITLE}
+	description={HOME_DESCRIPTION}
+	canonical="/"
+	ogType="profile"
+	ogTitle={HOME_TITLE}
+	ogDescription={HOME_DESCRIPTION}
+	ogUrl={SITE_URL}
+	twitterTitle={HOME_TITLE}
+	twitterDescription={HOME_DESCRIPTION}
+	jsonLd={[personJsonLd, websiteJsonLd]}
+>
+	<Fragment slot="head">
+		<meta property="profile:first_name" content={SITE_AUTHOR.name} />
+		<meta property="profile:username" content={SITE_AUTHOR.name} />
+	</Fragment>
+	<div class="flex h-full flex-col">
+		<div class="flex flex-col items-center">
+			<div class="markdown space-y-3 p-6">
+				<div
+					class="mb-10 space-y-4 text-5xl font-bold lg:text-6xl lg:leading-[1.2]"
+				>
+					Hello~
+					<br />
+					I'm Emiya
+				</div>
+				<HomeContent components={{ Icon }} />
+			</div>
+		</div>
+	</div>
+</Layout>
