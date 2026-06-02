@@ -43,3 +43,4 @@ yarn-error.log*
 styles/dist.css
 
 .next
+.astro

@@ -1,22 +1,16 @@
 ---
-import "@fontsource/inter/400.css";
-import "@fontsource/inter/700.css";
-import "@fontsource/inter/900.css";
 import "../styles/global.css";
+import { Font } from "astro:assets";
 import ThemeScript from "../components/ThemeScript.astro";
 import ThemeSwitch from "../components/ThemeSwitch.astro";
-import Devider from "../components/Devider.astro";
-import Icons from "../components/Icons.astro";
 import {
 	SITE_AUTHOR,
 	SITE_DESCRIPTION,
 	SITE_KEYWORDS,
 	SITE_LOCALE,
 	SITE_NAME,
-	SITE_OG_IMAGE,
 	SITE_TITLE_DEFAULT,
-	SITE_TITLE_TEMPLATE,
-	SITE_URL
+	SITE_TITLE_TEMPLATE
 } from "../consts";
 
 interface Props {
@@ -63,18 +57,25 @@ const pageTitle = absoluteTitle
 		? SITE_TITLE_TEMPLATE.replace("%s", title)
 		: SITE_TITLE_DEFAULT;
 
+if (!Astro.site) {
+	throw new Error("Missing `site` in astro.config.mjs");
+}
+
+const siteUrl = Astro.site.origin;
+const canonicalUrl = new URL(canonical, siteUrl).toString();
 const resolvedOgTitle = ogTitle ?? (title ? pageTitle : SITE_TITLE_DEFAULT);
 const resolvedOgDescription = ogDescription ?? description;
-const resolvedOgUrl = ogUrl ?? `${SITE_URL}${canonical === "/" ? "" : canonical}`;
+const resolvedOgUrl = ogUrl ?? canonicalUrl;
+const resolvedOgImage = new URL(
+	"/favicon/android-chrome-512x512.png",
+	siteUrl
+).toString();
 const resolvedTwitterTitle = twitterTitle ?? resolvedOgTitle;
 const resolvedTwitterDescription = twitterDescription ?? resolvedOgDescription;
 const resolvedKeywords = keywords ?? SITE_KEYWORDS;
+const rssUrl = new URL("/feed.xml", siteUrl).toString();
 
-const jsonLdScripts = jsonLd
-	? Array.isArray(jsonLd)
-		? jsonLd
-		: [jsonLd]
-	: [];
+const jsonLdScripts = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 ---
 
 <!doctype html>
@@ -93,15 +94,13 @@ const jsonLdScripts = jsonLd
 		<meta name="publisher" content={SITE_AUTHOR.name} />
 		<meta name="referrer" content="origin-when-cross-origin" />
 		<meta name="category" content="technology" />
-		{
-			robots && <meta name="robots" content={robots} />
-		}
-		<link rel="canonical" href={`${SITE_URL}${canonical}`} />
+		{robots && <meta name="robots" content={robots} />}
+		<link rel="canonical" href={canonicalUrl} />
 		<link
 			rel="alternate"
 			type="application/rss+xml"
 			title={`${SITE_NAME} RSS Feed`}
-			href={`${SITE_URL}/feed.xml`}
+			href={rssUrl}
 		/>
 		<link rel="icon" href="/favicon/favicon.ico" />
 		<link
@@ -128,7 +127,7 @@ const jsonLdScripts = jsonLd
 		<meta property="og:site_name" content={SITE_NAME} />
 		<meta property="og:title" content={resolvedOgTitle} />
 		<meta property="og:description" content={resolvedOgDescription} />
-		<meta property="og:image" content={SITE_OG_IMAGE} />
+		<meta property="og:image" content={resolvedOgImage} />
 		<meta property="og:image:width" content="512" />
 		<meta property="og:image:height" content="512" />
 		<meta property="og:image:alt" content={SITE_NAME} />
@@ -142,19 +141,11 @@ const jsonLdScripts = jsonLd
 				<meta property="article:modified_time" content={modifiedTime} />
 			)
 		}
-		{
-			tags?.map((tag) => (
-				<meta property="article:tag" content={tag} />
-			))
-		}
 		<meta name="twitter:card" content="summary" />
 		<meta name="twitter:title" content={resolvedTwitterTitle} />
-		<meta
-			name="twitter:description"
-			content={resolvedTwitterDescription}
-		/>
+		<meta name="twitter:description" content={resolvedTwitterDescription} />
 		<meta name="twitter:creator" content={SITE_AUTHOR.twitter} />
-		<meta name="twitter:image" content={SITE_OG_IMAGE} />
+		<meta name="twitter:image" content={resolvedOgImage} />
 		<meta name="format-detection" content="email=no" />
 		<meta name="format-detection" content="address=no" />
 		<meta name="format-detection" content="telephone=no" />
@@ -170,57 +161,16 @@ const jsonLdScripts = jsonLd
 		/>
 		{
 			jsonLdScripts.map((data) => (
-				<script
-					type="application/ld+json"
-					set:html={JSON.stringify(data)}
-				/>
+				<script type="application/ld+json" set:html={JSON.stringify(data)} />
 			))
 		}
+		<Font cssVariable="--font-geist" preload />
 		<slot name="head" />
 	</head>
-	<body class="font-[Inter,sans-serif]">
+	<body>
+		<ThemeSwitch />
 		<div class="flex h-full w-full flex-col">
-			<div class="p-5">
-				<div class="flex items-center">
-					<a href="/" aria-label="返回首页">
-						<div
-							class="pointer-events-none select-none font-black opacity-90"
-						>
-							{"Emiya's Blog"}
-						</div>
-					</a>
-					<nav
-						class="ml-auto flex items-center space-x-5 opacity-90"
-						aria-label="主导航"
-					>
-						<a href="/" aria-label="首页">
-							<Icons name="home" width={24} />
-						</a>
-						<a href="/blog" aria-label="博客文章列表">
-							<Icons name="article" width={23} />
-						</a>
-						<Devider class="h-[20px]" v />
-						<a
-							href="https://github.com/Emiyaaaaa"
-							target="_blank"
-							rel="noopener noreferrer"
-							aria-label="访问 Emiya 的 GitHub"
-						>
-							<Icons name="github" width={22} />
-						</a>
-						<ThemeSwitch width={22} />
-					</nav>
-				</div>
-			</div>
-			<main class="flex-1">
-				<div class="flex-col items-center h-full w-full">
-					<div
-						class="mx-auto min-h-full w-full max-w-[51rem] overflow-auto"
-					>
-						<slot />
-					</div>
-				</div>
-			</main>
+			<slot />
 		</div>
 		<script>
 			import { inject } from "@vercel/analytics";

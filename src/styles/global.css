@@ -5,17 +5,13 @@
 	--color-color-main-dark: hsl(var(--color-main-dark));
 	--color-color-bg: rgb(var(--color-bg));
 	--color-color-font: rgb(var(--color-font));
-	--color-color-tag: rgb(var(--color-tag));
 	--color-color-font-40: rgb(var(--color-font) / 0.4);
 	--color-color-font-50: rgb(var(--color-font) / 0.5);
+	--color-color-surface: rgb(var(--color-surface));
+	--color-color-border: rgb(var(--color-border));
+	--color-color-spotlight: rgb(var(--color-font) / 0.15);
 
 	--leading-180: 1.8;
-
-	--background-image-img-color-tag: linear-gradient(
-		90deg,
-		rgb(var(--color-tag)) 0%,
-		rgb(var(--color-tag)) 100%
-	);
 
 	--animate-pulse-light: pulse-light 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 
@@ -36,6 +32,9 @@
 		--color-main-dark: 156deg 100% 0%;
 		--color-bg: 255 255 255;
 		--color-font: 50 50 50;
+		--color-surface: 255 255 255;
+		--color-border: 229 229 229;
+		--shadow-card: 0 10px 30px -12px rgb(0 0 0 / 0.15);
 	}
 
 	:root[data-theme="dark"] {
@@ -43,6 +42,9 @@
 		--color-main-dark: 156deg 100% 100%;
 		--color-bg: 28 28 28;
 		--color-font: 255 255 255;
+		--color-surface: 33 32 30;
+		--color-border: 64 64 67;
+		--shadow-card: 0 14px 40px -12px rgb(0 0 0 / 0.55);
 	}
 
 	* {
@@ -51,10 +53,11 @@
 
 	html,
 	body {
-		@apply h-full w-full scroll-smooth text-base lg:text-lg text-color-font;
+		@apply h-full w-full scroll-smooth;
 	}
 
 	body {
+		font-family: var(--font-geist), sans-serif;
 		background-color: rgb(var(--color-bg));
 		color: rgb(var(--color-font));
 		fill: rgb(var(--color-font));
@@ -79,61 +82,6 @@
 }
 
 @layer utilities {
-	*[data-tag] {
-		--color-tag: var(--color-font);
-	}
-	*[data-tag="react"] {
-		--color-tag: 97 218 251;
-	}
-	*[data-tag="typescript"] {
-		--color-tag: 0 122 204;
-	}
-	*[data-tag="vue.js"] {
-		--color-tag: 65 184 131;
-	}
-	*[data-tag="html"] {
-		--color-tag: 227 76 38;
-	}
-	*[data-tag="css"] {
-		--color-tag: 21 114 182;
-	}
-	*[data-tag="sass"],
-	*[data-tag="scss"] {
-		--color-tag: 199 93 203;
-	}
-	*[data-tag="tailwind"] {
-		--color-tag: 78 202 206;
-	}
-	*[data-tag="svelte"] {
-		--color-tag: 255 165 0;
-	}
-	*[data-tag="javascript"] {
-		--color-tag: 247 223 30;
-	}
-	*[data-tag="git"] {
-		--color-tag: 239 101 81;
-	}
-	*[data-tag="next.js"] {
-		--color-tag: 0 0 0;
-	}
-	*[data-tag="node.js"] {
-		--color-tag: 2 110 0;
-	}
-	*[data-tag="npm"] {
-		--color-tag: 203 0 0;
-	}
-	*[data-tag="python"] {
-		--color-tag: 0 114 187;
-	}
-	*[data-tag="json"] {
-		--color-tag: 21 114 182;
-	}
-
-	.tag {
-		@apply flex items-center font-semibold capitalize text-color-font/80;
-		@apply before:mr-1 before:h-2 before:w-2 before:rounded-full before:bg-color-tag before:opacity-70 before:content-[''];
-	}
-
 	.markdown {
 		h1 {
 			@apply mb-6 mt-10;

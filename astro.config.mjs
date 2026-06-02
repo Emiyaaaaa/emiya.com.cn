@@ -1,4 +1,4 @@
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 import mdx from "@astrojs/mdx";
 import tailwindcss from "@tailwindcss/vite";
 import rehypeSlug from "rehype-slug";
@@ -9,6 +9,17 @@ export default defineConfig({
 	site: "https://emiya.com.cn",
 	output: "static",
 	integrations: [mdx()],
+	experimental: {
+		fonts: [
+			{
+				provider: fontProviders.fontsource(),
+				name: "Geist Sans",
+				cssVariable: "--font-geist",
+				weights: [400, 500, 600, 700, 900],
+				styles: ["normal"]
+			}
+		]
+	},
 	vite: { plugins: [tailwindcss()] },
 	markdown: {
 		shikiConfig: { theme: "dracula" },

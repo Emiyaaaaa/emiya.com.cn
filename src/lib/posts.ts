@@ -31,7 +31,13 @@ export function getPostSlug(entry: BlogEntry): string {
 }
 
 export function getPostUrl(entry: BlogEntry): string {
-	return `${import.meta.env.SITE ?? "https://emiya.com.cn"}/blog/${getPostSlug(entry)}`;
+	const site = import.meta.env.SITE;
+
+	if (!site) {
+		throw new Error("Missing `site` in astro.config.mjs");
+	}
+
+	return new URL(`/blog/${getPostSlug(entry)}`, site).toString();
 }
 
 export function formatPostDate(date: Date): string {

@@ -1,13 +1,16 @@
 import type { APIRoute } from "astro";
-import { SITE_URL } from "../consts";
 
 export const prerender = true;
 
-export const GET: APIRoute = () => {
+export const GET: APIRoute = ({ site }) => {
+	if (!site) {
+		throw new Error("Missing `site` in astro.config.mjs");
+	}
+
 	const body = `User-agent: *
 Allow: /
 
-Sitemap: ${SITE_URL}/sitemap.xml
+Sitemap: ${new URL("/sitemap.xml", site.origin).toString()}
 `;
 
 	return new Response(body, {

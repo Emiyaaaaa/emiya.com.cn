@@ -1,10 +1,6 @@
 import type { APIRoute } from "astro";
-import {
-	getPostExcerpt,
-	getSortedPosts,
-	getPostUrl
-} from "../lib/posts";
-import { SITE_AUTHOR, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "../consts";
+import { getPostExcerpt, getSortedPosts, getPostUrl } from "../lib/posts";
+import { SITE_AUTHOR, SITE_DESCRIPTION, SITE_NAME } from "../consts";
 
 export const prerender = true;
 
@@ -33,23 +29,22 @@ function toRfc822(input?: Date): string {
 	return d.toUTCString();
 }
 
-export const GET: APIRoute = async () => {
+export const GET: APIRoute = async ({ site }) => {
+	if (!site) {
+		throw new Error("Missing `site` in astro.config.mjs");
+	}
+
+	const siteUrl = site.origin;
 	const metadataes = await getSortedPosts();
 
 	const latest = metadataes
 		.slice(0, 30)
 		.map((post) => {
 			const description =
-				post.data.description?.trim() ||
-				getPostExcerpt(post.body ?? "", 200);
+				post.data.description?.trim() || getPostExcerpt(post.body ?? "", 200);
 			const link = getPostUrl(post);
 			const pubDate = toRfc822(post.data.date);
 			const updated = toRfc822(post.data.updatedAt ?? post.data.date);
-			const categories =
-				post.data.tags
-					?.filter(Boolean)
-					.map((tag) => `      <category>${escapeXml(tag)}</category>`)
-					.join("\n") ?? "";
 
 			return `    <item>
       <title>${escapeXml(post.data.title ?? "Untitled")}</title>
@@ -59,7 +54,6 @@ export const GET: APIRoute = async () => {
       <pubDate>${pubDate}</pubDate>
       <atom:updated>${new Date(updated).toISOString()}</atom:updated>
       <author>noreply@emiya.com.cn (${escapeXml(SITE_AUTHOR.name)})</author>
-${categories}
     </item>`;
 		})
 		.join("\n");
@@ -75,12 +69,12 @@ ${categories}
   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
     <title>${escapeXml(SITE_NAME)}</title>
-    <link>${SITE_URL}</link>
+    <link>${siteUrl}</link>
     <description>${escapeXml(SITE_DESCRIPTION)}</description>
     <language>zh-CN</language>
     <copyright>© ${new Date().getFullYear()} ${escapeXml(SITE_AUTHOR.name)}</copyright>
     <lastBuildDate>${lastBuildDate}</lastBuildDate>
-    <atom:link href="${SITE_URL}/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="${new URL("/feed.xml", siteUrl).toString()}" rel="self" type="application/rss+xml" />
 ${latest}
   </channel>
 </rss>`;
