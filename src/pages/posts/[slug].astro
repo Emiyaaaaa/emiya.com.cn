@@ -1,7 +1,6 @@
 ---
 import { render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
-import Devider from "../../components/Devider.astro";
 import Time from "../../components/Time.astro";
 import {
 	getPostExcerpt,
@@ -27,7 +26,7 @@ if (!entry) {
 }
 
 const { Content } = await render(entry);
-const { title, date, tags, description, updatedAt } = entry.data;
+const { title, date, description, updatedAt } = entry.data;
 
 const excerpt = description?.trim() || getPostExcerpt(entry.body ?? "", 140);
 
@@ -36,21 +35,10 @@ if (!Astro.site) {
 }
 
 const siteUrl = Astro.site.origin;
+const githubEditUrl = `https://github.com/Emiyaaaaa/emiya.com.cn/edit/main/src/content/posts/${entry.id}`;
 const publishedTime = toISO(date);
 const modifiedTime = toISO(updatedAt) ?? publishedTime;
-const canonicalUrl = new URL(`/blog/${slug}`, siteUrl).toString();
-
-const currentTags = new Set(tags?.map((t) => t.toLowerCase()));
-const relatedPosts =
-	currentTags.size > 0
-		? posts
-				.filter(
-					(p) =>
-						getPostSlug(p) !== slug &&
-						p.data.tags?.some((t) => currentTags.has(t.toLowerCase()))
-				)
-				.slice(0, 4)
-		: [];
+const canonicalUrl = new URL(`/posts/${slug}`, siteUrl).toString();
 
 const articleJsonLd = {
 	"@context": "https://schema.org",
@@ -60,7 +48,6 @@ const articleJsonLd = {
 	datePublished: publishedTime,
 	dateModified: modifiedTime,
 	inLanguage: "zh-CN",
-	keywords: tags?.join(", "),
 	mainEntityOfPage: {
 		"@type": "WebPage",
 		"@id": canonicalUrl
@@ -92,7 +79,7 @@ const breadcrumbJsonLd = {
 			"@type": "ListItem",
 			position: 2,
 			name: "博客",
-			item: new URL("/blog", siteUrl).toString()
+			item: new URL("/posts", siteUrl).toString()
 		},
 		{
 			"@type": "ListItem",
@@ -107,55 +94,48 @@ const breadcrumbJsonLd = {
 <Layout
 	title={title}
 	description={excerpt}
-	canonical={`/blog/${slug}`}
-	keywords={tags && tags.length > 0 ? tags : undefined}
+	canonical={`/posts/${slug}`}
 	ogType="article"
 	ogTitle={title}
 	ogDescription={excerpt}
 	publishedTime={publishedTime}
 	modifiedTime={modifiedTime}
-	tags={tags}
 	twitterTitle={title}
 	twitterDescription={excerpt}
 	jsonLd={[articleJsonLd, breadcrumbJsonLd]}
 >
-	<article class="post px-5 pb-6 pt-3">
-		<header class="m-1 w-full">
-			<h1 class="m-0 text-3xl font-bold leading-snug">
-				<span>{title}</span>
-			</h1>
-			<div
-				class="ml-1 mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 opacity-70"
-			>
-				<Time format="MON DD · YYYY" date={date} />
+	<div class="max-w-[65ch] mx-auto px-4 py-10 pb-5">
+		<article class="post font-mono flex flex-col flex-1 px-5 pb-6 pt-3">
+			<header class="m-1 w-full">
+				<h1 class="m-0 text-3xl font-bold leading-snug">
+					<span>{title}</span>
+				</h1>
+				<div
+					class="ml-1 mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 opacity-70"
+				>
+					<Time format="YYYY-MM-DD" date={date} />
+				</div>
+			</header>
+			<div class="my-4 h-[2px] w-full bg-color-font/10"></div>
+			<div class="markdown w-fill mt-4 flex flex-1 flex-col px-[2%] py-2">
+				<Content />
 			</div>
-		</header>
-		<Devider class="my-4" />
-		<div class="markdown w-fill mt-4 flex flex-col px-[2%] py-2">
-			<Content />
-		</div>
-		{
-			relatedPosts.length > 0 && (
-				<aside class="mt-10 border-t border-color-font/10 pt-6">
-					<h2 class="text-lg font-bold">相关文章</h2>
-					<ul class="mt-3 space-y-2 list-disc pl-5">
-						{relatedPosts.map((p) => (
-							<li>
-								<a
-									href={`/blog/${getPostSlug(p)}`}
-									class="opacity-80 hover:opacity-100"
-								>
-									{p.data.title}
-								</a>
-							</li>
-						))}
-					</ul>
-				</aside>
-			)
-		}
-		<footer class="mt-10 text-sm opacity-60">
-			转载请注明出处：
-			<a href={canonicalUrl}>{canonicalUrl}</a> · 作者 {SITE_AUTHOR.name}
-		</footer>
-	</article>
+			<footer
+				class="mt-10 flex flex-wrap items-center justify-between gap-2 text-sm opacity-60"
+			>
+				<span>
+					转载请注明出处：
+					<a href={canonicalUrl}>{canonicalUrl}</a>
+				</span>
+				<a
+					href={githubEditUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="hover:opacity-100"
+				>
+					在 GitHub 上编辑此页
+				</a>
+			</footer>
+		</article>
+	</div>
 </Layout>

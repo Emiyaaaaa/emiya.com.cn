@@ -11,7 +11,8 @@
 		"@astrojs/mdx": "^4.3.13",
 		"@fontsource/geist-sans": "5.2.5",
 		"@vercel/analytics": "2.0.1",
-		"astro": "^5.17.1"
+		"astro": "^5.17.1",
+		"remark-pangu": "2.2.0"
 	},
 	"devDependencies": {
 		"@tailwindcss/vite": "4.3.0",

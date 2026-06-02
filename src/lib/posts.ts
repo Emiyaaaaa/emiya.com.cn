@@ -1,6 +1,6 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 
-export type BlogEntry = CollectionEntry<"blog">;
+export type PostEntry = CollectionEntry<"posts">;
 
 export function getPostExcerpt(content: string, maxLength = 140): string {
 	const stripped = content
@@ -19,25 +19,23 @@ export function getPostExcerpt(content: string, maxLength = 140): string {
 	return `${stripped.slice(0, maxLength).trim()}…`;
 }
 
-export async function getSortedPosts(): Promise<BlogEntry[]> {
-	const posts = await getCollection("blog");
-	return posts.sort(
-		(a, b) => b.data.date.getTime() - a.data.date.getTime()
-	);
+export async function getSortedPosts(): Promise<PostEntry[]> {
+	const posts = await getCollection("posts");
+	return posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 }
 
-export function getPostSlug(entry: BlogEntry): string {
+export function getPostSlug(entry: PostEntry): string {
 	return entry.id.replace(/\.mdx$/, "");
 }
 
-export function getPostUrl(entry: BlogEntry): string {
+export function getPostUrl(entry: PostEntry): string {
 	const site = import.meta.env.SITE;
 
 	if (!site) {
 		throw new Error("Missing `site` in astro.config.mjs");
 	}
 
-	return new URL(`/blog/${getPostSlug(entry)}`, site).toString();
+	return new URL(`/posts/${getPostSlug(entry)}`, site).toString();
 }
 
 export function formatPostDate(date: Date): string {

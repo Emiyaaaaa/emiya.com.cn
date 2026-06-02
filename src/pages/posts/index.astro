@@ -1,0 +1,90 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Card from "../../components/Card.astro";
+import { getSortedPosts, getPostSlug } from "../../lib/posts";
+import { SITE_AUTHOR, SITE_NAME } from "../../consts";
+
+const WEBSITE_TITLE = "posts";
+const WEBSITE_DESCRIPTION = "Emiya 的博客文章列表";
+
+const posts = await getSortedPosts();
+
+const pad = (value: number) => String(value).padStart(2, "0");
+
+const postsByYear = posts.reduce<Map<number, typeof posts>>((acc, post) => {
+	const year = post.data.date.getFullYear();
+	if (!acc.has(year)) {
+		acc.set(year, []);
+	}
+	acc.get(year)!.push(post);
+	return acc;
+}, new Map());
+
+const groupedPosts = Array.from(postsByYear.entries()).sort(
+	([a], [b]) => b - a
+);
+
+if (!Astro.site) {
+	throw new Error("Missing `site` in astro.config.mjs");
+}
+
+const siteUrl = Astro.site.origin;
+
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@type": "Website",
+	name: `${SITE_NAME} - ${WEBSITE_TITLE}`,
+	url: new URL("/posts", siteUrl).toString(),
+	description: WEBSITE_DESCRIPTION,
+	inLanguage: "zh-CN",
+	author: {
+		"@type": "Person",
+		name: SITE_AUTHOR.name,
+		url: siteUrl
+	},
+	blogPost: posts.map((post) => ({
+		"@type": "BlogPosting",
+		headline: post.data.title,
+		url: new URL(`/posts/${getPostSlug(post)}`, siteUrl).toString(),
+		datePublished: post.data.date.toISOString(),
+		dateModified: (post.data.updatedAt ?? post.data.date).toISOString(),
+		description: post.data.description
+	}))
+};
+---
+
+<Layout
+	title={WEBSITE_TITLE}
+	description={WEBSITE_DESCRIPTION}
+	canonical="/posts"
+	ogTitle={`${WEBSITE_TITLE} | ${SITE_NAME}`}
+	ogDescription={WEBSITE_DESCRIPTION}
+	twitterTitle={`${WEBSITE_TITLE} | ${SITE_NAME}`}
+	twitterDescription={WEBSITE_DESCRIPTION}
+	jsonLd={jsonLd}
+>
+	<div class="max-w-[65ch] mx-auto px-4 py-10">
+		<div class="flex flex-col gap-8">
+			{
+				groupedPosts.map(([year, yearPosts]) => (
+					<section class="flex flex-col gap-2">
+						<h2 class="text-color-font-50">{year}</h2>
+						{yearPosts.map((post) => (
+							<div class="flex items-center justify-between gap-4">
+								<a
+									class="leading-none border-b-2 border-transparent hover:border-color-font/50"
+									href={`/posts/${getPostSlug(post)}`}
+								>
+									{post.data.title}
+								</a>
+								<span class="shrink-0 font-mono tabular-nums text-color-font-50">
+									{`${pad(post.data.date.getMonth() + 1)}/${pad(post.data.date.getDate())}`}
+								</span>
+							</div>
+						))}
+					</section>
+				))
+			}
+		</div>
+	</div>
+</Layout>

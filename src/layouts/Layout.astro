@@ -1,7 +1,6 @@
 ---
 import "../styles/global.css";
 import { Font } from "astro:assets";
-import ThemeScript from "../components/ThemeScript.astro";
 import ThemeSwitch from "../components/ThemeSwitch.astro";
 import {
 	SITE_AUTHOR,
@@ -26,7 +25,6 @@ interface Props {
 	ogUrl?: string;
 	publishedTime?: string;
 	modifiedTime?: string;
-	tags?: string[];
 	twitterTitle?: string;
 	twitterDescription?: string;
 	jsonLd?: Record<string, unknown> | Record<string, unknown>[];
@@ -45,7 +43,6 @@ const {
 	ogUrl,
 	publishedTime,
 	modifiedTime,
-	tags,
 	twitterTitle,
 	twitterDescription,
 	jsonLd
@@ -76,6 +73,8 @@ const resolvedKeywords = keywords ?? SITE_KEYWORDS;
 const rssUrl = new URL("/feed.xml", siteUrl).toString();
 
 const jsonLdScripts = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+
+const isHome = Astro.url.pathname === "/";
 ---
 
 <!doctype html>
@@ -83,7 +82,14 @@ const jsonLdScripts = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<ThemeScript />
+		<script is:inline>
+			(function () {
+				const stored = localStorage.getItem("theme");
+				const theme = stored === "light" || stored === "dark" ? stored : "dark";
+				document.documentElement.dataset.theme = theme;
+				document.documentElement.style.colorScheme = theme;
+			})();
+		</script>
 		<title>{pageTitle}</title>
 		<meta name="description" content={description} />
 		<meta name="application-name" content={SITE_NAME} />
@@ -167,9 +173,35 @@ const jsonLdScripts = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 		<Font cssVariable="--font-geist" preload />
 		<slot name="head" />
 	</head>
-	<body>
-		<ThemeSwitch />
-		<div class="flex h-full w-full flex-col">
+	<body class="min-h-screen flex flex-col">
+		<div
+			class:list={[
+				"flex items-center px-4 pt-4 z-50",
+				isHome ? "justify-end" : "justify-between"
+			]}
+		>
+			{
+				!isHome && (
+					<button
+						onclick="history.back()"
+						class="inline-flex items-center justify-center rounded-full text-color-font/80 transition-opacity hover:opacity-100 cursor-pointer"
+						aria-label="返回"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							width={24}
+							height={24}
+							fill="currentColor"
+						>
+							<path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z" />
+						</svg>
+					</button>
+				)
+			}
+			<ThemeSwitch />
+		</div>
+		<div class="flex flex-col flex-1">
 			<slot />
 		</div>
 		<script>

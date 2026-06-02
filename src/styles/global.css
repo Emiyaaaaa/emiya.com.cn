@@ -7,6 +7,7 @@
 	--color-color-font: rgb(var(--color-font));
 	--color-color-font-40: rgb(var(--color-font) / 0.4);
 	--color-color-font-50: rgb(var(--color-font) / 0.5);
+	--color-color-font-hover: rgb(var(--color-font) / 0.7);
 	--color-color-surface: rgb(var(--color-surface));
 	--color-color-border: rgb(var(--color-border));
 	--color-color-spotlight: rgb(var(--color-font) / 0.15);
@@ -143,79 +144,6 @@
 			}
 			&:hover .anchor {
 				@apply opacity-60;
-			}
-		}
-	}
-
-	.post {
-		blockquote,
-		hr,
-		img,
-		& > ul,
-		& > ol {
-			@apply my-4;
-		}
-
-		& > *:first-child {
-			@apply mt-0;
-		}
-
-		& > p,
-		& > ul,
-		& > ol {
-			@apply leading-180 text-color-font/90;
-		}
-
-		& > p {
-			@apply mt-6;
-		}
-
-		input[type="checkbox"] {
-			@apply mr-2;
-		}
-
-		ol {
-			counter-reset: item;
-		}
-
-		ol li::before {
-			content: counters(item, ".") ".";
-			counter-increment: item;
-			@apply mr-2;
-		}
-
-		ol,
-		ul {
-			li::before {
-				@apply mr-2;
-			}
-			li {
-				@apply my-1 ml-4;
-			}
-		}
-
-		& > ol,
-		& > ul {
-			& > li {
-				@apply ml-2;
-			}
-		}
-
-		p + ul,
-		p + ol {
-			@apply mt-2;
-		}
-
-		& > blockquote {
-			@apply w-full rounded-md bg-color-font/20 px-3 py-2;
-			& > span {
-				@apply text-color-font;
-			}
-			& > span:last-child {
-				@apply block text-right text-sm italic text-color-font/80;
-				&::before {
-					content: "— ";
-				}
 			}
 		}
 	}

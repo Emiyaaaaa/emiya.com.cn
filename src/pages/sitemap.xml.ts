@@ -18,7 +18,7 @@ export const GET: APIRoute = async ({ site }) => {
 	const postEntries = posts.map((post) => {
 		const lastModified = post.data.updatedAt ?? post.data.date;
 		return `  <url>
-    <loc>${new URL(`/blog/${getPostSlug(post)}`, siteUrl).toString()}</loc>
+    <loc>${new URL(`/posts/${getPostSlug(post)}`, siteUrl).toString()}</loc>
     <lastmod>${formatW3CDate(lastModified)}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -30,8 +30,7 @@ export const GET: APIRoute = async ({ site }) => {
 		return t > acc.getTime() ? (item.data.updatedAt ?? item.data.date) : acc;
 	}, new Date(0));
 
-	const lastMod =
-		latestPost.getTime() === 0 ? new Date() : latestPost;
+	const lastMod = latestPost.getTime() === 0 ? new Date() : latestPost;
 
 	const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -42,7 +41,7 @@ export const GET: APIRoute = async ({ site }) => {
     <priority>1</priority>
   </url>
   <url>
-    <loc>${new URL("/blog", siteUrl).toString()}</loc>
+    <loc>${new URL("/posts", siteUrl).toString()}</loc>
     <lastmod>${formatW3CDate(lastMod)}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>

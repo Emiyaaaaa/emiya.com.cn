@@ -1,6 +1,7 @@
 import { defineConfig, fontProviders } from "astro/config";
 import mdx from "@astrojs/mdx";
 import tailwindcss from "@tailwindcss/vite";
+import remarkPangu from "remark-pangu";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeExternalLinks from "rehype-external-links";
@@ -23,6 +24,7 @@ export default defineConfig({
 	vite: { plugins: [tailwindcss()] },
 	markdown: {
 		shikiConfig: { theme: "dracula" },
+		remarkPlugins: [remarkPangu],
 		rehypePlugins: [
 			rehypeSlug,
 			[

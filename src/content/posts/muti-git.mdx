@@ -1,7 +1,6 @@
 ---
 title: 如何在多个 git 项目中使用不同的 git 账号
 date: 2025-09-15 11:50:35
-tags: Git
 ---
 
 #### 1. 生成 ssh 密钥
@@ -13,8 +12,8 @@ ssh-keygen -t rsa -C "git_user_2@email.com"
 
 #### 2. github 添加 ssh 密钥
 
-
 #### 3. 配置 ssh config
+
 ```
 Host git_user_1_host
   Hostname ssh.github.com
@@ -30,12 +29,14 @@ Host git_user_2_host
 ```
 
 #### 4. 测试 ssh
+
 ```bash
 ssh -T git_user_1_host
 ssh -T git_user_2_host
 ```
 
 #### 5. 配置 git
+
 ```bash
 git clone git@git_user_1_host:git_user_1_name/git_project_1.git
 ## or for existing project
