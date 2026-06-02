@@ -35,7 +35,7 @@ if (!Astro.site) {
 }
 
 const siteUrl = Astro.site.origin;
-const githubEditUrl = `https://github.com/Emiyaaaaa/emiya.com.cn/edit/main/src/content/posts/${entry.id}`;
+const githubEditUrl = `https://github.com/Emiyaaaaa/emiya.com.cn/blob/main/src/content/posts/${entry.id}.mdx`;
 const publishedTime = toISO(date);
 const modifiedTime = toISO(updatedAt) ?? publishedTime;
 const canonicalUrl = new URL(`/posts/${slug}`, siteUrl).toString();
