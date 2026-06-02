@@ -1,0 +1,141 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { SITE_AUTHOR, SITE_DESCRIPTION, SITE_NAME } from "../consts";
+import SpotlightCard from "@/components/SpotlightCard.astro";
+
+const HOME_TITLE = "Emiya's site";
+const HOME_DESCRIPTION = "前端开发者 Emiya 的个人主页";
+
+if (!Astro.site) {
+	throw new Error("Missing `site` in astro.config.mjs");
+}
+
+const siteUrl = Astro.site.origin;
+
+const personJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "Person",
+	name: SITE_AUTHOR.name,
+	url: siteUrl,
+	jobTitle: "Front-end Developer",
+	description: SITE_DESCRIPTION,
+	sameAs: ["https://github.com/Emiyaaaaa", "https://x.com/emiya0505"]
+};
+
+const websiteJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	name: SITE_NAME,
+	url: siteUrl,
+	inLanguage: "zh-CN",
+	description: SITE_DESCRIPTION,
+	author: {
+		"@type": "Person",
+		name: SITE_AUTHOR.name,
+		url: siteUrl
+	}
+};
+---
+
+<Layout
+	absoluteTitle={HOME_TITLE}
+	description={HOME_DESCRIPTION}
+	canonical="/"
+	ogType="profile"
+	ogTitle={HOME_TITLE}
+	ogDescription={HOME_DESCRIPTION}
+	twitterTitle={HOME_TITLE}
+	twitterDescription={HOME_DESCRIPTION}
+	jsonLd={[personJsonLd, websiteJsonLd]}
+>
+	<div class="absolute top-0 left-0 w-screen h-screen pb-15">
+		<div class="flex w-full h-full flex-col items-center justify-center">
+			<div class="w-4/5 max-w-160">
+				<SpotlightCard class="w-full">
+					<div class="flex w-full items-start">
+						<div
+							class="mb-10 space-y-4 font-bold text-2xl lg:text-4xl leading-[1.2]"
+						>
+							Hello~
+							<br />
+							I'm Emiya
+						</div>
+						<img
+							alt=""
+							class="ml-auto w-10 h-10 shrink-0 rounded"
+							src="data:image/jpg;base64,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"
+						/>
+					</div>
+					Front-end developer
+					<span class="hidden sm:inline"> / previously at </span>
+					<div class="mt-2 sm:hidden"></div>
+					<span class="inline sm:hidden"> Ex </span>
+					<a
+						class="tag ml-0.5"
+						href="https://realsee.com"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<img
+							alt="Realsee"
+							class="mr-1 inline"
+							width="16"
+							height="16"
+							src="https://realsee.com/favicon.ico"
+						/>
+						Realsee
+					</a><a
+						class="tag ml-0.5"
+						href="https://ke.com"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<img
+							alt="贝壳找房"
+							class="mr-1 inline"
+							width="16"
+							height="16"
+							src="https://ke.com/favicon.ico"
+						/>
+						Beike
+					</a>
+				</SpotlightCard>
+				<div class="flex mt-4 leading-none font-medium">
+					<div
+						class="cursor-pointer border-color-font hover:text-color-font-hover hover:border-color-font/50"
+					>
+						<a href="/posts">
+							<span class="text-[#92fffa]">{"~"}</span>
+							<span class="text-[#35BD34]">cd</span>
+							<span class="border-b">posts</span>
+						</a>
+					</div>
+					<div class="social-links flex ml-auto gap-4">
+						<a target="_blank" href="https://github.com/Emiyaaaaa">Github</a>
+						<a target="_blank" href="https://x.com/emiya0505">X</a>
+						<a target="_blank" href="/image/wechat.jpg">WeChat</a>
+						<a target="_blank" href="mailto:emiya@emiya.com.cn">Email</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</Layout>
+
+<style>
+	@reference "../styles/global.css";
+
+	.social-links a {
+		@apply border-b-2 border-transparent;
+	}
+
+	.social-links a:hover {
+		@apply border-color-font/50 text-color-font/70;
+	}
+
+	.tag {
+		@apply inline-flex items-center rounded px-1 py-0.5 text-[0.8em] no-underline align-bottom;
+		@apply bg-color-font/10 text-color-font/80;
+		@apply hover:text-color-font hover:bg-color-font/20;
+	}
+</style>

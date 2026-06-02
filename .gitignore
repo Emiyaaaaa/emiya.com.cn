@@ -8,9 +8,12 @@
 # testing
 /coverage
 
-# next.js
+# next.js (legacy)
 /.next/
 /out/
+
+# astro
+/dist/
 
 # production
 /build
@@ -40,3 +43,4 @@ yarn-error.log*
 styles/dist.css
 
 .next
+.astro

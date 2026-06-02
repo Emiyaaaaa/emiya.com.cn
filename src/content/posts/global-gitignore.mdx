@@ -1,0 +1,25 @@
+---
+title: 如何使用全局的 .gitignore
+date: 2024-07-30 17:42:00
+---
+
+当我们给一些开源项目提交代码时，可能会有一些不需要提交的文件，如 `.vscode`, 但是项目作者并不希望将各种各样的偏个人习惯的文件放到 `.gitignore` 中，这时我们可以使用全局的 `.gitignore` 文件来忽略这些文件。
+
+```sh
+echo ".vscode" >> ~/.gitignore
+```
+
+设置 git config
+
+```sh
+git config --global core.excludesFile ~/.gitignore
+```
+
+还有一种办法可以按照项目来设置，在`.git/info/exclude` 文件中添加需要忽略的文件。
+
+```sh
+# .git/info/exclude
+.vscode
+```
+
+文档：[https://git-scm.com/docs/gitignore](https://git-scm.com/docs/gitignore)

@@ -1,0 +1,212 @@
+---
+import "../styles/global.css";
+import { Font } from "astro:assets";
+import ThemeSwitch from "../components/ThemeSwitch.astro";
+import {
+	SITE_AUTHOR,
+	SITE_DESCRIPTION,
+	SITE_KEYWORDS,
+	SITE_LOCALE,
+	SITE_NAME,
+	SITE_TITLE_DEFAULT,
+	SITE_TITLE_TEMPLATE
+} from "../consts";
+
+interface Props {
+	title?: string;
+	absoluteTitle?: string;
+	description?: string;
+	canonical?: string;
+	robots?: string;
+	keywords?: string[];
+	ogType?: string;
+	ogTitle?: string;
+	ogDescription?: string;
+	ogUrl?: string;
+	publishedTime?: string;
+	modifiedTime?: string;
+	twitterTitle?: string;
+	twitterDescription?: string;
+	jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+	title,
+	absoluteTitle,
+	description = SITE_DESCRIPTION,
+	canonical = "/",
+	robots,
+	keywords,
+	ogType = "website",
+	ogTitle,
+	ogDescription,
+	ogUrl,
+	publishedTime,
+	modifiedTime,
+	twitterTitle,
+	twitterDescription,
+	jsonLd
+} = Astro.props;
+
+const pageTitle = absoluteTitle
+	? absoluteTitle
+	: title
+		? SITE_TITLE_TEMPLATE.replace("%s", title)
+		: SITE_TITLE_DEFAULT;
+
+if (!Astro.site) {
+	throw new Error("Missing `site` in astro.config.mjs");
+}
+
+const siteUrl = Astro.site.origin;
+const canonicalUrl = new URL(canonical, siteUrl).toString();
+const resolvedOgTitle = ogTitle ?? (title ? pageTitle : SITE_TITLE_DEFAULT);
+const resolvedOgDescription = ogDescription ?? description;
+const resolvedOgUrl = ogUrl ?? canonicalUrl;
+const resolvedOgImage = new URL(
+	"/favicon/android-chrome-512x512.png",
+	siteUrl
+).toString();
+const resolvedTwitterTitle = twitterTitle ?? resolvedOgTitle;
+const resolvedTwitterDescription = twitterDescription ?? resolvedOgDescription;
+const resolvedKeywords = keywords ?? SITE_KEYWORDS;
+const rssUrl = new URL("/feed.xml", siteUrl).toString();
+
+const jsonLdScripts = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+
+const isHome = Astro.url.pathname === "/";
+---
+
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script is:inline>
+			(function () {
+				const stored = localStorage.getItem("theme");
+				const theme = stored === "light" || stored === "dark" ? stored : "dark";
+				document.documentElement.dataset.theme = theme;
+				document.documentElement.style.colorScheme = theme;
+			})();
+		</script>
+		<title>{pageTitle}</title>
+		<meta name="description" content={description} />
+		<meta name="application-name" content={SITE_NAME} />
+		<meta name="generator" content="Astro" />
+		<meta name="keywords" content={resolvedKeywords.join(", ")} />
+		<meta name="author" content={SITE_AUTHOR.name} />
+		<meta name="creator" content={SITE_AUTHOR.name} />
+		<meta name="publisher" content={SITE_AUTHOR.name} />
+		<meta name="referrer" content="origin-when-cross-origin" />
+		<meta name="category" content="technology" />
+		{robots && <meta name="robots" content={robots} />}
+		<link rel="canonical" href={canonicalUrl} />
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title={`${SITE_NAME} RSS Feed`}
+			href={rssUrl}
+		/>
+		<link rel="icon" href="/favicon/favicon.ico" />
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="/favicon/favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="/favicon/favicon-16x16.png"
+		/>
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="/favicon/apple-touch-icon.png"
+		/>
+		<link rel="manifest" href="/favicon/site.webmanifest" />
+		<meta property="og:type" content={ogType} />
+		<meta property="og:locale" content={SITE_LOCALE} />
+		<meta property="og:url" content={resolvedOgUrl} />
+		<meta property="og:site_name" content={SITE_NAME} />
+		<meta property="og:title" content={resolvedOgTitle} />
+		<meta property="og:description" content={resolvedOgDescription} />
+		<meta property="og:image" content={resolvedOgImage} />
+		<meta property="og:image:width" content="512" />
+		<meta property="og:image:height" content="512" />
+		<meta property="og:image:alt" content={SITE_NAME} />
+		{
+			publishedTime && (
+				<meta property="article:published_time" content={publishedTime} />
+			)
+		}
+		{
+			modifiedTime && (
+				<meta property="article:modified_time" content={modifiedTime} />
+			)
+		}
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:title" content={resolvedTwitterTitle} />
+		<meta name="twitter:description" content={resolvedTwitterDescription} />
+		<meta name="twitter:creator" content={SITE_AUTHOR.twitter} />
+		<meta name="twitter:image" content={resolvedOgImage} />
+		<meta name="format-detection" content="email=no" />
+		<meta name="format-detection" content="address=no" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta
+			name="theme-color"
+			media="(prefers-color-scheme: light)"
+			content="#ffffff"
+		/>
+		<meta
+			name="theme-color"
+			media="(prefers-color-scheme: dark)"
+			content="#0a0a0a"
+		/>
+		{
+			jsonLdScripts.map((data) => (
+				<script type="application/ld+json" set:html={JSON.stringify(data)} />
+			))
+		}
+		<Font cssVariable="--font-geist" preload />
+		<slot name="head" />
+	</head>
+	<body class="min-h-screen flex flex-col">
+		<div
+			class:list={[
+				"flex items-center px-4 pt-4 z-50",
+				isHome ? "justify-end" : "justify-between"
+			]}
+		>
+			{
+				!isHome && (
+					<button
+						onclick="history.back()"
+						class="inline-flex items-center justify-center rounded-full text-color-font/80 transition-opacity hover:opacity-100 cursor-pointer"
+						aria-label="返回"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							width={24}
+							height={24}
+							fill="currentColor"
+						>
+							<path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z" />
+						</svg>
+					</button>
+				)
+			}
+			<ThemeSwitch />
+		</div>
+		<div class="flex flex-col flex-1">
+			<slot />
+		</div>
+		<script>
+			import { inject } from "@vercel/analytics";
+			inject();
+		</script>
+	</body>
+</html>

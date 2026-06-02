@@ -1,0 +1,17 @@
+---
+title: JavaScript 中 querySelectorAll 与 getElementsByClassName 的区别
+date: 2019-01-15 20:10:16
+---
+
+单单讨论最基础的功能：选择class对象来说，querySelectorAll()是静态的，函数一旦被使用，内容就不会再改变
+
+而getElementsByClassName()是动态的，其长度会随着class的动态修改而变化，也就是说用for循环批量删除class属性时是删除不完的，例如：
+```
+  var unchecked_li = document.getElementsByClassName('unchecked');
+  //	var unchecked_li = document.querySelectorAll('.unchecked');
+  for (var i = 0; i < unchecked_li.length; i++) {
+    unchecked_li[i].classList.remove("unchecked");
+  }
+```
+
+此时只有一半的带"unchecked"属性的元素会成功删除掉此元素，这时我们如果换用	`var unchecked_li = document.querySelectorAll('.unchecked');` 就可以成功删除完整

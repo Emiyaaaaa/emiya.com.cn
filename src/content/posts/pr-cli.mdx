@@ -1,0 +1,41 @@
+---
+title: 使用命令行创建及合并 pull request
+date: 2023-05-25 18:00:35
+---
+
+github 提供了官方的命令行工具`gh`，[gh文档](https://cli.github.com/manual/)
+
+#### 1. 安装
+
+```bash
+brew install gh
+```
+
+#### 2. 登录
+
+```bash
+gh auth login
+```
+
+#### 3. 提交pull request
+
+```bash
+git checkout -b dev
+# 进行了巴拉巴拉的修改
+git add .
+git comment -m 'dev xxxx'
+git push
+gh pr create
+```
+
+查看pr状态
+
+```bash
+gh pr status
+```
+
+#### 4. 合并pull request
+
+```bash
+gh pr merge
+```

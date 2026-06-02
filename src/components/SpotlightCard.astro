@@ -1,0 +1,72 @@
+---
+interface Props {
+	spotlightColor?: string;
+	class?: string;
+}
+
+const { spotlightColor = "var(--color-color-spotlight)", class: className = "" } =
+	Astro.props;
+---
+
+<div
+	class:list={[
+		"spotlight-card relative overflow-hidden rounded-3xl border border-color-border bg-color-surface p-8 shadow-(--shadow-card)",
+		className
+	]}
+	data-spotlight-color={spotlightColor}
+>
+	<div
+		class="spotlight-overlay pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 ease-in-out"
+	>
+	</div>
+	<slot />
+</div>
+
+<script>
+	function initSpotlightCards() {
+		document.querySelectorAll(".spotlight-card").forEach((card) => {
+			if (card instanceof HTMLElement && card.dataset.spotlightInitialized)
+				return;
+			if (!(card instanceof HTMLElement)) return;
+			card.dataset.spotlightInitialized = "true";
+
+			const overlay = card.querySelector(".spotlight-overlay");
+			if (!(overlay instanceof HTMLElement)) return;
+
+			const color =
+				card.dataset.spotlightColor || "var(--color-color-spotlight)";
+			let isFocused = false;
+
+			const setGradient = (x: number, y: number) => {
+				overlay.style.background = `radial-gradient(circle at ${x}px ${y}px, ${color}, transparent 80%)`;
+			};
+
+			card.addEventListener("mousemove", (event) => {
+				if (isFocused || !(event instanceof MouseEvent)) return;
+				const rect = card.getBoundingClientRect();
+				setGradient(event.clientX - rect.left, event.clientY - rect.top);
+			});
+
+			card.addEventListener("focusin", () => {
+				isFocused = true;
+				overlay.style.opacity = "0.6";
+			});
+
+			card.addEventListener("focusout", () => {
+				isFocused = false;
+				overlay.style.opacity = "0";
+			});
+
+			card.addEventListener("mouseenter", () => {
+				overlay.style.opacity = "0.6";
+			});
+
+			card.addEventListener("mouseleave", () => {
+				overlay.style.opacity = "0";
+			});
+		});
+	}
+
+	initSpotlightCards();
+	document.addEventListener("astro:page-load", initSpotlightCards);
+</script>

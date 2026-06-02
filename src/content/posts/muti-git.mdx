@@ -1,0 +1,58 @@
+---
+title: 如何在多个 git 项目中使用不同的 git 账号
+date: 2025-09-15 11:50:35
+---
+
+#### 1. 生成 ssh 密钥
+
+```bash
+ssh-keygen -t rsa -C "git_user_1@email.com"
+ssh-keygen -t rsa -C "git_user_2@email.com"
+```
+
+#### 2. github 添加 ssh 密钥
+
+#### 3. 配置 ssh config
+
+```
+Host git_user_1_host
+  Hostname ssh.github.com
+  Port 443
+  User git
+  IdentityFile ~/.ssh/id_rsa_git_user_1
+
+Host git_user_2_host
+  Hostname ssh.github.com
+  Port 443
+  User git
+  IdentityFile ~/.ssh/id_rsa_git_user_2
+```
+
+#### 4. 测试 ssh
+
+```bash
+ssh -T git_user_1_host
+ssh -T git_user_2_host
+```
+
+#### 5. 配置 git
+
+```bash
+git clone git@git_user_1_host:git_user_1_name/git_project_1.git
+## or for existing project
+git remote set-url origin git@git_user_1_host:git_user_1_name/git_project_1.git
+
+cd git_project_1
+git config user.name "git_user_1_name"
+git config user.email "git_user_1@email.com"
+```
+
+```bash
+git clone git@git_user_2_host:git_user_2_name/git_project_2.git
+## or for existing project
+git remote set-url origin git@git_user_2_host:git_user_2_name/git_project_2.git
+
+cd git_project_2
+git config user.name "git_user_2_name"
+git config user.email "git_user_2@email.com"
+```
