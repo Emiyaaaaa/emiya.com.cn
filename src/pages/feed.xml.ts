@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { getPostExcerpt, getSortedPosts, getPostUrl } from "../lib/posts";
-import { SITE_AUTHOR, SITE_DESCRIPTION, SITE_NAME } from "../consts";
+import { SITE_AUTHOR, SITE_NAME } from "../consts";
 
 export const prerender = true;
 
@@ -70,7 +70,7 @@ export const GET: APIRoute = async ({ site }) => {
   <channel>
     <title>${escapeXml(SITE_NAME)}</title>
     <link>${siteUrl}</link>
-    <description>${escapeXml(SITE_DESCRIPTION)}</description>
+    <description>${escapeXml(`${SITE_NAME} RSS Feed`)}</description>
     <language>zh-CN</language>
     <copyright>© ${new Date().getFullYear()} ${escapeXml(SITE_AUTHOR.name)}</copyright>
     <lastBuildDate>${lastBuildDate}</lastBuildDate>
