@@ -99,7 +99,7 @@ const breadcrumbJsonLd = {
 	modifiedTime={modifiedTime}
 	jsonLd={[articleJsonLd, breadcrumbJsonLd]}
 >
-	<div class="max-w-[65ch] mx-auto px-4 py-10 pb-5">
+	<div class="max-w-[65ch] w-full mx-auto px-4 py-10 pb-5 flex flex-1 flex-col">
 		<article class="post font-mono flex flex-col flex-1 pb-[2%]">
 			<header class="w-full">
 				<h1 class="m-0 text-xl font-bold leading-snug">
@@ -115,7 +115,7 @@ const breadcrumbJsonLd = {
 			<div class="markdown w-fill mt-4 flex flex-1 flex-col py-2">
 				<Content />
 			</div>
-			<footer class="mt-10 flex items-center text-sm opacity-60">
+			<footer class="mt-auto pt-10 flex items-center text-sm opacity-60">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 24 24"
@@ -187,7 +187,7 @@ const breadcrumbJsonLd = {
 			}
 
 			p, ul {
-				@apply leading-7 text-color-font/80 my-3 md:my-4;
+				@apply leading-7 text-color-font/80 my-3 md:my-4 break-all;
 			}
 
 			pre {
