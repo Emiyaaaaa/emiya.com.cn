@@ -62,14 +62,11 @@ const jsonLd = {
 					<section class="flex flex-col gap-2">
 						<h2 class="text-color-font-50">{year}</h2>
 						{yearPosts.map((post) => (
-							<div class="flex items-center justify-between gap-4">
-								<a
-									class="leading-none border-b-2 border-transparent hover:border-color-font/50"
-									href={`/posts/${getPostSlug(post)}`}
-								>
+							<div class="flex items-center justify-between gap-4 leading-relaxed">
+								<a class="hover:underline" href={`/posts/${getPostSlug(post)}`}>
 									{post.data.title}
 								</a>
-								<span class="shrink-0 font-mono tabular-nums text-color-font-50">
+								<span class="self-start shrink-0 font-mono tabular-nums text-color-font-50">
 									{`${pad(post.data.date.getMonth() + 1)}/${pad(post.data.date.getDate())}`}
 								</span>
 							</div>

@@ -100,33 +100,40 @@ const breadcrumbJsonLd = {
 	jsonLd={[articleJsonLd, breadcrumbJsonLd]}
 >
 	<div class="max-w-[65ch] mx-auto px-4 py-10 pb-5">
-		<article class="post font-mono flex flex-col flex-1 px-5 pb-6 pt-3">
-			<header class="m-1 w-full">
+		<article class="post font-mono flex flex-col flex-1 pb-[2%]">
+			<header class="w-full">
 				<h1 class="m-0 text-xl font-bold leading-snug">
 					<span>{title}</span>
 				</h1>
 				<div
-					class="ml-1 mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 opacity-70"
+					class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 opacity-70 text-xs"
 				>
 					<Time format="YYYY-MM-DD" date={date} />
 				</div>
 			</header>
 			<div class="my-4 h-[2px] w-full bg-color-font/10"></div>
-			<div class="markdown w-fill mt-4 flex flex-1 flex-col px-[2%] py-2">
+			<div class="markdown w-fill mt-4 flex flex-1 flex-col py-2">
 				<Content />
 			</div>
-			<footer
-				class="mt-10 flex flex-wrap items-center justify-between gap-2 text-sm opacity-60"
-			>
-				<span>
-					转载请注明出处：
-					<a href={canonicalUrl}>{canonicalUrl}</a>
-				</span>
+			<footer class="mt-10 flex items-center text-sm opacity-60">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 24 24"
+					class="inline-block mr-1"
+					width="1rem"
+					height="1rem"
+					fill="currentColor"
+				>
+					<path
+						d="M16.7574 2.99678L14.7574 4.99678H5V18.9968H19V9.23943L21 7.23943V19.9968C21 20.5491 20.5523 20.9968 20 20.9968H4C3.44772 20.9968 3 20.5491 3 19.9968V3.99678C3 3.4445 3.44772 2.99678 4 2.99678H16.7574ZM20.4853 2.09729L21.8995 3.5115L12.7071 12.7039L11.2954 12.7064L11.2929 11.2897L20.4853 2.09729Z"
+					>
+					</path>
+				</svg>
 				<a
 					href={githubEditUrl}
 					target="_blank"
 					rel="noopener noreferrer"
-					class="hover:opacity-100"
+					class="hover:underline"
 				>
 					在 GitHub 上编辑此页
 				</a>
@@ -134,3 +141,73 @@ const breadcrumbJsonLd = {
 		</article>
 	</div>
 </Layout>
+
+<style lang="postcss">
+	@reference "../../styles/global.css";
+
+	@layer utilities {
+		.markdown {
+			*:first-child {
+				@apply mt-0;
+			}
+			*:last-child {
+				@apply mb-0;
+			}
+
+			h1,h2,h3,h4,h5,h6 {
+				@apply font-bold relative;
+				.anchor {
+					@apply px-2 opacity-0 transition-opacity;
+				}
+				&:hover .anchor {
+					@apply opacity-60;
+				}
+			}
+
+			h1 {
+				@apply mb-6 mt-10;
+				@apply text-[1.5rem];
+			}
+			h2 {
+				@apply mb-5 mt-8;
+				@apply text-[1.3rem];
+			}
+			h3 {
+				@apply mb-4 mt-6;
+				@apply text-[1.2rem];
+			}
+			h4 {
+				@apply mb-3 mt-4;
+				@apply text-[1.1rem];
+			}
+			h5,
+			h6 {
+				@apply mb-3 mt-4;
+				@apply text-base;
+			}
+
+			p, ul {
+				@apply leading-7 text-color-font/80 my-3 md:my-4;
+			}
+
+			pre {
+				@apply overflow-x-auto rounded-md p-4 text-sm leading-normal my-4;
+				@apply bg-[#28292d]!;
+			}
+
+			img {
+				@apply rounded-md;
+			}
+
+			*:not(pre) > code {
+				@apply mx-1 rounded-[3px] bg-color-font/10 text-color-font/90 px-2 py-px;
+			}
+
+			p,span,ul,li {
+				a {
+					@apply px-1 opacity-80 hover:opacity-100 underline decoration-color-font-40 decoration-dashed underline-offset-[3px];
+				}
+			}
+		}
+	}
+</style>
