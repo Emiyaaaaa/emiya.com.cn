@@ -1,11 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import Card from "../../components/Card.astro";
 import { getSortedPosts, getPostSlug } from "../../lib/posts";
 import { SITE_AUTHOR, SITE_NAME } from "../../consts";
 
 const WEBSITE_TITLE = "posts";
-const WEBSITE_DESCRIPTION = "Emiya 的博客文章列表";
 
 const posts = await getSortedPosts();
 
@@ -35,7 +33,6 @@ const jsonLd = {
 	"@type": "Website",
 	name: `${SITE_NAME} - ${WEBSITE_TITLE}`,
 	url: new URL("/posts", siteUrl).toString(),
-	description: WEBSITE_DESCRIPTION,
 	inLanguage: "zh-CN",
 	author: {
 		"@type": "Person",
@@ -55,12 +52,7 @@ const jsonLd = {
 
 <Layout
 	title={WEBSITE_TITLE}
-	description={WEBSITE_DESCRIPTION}
-	canonical="/posts"
-	ogTitle={`${WEBSITE_TITLE} | ${SITE_NAME}`}
-	ogDescription={WEBSITE_DESCRIPTION}
-	twitterTitle={`${WEBSITE_TITLE} | ${SITE_NAME}`}
-	twitterDescription={WEBSITE_DESCRIPTION}
+	description={`${WEBSITE_TITLE} | ${SITE_NAME}`}
 	jsonLd={jsonLd}
 >
 	<div class="max-w-[65ch] mx-auto px-4 py-10">

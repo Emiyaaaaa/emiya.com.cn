@@ -4,71 +4,46 @@ import { Font } from "astro:assets";
 import ThemeSwitch from "../components/ThemeSwitch.astro";
 import {
 	SITE_AUTHOR,
-	SITE_DESCRIPTION,
 	SITE_KEYWORDS,
 	SITE_LOCALE,
 	SITE_NAME,
-	SITE_TITLE_DEFAULT,
 	SITE_TITLE_TEMPLATE
 } from "../consts";
 
 interface Props {
 	title?: string;
-	absoluteTitle?: string;
 	description?: string;
-	canonical?: string;
 	robots?: string;
 	keywords?: string[];
 	ogType?: string;
-	ogTitle?: string;
-	ogDescription?: string;
-	ogUrl?: string;
 	publishedTime?: string;
 	modifiedTime?: string;
-	twitterTitle?: string;
-	twitterDescription?: string;
 	jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
 	title,
-	absoluteTitle,
-	description = SITE_DESCRIPTION,
-	canonical = "/",
+	description,
 	robots,
 	keywords,
 	ogType = "website",
-	ogTitle,
-	ogDescription,
-	ogUrl,
 	publishedTime,
 	modifiedTime,
-	twitterTitle,
-	twitterDescription,
 	jsonLd
 } = Astro.props;
 
-const pageTitle = absoluteTitle
-	? absoluteTitle
-	: title
-		? SITE_TITLE_TEMPLATE.replace("%s", title)
-		: SITE_TITLE_DEFAULT;
+const pageTitle = title ? SITE_TITLE_TEMPLATE.replace("%s", title) : SITE_NAME;
 
 if (!Astro.site) {
 	throw new Error("Missing `site` in astro.config.mjs");
 }
 
 const siteUrl = Astro.site.origin;
-const canonicalUrl = new URL(canonical, siteUrl).toString();
-const resolvedOgTitle = ogTitle ?? (title ? pageTitle : SITE_TITLE_DEFAULT);
-const resolvedOgDescription = ogDescription ?? description;
-const resolvedOgUrl = ogUrl ?? canonicalUrl;
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
 const resolvedOgImage = new URL(
 	"/favicon/android-chrome-512x512.png",
 	siteUrl
 ).toString();
-const resolvedTwitterTitle = twitterTitle ?? resolvedOgTitle;
-const resolvedTwitterDescription = twitterDescription ?? resolvedOgDescription;
 const resolvedKeywords = keywords ?? SITE_KEYWORDS;
 const rssUrl = new URL("/feed.xml", siteUrl).toString();
 
@@ -91,9 +66,9 @@ const isHome = Astro.url.pathname === "/";
 			})();
 		</script>
 		<title>{pageTitle}</title>
-		<meta name="description" content={description} />
 		<meta name="application-name" content={SITE_NAME} />
 		<meta name="generator" content="Astro" />
+		{description && <meta name="description" content={description} />}
 		<meta name="keywords" content={resolvedKeywords.join(", ")} />
 		<meta name="author" content={SITE_AUTHOR.name} />
 		<meta name="creator" content={SITE_AUTHOR.name} />
@@ -129,10 +104,10 @@ const isHome = Astro.url.pathname === "/";
 		<link rel="manifest" href="/favicon/site.webmanifest" />
 		<meta property="og:type" content={ogType} />
 		<meta property="og:locale" content={SITE_LOCALE} />
-		<meta property="og:url" content={resolvedOgUrl} />
+		<meta property="og:url" content={canonicalUrl} />
 		<meta property="og:site_name" content={SITE_NAME} />
-		<meta property="og:title" content={resolvedOgTitle} />
-		<meta property="og:description" content={resolvedOgDescription} />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={description} />
 		<meta property="og:image" content={resolvedOgImage} />
 		<meta property="og:image:width" content="512" />
 		<meta property="og:image:height" content="512" />
@@ -148,8 +123,8 @@ const isHome = Astro.url.pathname === "/";
 			)
 		}
 		<meta name="twitter:card" content="summary" />
-		<meta name="twitter:title" content={resolvedTwitterTitle} />
-		<meta name="twitter:description" content={resolvedTwitterDescription} />
+		<meta name="twitter:title" content={pageTitle} />
+		<meta name="twitter:description" content={description} />
 		<meta name="twitter:creator" content={SITE_AUTHOR.twitter} />
 		<meta name="twitter:image" content={resolvedOgImage} />
 		<meta name="format-detection" content="email=no" />

@@ -1,6 +1,6 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 
-export type PostEntry = CollectionEntry<"posts">;
+type PostEntry = CollectionEntry<"posts">;
 
 export function getPostExcerpt(content: string, maxLength = 140): string {
 	const stripped = content

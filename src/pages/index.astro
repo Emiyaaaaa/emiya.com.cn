@@ -1,10 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { SITE_AUTHOR, SITE_DESCRIPTION, SITE_NAME } from "../consts";
+import { SITE_AUTHOR, SITE_NAME } from "../consts";
 import SpotlightCard from "@/components/SpotlightCard.astro";
-
-const HOME_TITLE = "Emiya's site";
-const HOME_DESCRIPTION = "前端开发者 Emiya 的个人主页";
 
 if (!Astro.site) {
 	throw new Error("Missing `site` in astro.config.mjs");
@@ -17,8 +14,6 @@ const personJsonLd = {
 	"@type": "Person",
 	name: SITE_AUTHOR.name,
 	url: siteUrl,
-	jobTitle: "Front-end Developer",
-	description: SITE_DESCRIPTION,
 	sameAs: ["https://github.com/Emiyaaaaa", "https://x.com/emiya0505"]
 };
 
@@ -28,7 +23,6 @@ const websiteJsonLd = {
 	name: SITE_NAME,
 	url: siteUrl,
 	inLanguage: "zh-CN",
-	description: SITE_DESCRIPTION,
 	author: {
 		"@type": "Person",
 		name: SITE_AUTHOR.name,
@@ -38,14 +32,8 @@ const websiteJsonLd = {
 ---
 
 <Layout
-	absoluteTitle={HOME_TITLE}
-	description={HOME_DESCRIPTION}
-	canonical="/"
+	description="前端开发者 Emiya 的个人主页"
 	ogType="profile"
-	ogTitle={HOME_TITLE}
-	ogDescription={HOME_DESCRIPTION}
-	twitterTitle={HOME_TITLE}
-	twitterDescription={HOME_DESCRIPTION}
 	jsonLd={[personJsonLd, websiteJsonLd]}
 >
 	<div class="absolute top-0 left-0 w-screen h-screen pb-15">
