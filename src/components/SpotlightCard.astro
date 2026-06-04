@@ -41,6 +41,15 @@ const { spotlightColor = "var(--color-color-spotlight)", class: className = "" }
 				overlay.style.background = `radial-gradient(circle at ${x}px ${y}px, ${color}, transparent 80%)`;
 			};
 
+			const isTouchScreen =
+				window.matchMedia("(pointer: coarse)").matches ||
+				navigator.maxTouchPoints > 0;
+			if (isTouchScreen) {
+				overlay.style.background = `radial-gradient(circle at 20% 20%, ${color}, transparent 80%)`;
+				overlay.style.opacity = "0.6";
+				return;
+			}
+
 			card.addEventListener("mousemove", (event) => {
 				if (isFocused || !(event instanceof MouseEvent)) return;
 				const rect = card.getBoundingClientRect();
